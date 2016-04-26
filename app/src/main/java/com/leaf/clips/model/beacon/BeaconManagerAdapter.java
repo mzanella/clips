@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
+import javax.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 
 import org.altbeacon.beacon.Beacon;
