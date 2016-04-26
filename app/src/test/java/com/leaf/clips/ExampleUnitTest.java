@@ -1,4 +1,4 @@
-package com.leaf.clips.model.beacon;
+package com.leaf.clips;
 
 import org.junit.Test;
 
