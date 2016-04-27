@@ -13,7 +13,13 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            /**
+             * This automatically removes resources that are unused from the packaged application.In addition to removing resources
+             * in your project that are not actually needed at runtime, this also removes resources from libraries you are depending
+             * on if they are not actually needed by your application. This can hugely reduce the size of your application.
+             */
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
