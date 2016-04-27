@@ -22,7 +22,7 @@ android:
   - tools
   - platform-tools
   - $ANDROID_BUILD_TOOLS
-  - android-23
+  - android-$ANDROID_VERSION
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-$ANDROID_VERSION
