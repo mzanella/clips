@@ -21,11 +21,11 @@ android:
   components:
   - tools
   - platform-tools
-  - ANDROID_BUILD_TOOLS
-  - android-ANDROID_VERSION
+  - $ANDROID_BUILD_TOOLS
+  - android-$ANDROID_VERSION
   - extra-google-m2repository
   - extra-android-m2repository
-  - addon-google_apis-google-ANDROID_VERSION
+  - addon-google_apis-google-$ANDROID_VERSION
   - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 
 # to give execute permission
@@ -41,8 +41,6 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  # build the project
-  - gradle build
   # unit testing
   - gradle test
   # starting the emulator
