@@ -21,11 +21,11 @@ android:
   components:
   - tools
   - platform-tools
-  - ANDROID_BUILD_TOOLS
+  - $ANDROID_BUILD_TOOLS
   - android-23
   - extra-google-m2repository
   - extra-android-m2repository
-  - addon-google_apis-google-ANDROID_VERSION
+  - addon-google_apis-google-$ANDROID_VERSION
   - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 
 # to give execute permission
