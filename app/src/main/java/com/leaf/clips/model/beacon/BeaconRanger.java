@@ -1,0 +1,37 @@
+package com.leaf.clips.model.beacon;
+/**
+ * @author Federico Tavella
+ * @version 0.02
+ * @since 0.00
+ */
+
+/**
+ * Interfaccia che espone tutti i metodi che possono essere invocati
+ * su di una classe che si occupa del rilevamento dei beacon
+ */
+public interface BeaconRanger {
+
+    /**
+     * Metodo per notificare al Service che l'applicazione sta andando in
+     * background
+     * @param mode Parametro che serve per impostare se l’applicazione sta andando in background o no
+     */
+    void setBackgroundMode(boolean mode);
+
+    /**
+     * Metodo per impostare il periodo che determina l’uscita di un
+     * beacon da una Region
+     * @param p Questo parametro richiede il periodo in millisecondi
+     */
+    void setRegionExitPeriod(long p);
+
+    /**
+     * Metodo che serve a modificare il periodo di scansione per il rilevamento
+     * dei beacon
+     * @param p Periodo di scansione
+     * @param type Parametro per decidere se cambiare il periodo di scansione in Foreground o in Background,
+     *             di scansione o di non scansione
+     */
+     void modifyScanPeriod(long p, PeriodType type);
+
+}
