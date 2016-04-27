@@ -34,4 +34,19 @@ public interface BeaconRanger {
      */
      void modifyScanPeriod(long p, PeriodType type);
 
+    /**
+     * Metodo che ritorna un valore booleano che indica se il BeaconManager è in background
+     * @return boolean Valore booleano che indica se il BeaconManager è in background
+     */
+
+    boolean isBackground();
+
+    /**
+     * Metodo per ottenere uno tra i periodi di scan del BeaconManager in base alla richiesta
+     * @param type Tipo di periodo di scan desiderato
+     * @return long Periodo di scan desiderato
+     */
+
+    long getPeriod(PeriodType type);
+
 }

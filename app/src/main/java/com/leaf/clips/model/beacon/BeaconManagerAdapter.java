@@ -23,6 +23,8 @@ import org.altbeacon.beacon.Region;
 import org.altbeacon.beacon.startup.BootstrapNotifier;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -53,13 +55,27 @@ public class BeaconManagerAdapter extends Service implements BeaconConsumer, Boo
     private static String beaconLayout = "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"; //AltBeacon beacons
 
     /**
+     * Insieme dei periodi di scan del BeaconManager
+     */
+
+    Map<PeriodType, Long> periods = new HashMap<>();
+
+    /**
+     * Indica se il BeaconManager è in background o meno
+     */
+
+    boolean isBackground;
+
+    /**
      * Metodo che inizializza i parametri della classe alla creazione di un’istanza
      */
+
     @Override
     public void onCreate(){
         super.onCreate();
         region = new Region("MyApplicationRegion", null, null, null);
         locBinder = new LocalBinder();
+        periods = new HashMap<>();
         beaconManager = BeaconManager.getInstanceForApplication(getApplicationContext());
         beaconManager.getBeaconParsers().clear();
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout(beaconLayout));
@@ -69,6 +85,7 @@ public class BeaconManagerAdapter extends Service implements BeaconConsumer, Boo
         beaconManager.setForegroundBetweenScanPeriod(500);
         beaconManager.setForegroundScanPeriod(1000);
         beaconManager.setRangeNotifier(this);
+
     }
 
     /**
@@ -244,9 +261,28 @@ public class BeaconManagerAdapter extends Service implements BeaconConsumer, Boo
          * Metodo restituisce il riferimento al Service BeaconManagerAdapter
          * @return BeaconManagerAdapter Riferimento al BeaconManagerAdapter per invocare metodi pubblici
          */
-        BeaconManagerAdapter getService() {
+        public BeaconManagerAdapter getService() {
             return BeaconManagerAdapter.this;
         }
+    }
+
+    /**
+     * Metodo che ritorna un valore booleano che indica se il BeaconManager è in background
+     * @return boolean Valore booleano che indica se il BeaconManager è in background
+     */
+    @Override
+    public boolean isBackground(){
+        return isBackground;
+    }
+
+    /**
+     * Metodo per ottenere uno tra i periodi di scan del BeaconManager in base alla richiesta
+     * @param type Tipo di periodo di scan desiderato
+     * @return long Periodo di scan desiderato
+     */
+    @Override
+    public long getPeriod(PeriodType type){
+        return periods.get(type);
     }
 }
 
