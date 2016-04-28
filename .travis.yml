@@ -7,30 +7,31 @@ jdk: oraclejdk8
 # global variables used in this file
 env:
   global:
-    # target of development
-    - ANDROID_TARGET=android-23
-    # emulator version
-    - ANDROID_ABI=armeabi-v7a
-    # android version
-    - ANDROID_VERSION=23
-    # android tools used
-    - ANDROID_BUILD_TOOLS=build-tools-23.0.1
-    # Timeout for ADB
-    - ADB_INSTALL_TIMEOUT=8
+    - ANDROID_API_LEVEL=23
+    - EMULATOR_API_LEVEL=21
+    - ANDROID_BUILD_TOOLS_VERSION=23.1.0
+    - ANDROID_ABI=google_apis/armeabi-v7a
+    - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
 
 # components used to build
 android:
   components:
-  - tools
-  - platform-tools
-  - $ANDROID_BUILD_TOOLS
-  - android-$ANDROID_VERSION
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - addon-google_apis-google-$ANDROID_VERSION
-#  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
-  - sys-img-armeabi-v7a-android-23
-  - sys-img-x86-android-23
+- platform-tools
+    - tools
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$ANDROID_API_LEVEL
+    - android-$EMULATOR_API_LEVEL
+    # For Google APIs
+    - addon-google_apis-google-$ANDROID_API_LEVEL
+    - addon-google_apis-google-$EMULATOR_API_LEVEL
+    # Support library
+    - extra-android-support
+    # Latest artifacts in local repository
+    - extra-google-m2repository
+    - extra-android-m2repository
+    # Specify at least one system image
+    - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+    - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
 
 # to give execute permission
 before_script:
@@ -44,16 +45,14 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-script:
-  # unit testing
-  - gradle test
-  # starting the emulator
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+before_script:
+  # Create and start emulator
+  - echo no | android create avd --force -n test -t "Google Inc.:Google APIs:"$EMULATOR_API_LEVEL --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
-  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-  # instrumental test
-  - ./gradlew connectedCheck
+
+script:
+  - ./gradlew connectedCheck -x library:signArchives -PdisablePreDex
 
 after_success:
   - echo "oh fischi"
