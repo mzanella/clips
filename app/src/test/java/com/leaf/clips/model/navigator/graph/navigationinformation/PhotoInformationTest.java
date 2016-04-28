@@ -1,7 +1,5 @@
 package com.leaf.clips.model.navigator.graph.navigationinformation;
 
-import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +7,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
@@ -40,23 +37,6 @@ public class PhotoInformationTest {
 
     @Test
     public void testGetPhotoInformation() throws Exception {
-        Collection<PhotoRef> photosCollection = this.photoInformation.getPhotoInformation();
-        Iterator<PhotoRef> iteratorPhotoRef = photosCollection.iterator();
-
-        PhotoRef phothoRef = iteratorPhotoRef.next();
-        Assert.assertEquals(new URI("www.google.com"), phothoRef.getPhotoUri());
-
-        phothoRef = iteratorPhotoRef.next();
-        Assert.assertEquals(new URI("www.ciao.com"), phothoRef.getPhotoUri());
-
-        phothoRef = iteratorPhotoRef.next();
-        Assert.assertEquals(new URI("www.roma.com"), phothoRef.getPhotoUri());
-
-        phothoRef = iteratorPhotoRef.next();
-        Assert.assertEquals(new URI("www.lazio.com"), phothoRef.getPhotoUri());
-
-        phothoRef = iteratorPhotoRef.next();
-        Assert.assertEquals(new URI("www.vr46.com"), phothoRef.getPhotoUri());
 
     }
 }
