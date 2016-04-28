@@ -7,6 +7,8 @@ package com.leaf.clips.model.dataaccess.dao;
  *
  */
 
+import java.util.Collection;
+
 /**
  *Interfaccia che espone i metodi per un DAO per accedere alla tabella "Building" del database locale
  */
@@ -23,7 +25,7 @@ public interface BuildingDao {
      * Metodo che viene utilizzato per recuperare le informazioni di tutti gli edifici presenti nella tabella "Building" del database locale
      * @return  Collection<BuildingTable>
      */
-    //Collection<BuildingTable> findAllBuildings();
+    Collection<BuildingTable> findAllBuildings();
 
     /**
      * Metodo che viene utilizzato per recuperare le informazioni di tutti gli edifici presenti nella tabella "Building" del database locale

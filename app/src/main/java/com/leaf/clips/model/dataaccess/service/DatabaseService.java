@@ -7,6 +7,10 @@ package com.leaf.clips.model.dataaccess.service;
  *
  */
 
+import com.leaf.clips.model.dataaccess.dao.BuildingTable;
+
+import java.util.Collection;
+
 /**
  *Interfaccia che espone tutti i metodi per l'accesso alle mappe contenute nel database locale o remoto
  */
@@ -23,13 +27,13 @@ public interface DatabaseService {
      * Metodo che ritorna la lista di tutti gli oggetti BuildingTable presenti nel database locale
      * @return  Collection<BuildingTable>
      */
-    //Collection<BuildingTable> findAllBuildings();
+    Collection<BuildingTable> findAllBuildings();
 
     /**
      * Metodo che ritorna la lista di tutti gli oggetti BuildingTable presenti nel database remoto
      * @return  Collection<BuildingTable>
      */
-    //Collection<BuildingTable> findAllRemoteBuildings();
+    Collection<BuildingTable> findAllRemoteBuildings();
 
     /**
      * Metodo per il recupero di un oggetto BuildingMap da un database locale o remoto tramite l'identificativo Major uguale in tutti i beacon presenti in uno stesso edificio
