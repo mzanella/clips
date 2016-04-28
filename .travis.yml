@@ -21,14 +21,12 @@ env:
 # components used to build
 android:
   components:
-  - tools
-  - platform-tools
-  - $ANDROID_BUILD_TOOLS
-  - android-$ANDROID_VERSION
-  - extra-google-m2repository
   - extra-android-m2repository
-  - addon-google_apis-google-$ANDROID_VERSION
-#  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  - extra-android-support
+  - platform-tools
+  - tools
+  - build-tools-23.0.3
+  - android-23
   - sys-img-armeabi-v7a-android-23
   - sys-img-x86-android-23
 
