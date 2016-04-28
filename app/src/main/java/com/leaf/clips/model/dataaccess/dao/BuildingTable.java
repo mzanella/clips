@@ -15,47 +15,47 @@ public class BuildingTable {
     /**
      * Indirizzo dell'edificio
      */
-    private String address;
+    private final String address;
 
     /**
      * Descrizione dell'edificio
      */
-    private String description;
+    private final String description;
 
     /**
      * Identificativo dell'edificio
      */
-    private int id;
+    private final int id;
 
     /**
      * Major dell'edificio
      */
-    private int major;
+    private final int major;
 
     /**
      * Dimensione della mappa (in MB)
      */
-    private String mapSize;
+    private final String mapSize;
 
     /**
      * Versione corrente della mappa
      */
-    private int mapVersion;
+    private final int mapVersion;
 
     /**
      * Nome dell'edificio
      */
-    private String name;
+    private final String name;
 
     /**
      * Orario dell'apertura dell'edificio
      */
-    private String openingHours;
+    private final String openingHours;
 
     /**
      * Identificativo dell'applicazione
      */
-    private String uuid;
+    private final String uuid;
 
     /**
      * Costruttore della classe BuildingTable
@@ -70,7 +70,15 @@ public class BuildingTable {
      * @param mapSize Dimensione della mappa (espressa in MB)
      */
     public BuildingTable(int id, String uuid, int major, String name, String description, String openingHours, String address, int mapVersion, String mapSize) {
-        // TODO: 28/04/16
+        this.id = id;
+        this.uuid = uuid;
+        this.major = major;
+        this.name = name;
+        this.description = description;
+        this.openingHours = openingHours;
+        this.address = address;
+        this.mapVersion = mapVersion;
+        this.mapSize = mapSize;
     }
 
     /**
@@ -78,8 +86,7 @@ public class BuildingTable {
      * @return  String
      */
     public String getAddress() {
-        // TODO: 28/04/16
-        return null;
+        return address;
     }
 
     /**
@@ -87,8 +94,7 @@ public class BuildingTable {
      * @return  String
      */
     public String getDescription() {
-        // TODO: 28/04/16
-        return null;
+        return description;
     }
 
     /**
@@ -96,8 +102,7 @@ public class BuildingTable {
      * @return  int
      */
     public int getId() {
-        // TODO: 28/04/16
-        return 0;
+        return id;
     }
 
     /**
@@ -105,8 +110,7 @@ public class BuildingTable {
      * @return  int
      */
     public int getMajor() {
-        // TODO: 28/04/16
-        return 0;
+        return major;
     }
 
     /**
@@ -114,8 +118,7 @@ public class BuildingTable {
      * @return  String
      */
     public String getName() {
-        // TODO: 28/04/16
-        return null;
+        return name;
     }
 
     /**
@@ -123,8 +126,7 @@ public class BuildingTable {
      * @return  String
      */
     public String getOpeningHours() {
-        // TODO: 28/04/16
-        return null;
+        return openingHours;
     }
 
     /**
@@ -132,8 +134,7 @@ public class BuildingTable {
      * @return  String
      */
     public String getSize() {
-        // TODO: 28/04/16
-        return null;
+        return mapSize;
     }
 
     /**
@@ -141,8 +142,7 @@ public class BuildingTable {
      * @return  String
      */
     public String getUUID() {
-        // TODO: 28/04/16
-        return null;
+        return uuid;
     }
 
     /**
@@ -150,8 +150,7 @@ public class BuildingTable {
      * @return  int
      */
     public int getVersion() {
-        // TODO: 28/04/16
-        return 0;
+        return mapVersion;
     }
 
 }
