@@ -25,36 +25,36 @@ public class EdgeContract {
     /**
      * Valore della colonna distance. Valore di default "distance"
      */
-    public final static String COLUMN_DISTANCE;
+    public final static String COLUMN_DISTANCE = "distance";
 
     /**
      * Valore della colonna endROI. Valore di default "endROI"
      */
-    public final static String COLUMN_ENDROI;
+    public final static String COLUMN_ENDROI = "endROI";
 
     /**
      * Valore della colonna id. Valore di default "id"
      */
-    public final static String COLUMN_ID;
+    public final static String COLUMN_ID = "id";
 
     /**
      * Valore della colonna longDescription. Valore di default "longDescription"
      */
-    public final static String COLUMN_LONGDESCRIPTION;
+    public final static String COLUMN_LONGDESCRIPTION = "longDescription";
 
     /**
      * Valore della colonna startROI. Valore di default "startROI"
      */
-    public final static String COLUMN_STARTROI;
+    public final static String COLUMN_STARTROI = "startROI";
 
     /**
      * Valore della colonna typeId. Valore di default "typeId"
      */
-    public final static String COLUMN_TYPEID;
+    public final static String COLUMN_TYPEID = "typeID";
 
     /**
      * Nome della tabella. Valore di default "Edge"
      */
-    public final static String TABLE_NAME;
+    public final static String TABLE_NAME = "Edge";
 
 }
