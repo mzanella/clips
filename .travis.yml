@@ -44,7 +44,7 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-script:
+before_script:
   # unit testing
   - gradle test
   # starting the emulator
@@ -52,6 +52,8 @@ script:
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+
+script:
   # instrumental test
   - ./gradlew connectedCheck
 
