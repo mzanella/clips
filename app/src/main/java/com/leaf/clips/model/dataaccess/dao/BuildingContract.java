@@ -1,9 +1,9 @@
 package com.leaf.clips.model.dataaccess.dao;
 
 /**
- * @author
- * @version 0.00
- * @since 0.00
+ * @author Marco Zanella
+ * @version 0.01
+ * @since 0.01
  *
  *
  */
