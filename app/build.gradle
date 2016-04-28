@@ -30,6 +30,10 @@ android {
         exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
         exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
     }
+    adbOptions {
+        timeOutInMs 10 * 60 * 1000  // 10 minutes
+        installOptions "-d","-t"
+    }
 }
 
 dependencies {
