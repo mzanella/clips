@@ -8,7 +8,7 @@ jdk: oraclejdk8
 env:
   global:
     # target of development
-    - ANDROID_TARGET=android-15
+    - ANDROID_TARGET=android-23
     # emulator version
     - ANDROID_ABI=armeabi-v7a
     # android version
