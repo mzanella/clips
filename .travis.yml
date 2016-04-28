@@ -26,7 +26,9 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-$ANDROID_VERSION
-  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+#  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  - sys-img-armeabi-v7a-android-23
+  - sys-img-x86-android-23
 
 # to give execute permission
 before_script:
