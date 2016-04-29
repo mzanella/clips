@@ -17,7 +17,6 @@ public interface BuildingDao {
     /**
      * Metodo che permette la rimozione delle informazioni di un edificio dalla tabella "Building" del database locale
      * @param id Identificativo dell'edificio di cui rimuovere le informazioni dal database locale
-     * @return  void
      */
     void deleteBuilding(int id);
 
