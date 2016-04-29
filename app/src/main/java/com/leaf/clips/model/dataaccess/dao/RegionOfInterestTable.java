@@ -15,22 +15,22 @@ public class RegionOfInterestTable {
     /**
      * Identificativo della RegionOfInterest
      */
-    private int id;
+    private final int id;
 
     /**
      * Major dell'edificio
      */
-    private int major;
+    private final int major;
 
     /**
      * Identificativo del beacon associato alla ROI
      */
-    private int minor;
+    private final int minor;
 
     /**
      * UUID dell'applicazione
      */
-    private String uuid;
+    private final String uuid;
 
     /**
      * Costruttore della classe RegionOfInterestTable
