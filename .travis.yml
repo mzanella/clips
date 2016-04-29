@@ -14,7 +14,11 @@ env:
     # android version
     - ANDROID_VERSION=23
     # android tools used
+<<<<<<< HEAD
     - ANDROID_BUILD_TOOLS=build-tools-23.0.3
+=======
+    - ANDROID_BUILD_TOOLS=build-tools-23.0.1
+>>>>>>> b6742a829a7141b863fa5582ceb431c59a80e20f
     # Timeout for ADB
     - ADB_INSTALL_TIMEOUT=8
 
@@ -22,11 +26,16 @@ env:
 android:
   components:
   - extra-android-m2repository
+<<<<<<< HEAD
   - extra-android-support
   - platform-tools
   - tools
   - build-tools-23.0.3
   - android-23
+=======
+  - addon-google_apis-google-$ANDROID_VERSION
+#  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+>>>>>>> b6742a829a7141b863fa5582ceb431c59a80e20f
   - sys-img-armeabi-v7a-android-23
   - sys-img-x86-android-23
 
@@ -57,4 +66,3 @@ script:
 
 after_success:
   - echo "oh fischi"
-
