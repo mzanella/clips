@@ -17,7 +17,7 @@ public interface PointOfInterest {
      * Metodo che ritorna la collezione di RegionOfInterest alle quali tale oggetto appartiene
      * @return  Collection<RegionOfInterest>
      */
-    Collection<RegionOfInterest> getBelongingROIs();
+    Collection<RegionOfInterest> getAllBelongingROIs();
 
     /**
      * Metodo che ritorna il nome della categoria di appartenenza del PointOfInterest
@@ -48,6 +48,6 @@ public interface PointOfInterest {
      * @param rois Insieme di RegionOfInterest alle quali appartiene il PointOfInterest
      * @return  void
      */
-    void setAllBelongingROIs(Collection<RegionOfInterest> rois);
+    void setBelongingROIs(Collection<RegionOfInterest> rois);
 
 }
