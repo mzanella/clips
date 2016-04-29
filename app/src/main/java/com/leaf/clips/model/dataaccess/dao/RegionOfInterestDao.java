@@ -17,7 +17,6 @@ public interface RegionOfInterestDao {
     /**
      * Metodo che permette la rimozione delle informazioni di una RegionOfInterest dalla tabella "ROI" del database locale
      * @param id Identificativo della RegionOfInterest di cui rimuovere le informazioni dal database locale
-     * @return  void
      */
     void deleteRegionOfInterest(int id);
 
