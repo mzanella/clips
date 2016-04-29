@@ -43,7 +43,6 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_script:
-  - ./gradlew build
   # unit testing
   - gradle test
   # starting the emulator
