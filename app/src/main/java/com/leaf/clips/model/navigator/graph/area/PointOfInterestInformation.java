@@ -9,23 +9,21 @@ package com.leaf.clips.model.navigator.graph.area;
  *Classe che rappresenta le informazioni associate ad un POI
  */
 public class PointOfInterestInformation {
-
-    // TODO: 4/29/16 to codify 
     
     /**
      * Categoria di appartenenza del POI
      */
-    private final String  category = null;
+    private final String  category;
 
     /**
      * Descrizione del POI
      */
-    private final String  description = null;
+    private final String  description;
 
     /**
      * Nome del POI
      */
-    private final String  name = null;
+    private final String  name;
 
     /**
      * Costruttore della classe PointOfInterestInformation
@@ -33,14 +31,18 @@ public class PointOfInterestInformation {
      * @param description Descrizione del POI
      * @param category Categoria di appartenenza del POI
      */
-    public PointOfInterestInformation(String name, String description, String category){}
+    public PointOfInterestInformation(String name, String description, String category){
+        this.name = name;
+        this.description = description;
+        this.category = category;
+    }
 
     /**
      * Metodo che ritorna la categoria di appartenenza del PointOfInterest a cui l'oggetto è associato
      * @return  String
      */
     public String getCategory(){
-        return null;
+        return this.category;
     }
 
     /**
@@ -48,7 +50,7 @@ public class PointOfInterestInformation {
      * @return  String
      */
     public String getDescription() {
-        return null;
+        return this.description;
     }
 
     /**
@@ -56,7 +58,7 @@ public class PointOfInterestInformation {
      * @return  String
      */
     public String getName() {
-        return null;
+        return this.name;
     }
 
 }
