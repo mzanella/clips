@@ -40,7 +40,10 @@ public class PointOfInterestTable {
      * @param category Identificativo della categoria a cui appartiene il POI
      */
     public PointOfInterestTable(String description, int id, String name, int category) {
-        // TODO: 28/04/16
+        this.description = description;
+        this.id = id;
+        this.name = name;
+        this.categoryId = category;
     }
 
     /**
@@ -48,8 +51,7 @@ public class PointOfInterestTable {
      * @return  int
      */
     public int getCategoryId() {
-        // TODO: 28/04/16
-        return 0;
+        return categoryId;
     }
 
     /**
@@ -57,8 +59,7 @@ public class PointOfInterestTable {
      * @return  String
      */
     public String getDescription() {
-        // TODO: 28/04/16
-        return null;
+        return description;
     }
 
     /**
@@ -66,8 +67,7 @@ public class PointOfInterestTable {
      * @return  int
      */
     public int getId() {
-        // TODO: 28/04/16
-        return 0;
+        return id;
     }
 
     /**
@@ -75,8 +75,7 @@ public class PointOfInterestTable {
      * @return  String
      */
     public String getName() {
-        // TODO: 28/04/16
-        return null;
+        return name;
     }
 
 }
