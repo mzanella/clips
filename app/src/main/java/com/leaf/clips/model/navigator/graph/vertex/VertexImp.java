@@ -1,4 +1,4 @@
-package com.leaf.clips.model.navigator.graph.Vertex;
+package com.leaf.clips.model.navigator.graph.vertex;
 
 /**
  * @author Oscar Elia Conti
@@ -13,14 +13,15 @@ public class VertexImp implements Vertex {
     /**
      * Identificativo numerico di un VertexImp 
      */
-    // TODO: 4/29/16 aggiungere codifica 
-    private final int id = 0;
+    private final int id;
 
     /**
      * Costruttore della classe VertexImp
      * @param id Identificativo numerico di un oggetto VertexImp
      */
-    public VertexImp(int  id){};
+    public VertexImp(int  id){
+        this.id = id;
+    };
 
     /**
      * Metodo che ritorna l'identificativo numerico associato all'oggetto VertexImp
@@ -28,7 +29,7 @@ public class VertexImp implements Vertex {
      */
     @Override
     public int getId(){
-        return 0;
+        return this.id;
     }
 
 }

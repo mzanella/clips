@@ -1,4 +1,4 @@
-package com.leaf.clips.model.navigator.graph.Vertex;
+package com.leaf.clips.model.navigator.graph.vertex;
 
 /**
  * @author Oscar Elia Conti
