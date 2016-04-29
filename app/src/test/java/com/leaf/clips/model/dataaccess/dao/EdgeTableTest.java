@@ -76,6 +76,6 @@ public class EdgeTableTest {
 
     @Test
     public void testGetTypeId() throws Exception {
-
+        Assert.assertEquals(typeId, edgeTable.getTypeId());
     }
 }
