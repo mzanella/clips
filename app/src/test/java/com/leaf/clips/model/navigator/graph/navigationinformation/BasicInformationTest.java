@@ -18,7 +18,7 @@ public class BasicInformationTest {
 
     @Before
     public void init() {
-        this.basicInformation = new BasicInformation("TestAaaction");
+        this.basicInformation = new BasicInformation("TestAction");
     }
 
     @Test
