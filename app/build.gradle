@@ -47,8 +47,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-
     compile 'com.android.support:appcompat-v7:23.1.1'
     androidTestCompile 'com.android.support:support-annotations:23.1.1'
 
@@ -57,7 +55,6 @@ dependencies {
 
 
     compile 'org.altbeacon:android-beacon-library:2+'
-
     // Required -- JUnit 4 framework
     testCompile 'junit:junit:4.12'
     // Optional -- Mockito framework
@@ -74,9 +71,6 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.2'
     // Espresso-idling-resource for synchronization with background jobs
     androidTestCompile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
-
     compile 'com.google.code.findbugs:jsr305:2.0.1'
-    testCompile 'junit:junit:4.12'
-    compile 'junit:junit:4.12'
     compile 'junit:junit:4.12'
 }
