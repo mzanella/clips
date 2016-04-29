@@ -14,21 +14,19 @@ env:
     # android version
     - ANDROID_VERSION=23
     # android tools used
-    - ANDROID_BUILD_TOOLS=build-tools-23.0.1
+    - ANDROID_BUILD_TOOLS=build-tools-23.0.3
     # Timeout for ADB
     - ADB_INSTALL_TIMEOUT=8
 
 # components used to build
 android:
   components:
-  - tools
-  - platform-tools
-  - $ANDROID_BUILD_TOOLS
-  - android-$ANDROID_VERSION
-  - extra-google-m2repository
   - extra-android-m2repository
-  - addon-google_apis-google-$ANDROID_VERSION
-#  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  - extra-android-support
+  - platform-tools
+  - tools
+  - build-tools-23.0.3
+  - android-23
   - sys-img-armeabi-v7a-android-23
   - sys-img-x86-android-23
 
@@ -46,7 +44,7 @@ cache:
 
 before_script:
   # unit testing
-  - gradle test
+  - ./gradlew test
   # starting the emulator
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
@@ -59,5 +57,3 @@ script:
 
 after_success:
   - echo "oh fischi"
-
-
