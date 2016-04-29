@@ -15,7 +15,6 @@ public interface CategoryDao {
     /**
      * Metodo che permette la rimozione delle informazioni di un edificio dalla tabella "Category" del database locale
      * @param id Identificativo della categoria da rimuovere dal database locale
-     * @return  void
      */
     void deleteCategory(int id);
 
