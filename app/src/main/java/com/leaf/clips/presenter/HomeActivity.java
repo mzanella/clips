@@ -60,10 +60,15 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
+    /**
+     *  Gestisce i tap dell'utente nel Drawer: esegue l'azione appropriata rispetto alla voce di
+     *  menù scelta dall'utente.
+     * @param item: voce del menù scelta dall'utente
+     * @return true sse l'evento scatenato dal tap è stato gestito con successo
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
