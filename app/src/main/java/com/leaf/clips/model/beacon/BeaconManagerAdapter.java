@@ -10,9 +10,10 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
-import javax.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+
+import javax.annotation.Nullable;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -197,8 +198,8 @@ public class BeaconManagerAdapter extends Service implements BeaconRanger, Beaco
 
             Intent msg = new Intent("beaconsDetected"); // TODO: 28/04/2016
             msg.putExtra("beacons", p);
-            LocalBroadcastManager.getInstance(BeaconManagerAdapter.this).sendBroadcast(msg);
 
+            LocalBroadcastManager.getInstance(BeaconManagerAdapter.this).sendBroadcast(msg);
 
         }
     }
