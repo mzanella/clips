@@ -26,13 +26,18 @@ android {
     defaultConfig {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    packagingOptions {
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+    }
+
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'org.altbeacon:android-beacon-library:2+'
     // Required -- JUnit 4 framework
     testCompile 'junit:junit:4.12'
     // Optional -- Mockito framework
@@ -49,5 +54,8 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.2'
     // Espresso-idling-resource for synchronization with background jobs
     androidTestCompile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'org.altbeacon:android-beacon-library:2.+'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
+    compile 'com.android.support:design:23.1.1'
 }
