@@ -6,9 +6,8 @@ package com.leaf.clips.model.navigator.graph.area;
  * @since 0.00
  */
 
+import java.util.ArrayList;
 import java.util.Collection;
-
-// TODO: 4/29/16 codify 
 
 /**
  *Classe che rappresenta un POI, ossia un punto all'interno di un edificio ritenuto di possibile interesse
@@ -19,12 +18,12 @@ public class PointOfInterestImp implements PointOfInterest {
     /**
      * Identificativo numerico di un PointOfInterestImp
      */
-    private final int id = 0;
+    private final int id;
 
     /**
      * Informazioni relative ad un PointOfInterestImp
      */
-    private final PointOfInterestInformation info = null;
+    private final PointOfInterestInformation info;
 
     /**
      * Collezione degli oggetti RegionOfInterest alle quali appartiene l'oggetto
@@ -37,7 +36,8 @@ public class PointOfInterestImp implements PointOfInterest {
      * @param info Informazioni relative ad un POI
      */
     public PointOfInterestImp(int id , PointOfInterestInformation info){
-
+        this.id = id;
+        this.info = info;
     }
 
     /**
@@ -46,7 +46,7 @@ public class PointOfInterestImp implements PointOfInterest {
      */
     @Override
     public Collection<RegionOfInterest> getAllBelongingROIs(){
-        return null;
+        return new ArrayList<RegionOfInterest>(this.rois);
     }
 
     /**
@@ -55,7 +55,7 @@ public class PointOfInterestImp implements PointOfInterest {
      */
     @Override
     public String getCategory(){
-        return null;
+        return this.info.getCategory();
     }
 
     /**
@@ -64,7 +64,7 @@ public class PointOfInterestImp implements PointOfInterest {
      */
     @Override
     public String getDescription(){
-        return null;
+        return this.info.getDescription();
     }
 
     /**
@@ -73,7 +73,7 @@ public class PointOfInterestImp implements PointOfInterest {
      */
     @Override
     public int getId(){
-        return 0;
+        return this.id;
     }
 
     /**
@@ -82,7 +82,7 @@ public class PointOfInterestImp implements PointOfInterest {
      */
     @Override
     public String getName(){
-        return null;
+        return this.info.getName();
     }
 
     /**
@@ -92,6 +92,7 @@ public class PointOfInterestImp implements PointOfInterest {
      */
     @Override
     public void setBelongingROIs(Collection<RegionOfInterest> rois){
+        this.rois = new ArrayList<RegionOfInterest>(rois);
     }
 
 }

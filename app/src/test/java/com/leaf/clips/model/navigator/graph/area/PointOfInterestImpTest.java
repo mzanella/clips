@@ -16,8 +16,6 @@ import static org.junit.Assert.*;
  * @since 0.00
  */
 
-// TODO: 4/30/16 ToVerifiy
-
 public class PointOfInterestImpTest {
 
     PointOfInterestImp pointOfInterestImp;
@@ -26,14 +24,20 @@ public class PointOfInterestImpTest {
 
     @Before
     public void init() {
-        pointOfInterestInformation = new PointOfInterestInformation("name", "description", "dategory");
+        pointOfInterestInformation = new PointOfInterestInformation("name", "description", "category");
         this.pointOfInterestImp = new PointOfInterestImp(this.id, pointOfInterestInformation);
     }
 
     @Test
     public void testGetAllBelongingROIs() throws Exception {
-        Collection<RegionOfInterest> belonginROIs = pointOfInterestImp.getAllBelongingROIs();
-        for(RegionOfInterest ROI : belonginROIs){
+        //Questo test potrebbe non essere efficace
+
+        Collection<RegionOfInterest> belonginROIs = new ArrayList<>();
+        RegionOfInterest roi = new RegionOfInterestImp(15, "DF7E1C79-43E9-44FF-886F-1D1F7DA6997A", 1, 1);
+        belonginROIs.add(roi);
+        pointOfInterestImp.setBelongingROIs(belonginROIs);
+
+        for(RegionOfInterest ROI : pointOfInterestImp.getAllBelongingROIs()){
             Assert.assertNotNull(ROI);
         }
     }
