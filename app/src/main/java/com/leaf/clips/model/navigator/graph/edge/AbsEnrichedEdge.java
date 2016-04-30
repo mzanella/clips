@@ -10,10 +10,12 @@ import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 import com.leaf.clips.model.navigator.graph.navigationinformation.NavigationInformation;
 import com.leaf.clips.model.navigator.graph.navigationinformation.PhotoInformation;
 
+import org.jgrapht.graph.DefaultWeightedEdge;
+
 /**
  *Classe astratta che rappresenta l'implementazione di base utilizzata per gli archi del grafo
  */
-public abstract class AbsEnrichedEdge implements EnrichedEdge {
+public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements EnrichedEdge {
 
     /**
      * Angolo rispetto al Nord polare tra il punto di inizio dell'arco e il punto finale dell'arco
@@ -157,6 +159,11 @@ public abstract class AbsEnrichedEdge implements EnrichedEdge {
      */
     @Override
     public abstract int getWeight();
+
+    @Override
+    protected double getWeight(){
+        return 0;
+    }
 
     /**
      * Metodo che permette di impostare le preferenze di un utente per il calcolo del peso dell'arco
