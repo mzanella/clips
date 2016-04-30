@@ -35,7 +35,6 @@ public class RemoteCategoryDaoTest {
 
     @Test
     public void testFromJSONToTable() throws Exception {
-        categoryTable = remoteCategoryDao.fromJSONToTable(js);
         Assert.assertEquals(1, categoryTable.getId());
         Assert.assertEquals("description", categoryTable.getDescription());
     }
