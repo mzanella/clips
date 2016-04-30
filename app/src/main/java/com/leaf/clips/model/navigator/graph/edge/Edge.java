@@ -6,6 +6,7 @@ package com.leaf.clips.model.navigator.graph.edge;
  * @since 0.00
  */
 
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 import com.leaf.clips.model.navigator.graph.vertex.Vertex;
 
 /**
@@ -17,7 +18,7 @@ public interface Edge {
      * Metodo che restituisce il Vertex di arrivo dell'arco
      * @return  Vertex
      */
-    Vertex getEndPoint();
+    RegionOfInterest getEndPoint();
 
     /**
      * Metodo che ritorna l'identificativo numerico dell'arco
@@ -29,7 +30,7 @@ public interface Edge {
      * Metodo che restituisce il Vertex di partenza dell'arco
      * @return  Vertex
      */
-    Vertex getStarterPoint();
+    RegionOfInterest getStarterPoint();
 
     /**
      * Metodo che ritorna il peso dell'arco
