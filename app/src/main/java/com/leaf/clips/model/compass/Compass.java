@@ -25,22 +25,22 @@ public class Compass implements SensorEventListener {
     /**
      * variabile di guardia per accertarsi il reperimento di almeno un dato dall'accelerometro
      */
-    private boolean lastAccelerometerSet;
+    private boolean lastAccelerometerSet = false;
 
     /**
      * variabile di guardia per accertarsi il reperimento di almeno un dato dal magnetometro
      */
-    private boolean lastMagnetometerSet;
+    private boolean lastMagnetometerSet = false;
 
     /**
      * array che contiene gli ultimi dati ricevuti dal magnetometro
      */
-    private float[] lastMagnetometerData;
+    private float[] lastMagnetometerData = new float[3];
 
     /**
      * array che contiene gli ultimi dati ricevuti dall'accelerometro
      */
-    private float[] lastAccelerometerData;
+    private float[] lastAccelerometerData = new float[3];
 
     /**
      * Sensore che misura il campo magnetico per i tre assi fisici
@@ -50,12 +50,12 @@ public class Compass implements SensorEventListener {
     /**
      * gradi di orientamento sui tre assi fisici
      */
-    private float[] orientation;
+    private float[] orientation = new float[3];
 
     /**
      * matrice di rotazione ottenuta dai dati rilevati dai sensori
      */
-    private float[] rotationMatrix;
+    private float[] rotationMatrix = new float[9];
 
     /**
      * oggetto fornito dal sistema Android per ottenere le istanze dei sensori
@@ -70,8 +70,6 @@ public class Compass implements SensorEventListener {
         this.sensorManager = sensorManager;
         accelerometer = this.sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnetometer = this.sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        lastAccelerometerData = new float[3];
-        lastMagnetometerData = new float[3];
     }
 
     /**
