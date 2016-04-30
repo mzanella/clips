@@ -37,8 +37,7 @@ public class SQLDao {
      * @return  int
      */
     public int delete(String tableName, String where, String[] whereArgs) {
-        // TODO: 30/04/16
-        return 0;
+        return database.delete(tableName, where, whereArgs);
     }
 
     /**
@@ -48,8 +47,7 @@ public class SQLDao {
      * @return  long
      */
     public long insert(String tableName, ContentValues values) {
-        // TODO: 30/04/16
-        return 0;
+        return database.insert(tableName, null, values);
     }
 
     /**
@@ -67,8 +65,7 @@ public class SQLDao {
      */
     public Cursor query(boolean distinct, String tableName, String[] columns, String where, String[]
             whereArgs, String groupBy, String having, String orderBy, String limit) {
-        // TODO: 30/04/16
-        return null;
+        return database.query(distinct, tableName, columns, where, whereArgs, groupBy, having, orderBy, limit);
     }
 
     /**
@@ -78,8 +75,7 @@ public class SQLDao {
      * @return  Cursor
      */
     public Cursor rawQuery(String sqlQuery, String[] whereArgs) {
-        // TODO: 30/04/16
-        return null;
+        return database.rawQuery(sqlQuery, whereArgs);
     }
 
     /**
@@ -92,8 +88,7 @@ public class SQLDao {
      * @return  int
      */
     public int update(String tableName, ContentValues values, String where, String[] whereArgs) {
-        // TODO: 30/04/16
-        return 0;
+        return database.update(tableName, values, where, whereArgs);
     }
 
 }
