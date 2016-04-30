@@ -27,11 +27,11 @@ public class PointOfInterestInformationTest {
 
     @Test
     public void testGetDescription() throws Exception {
-        Assert.assertEquals("description", pointOfInterestInformation.getCategory());
+        Assert.assertEquals("description", pointOfInterestInformation.getDescription());
     }
 
     @Test
     public void testGetName() throws Exception {
-        Assert.assertEquals("name", pointOfInterestInformation.getCategory());
+        Assert.assertEquals("name", pointOfInterestInformation.getName());
     }
 }
