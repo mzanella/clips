@@ -44,7 +44,7 @@ public class RegionOfInterestImpTest {
         myBeaconContained= new MyBeaconImp(new AltBeacon.Builder().setId1(uuid)
                 .setId2(((Integer)major).toString()).setId3(((Integer)major).toString()).setRssi(-55).setTxPower(-55).setBluetoothAddress("prova").setDataFields(data).setBeaconTypeCode(1).build());
 
-        this.myBeaconNotContained = new MyBeaconImp(new AltBeacon.Builder().setId1("DF7F1C79-43E9-44FF-886F-1D1F7DA6997A")
+        this.myBeaconNotContained = new MyBeaconImp(new AltBeacon.Builder().setId1("DF7F1C79-43E9-44FF-886F-1D1F7DA6997A".toLowerCase())
                 .setId2("1").setId3("1").setRssi(-55).setTxPower(-55).setBluetoothAddress("prova").setDataFields(data).setBeaconTypeCode(1).build());;
 
 

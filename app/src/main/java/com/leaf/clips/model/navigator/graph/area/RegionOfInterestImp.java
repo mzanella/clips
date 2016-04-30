@@ -6,8 +6,6 @@ package com.leaf.clips.model.navigator.graph.area;
  * @since 0.00
  */
 
-// TODO: 4/30/16 codify
-
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.navigator.graph.vertex.VertexImp;
 
