@@ -49,7 +49,6 @@ public class BeaconManagerAndroidTest40 extends InstrumentationTestCase{
 
     @Test
     public void shouldModifyScanPeriod() {
-        // TODO: 30/04/2016
         long period = 101;
 
         ranger.modifyScanPeriod(period, PeriodType.FOREGROUND);
