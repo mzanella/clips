@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_developer">Area sviluppatore</string>
+    <string name="navigation_drawer_close">Chiudi il navigation drawer</string>
+    <string name="navigation_drawer_open">Apri il navigation drawer</string>
+    <string name="splash_icon_desc">L\'icona dell\'applicazione</string>
+</resources>
