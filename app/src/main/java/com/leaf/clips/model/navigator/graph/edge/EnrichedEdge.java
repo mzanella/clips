@@ -50,4 +50,10 @@ public interface EnrichedEdge extends Edge {
      */
     RegionOfInterest getStarterPoint();
 
+    /**
+     * Metodo che ritorna le coordinate di un arco
+     * @return  int
+     */
+    int getCoordinate();
+
 }
