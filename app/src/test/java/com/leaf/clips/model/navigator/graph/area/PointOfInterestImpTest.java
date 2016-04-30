@@ -5,6 +5,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.junit.Assert.*;
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
  * @since 0.00
  */
 
-// TODO: 4/30/16 codify test Set ROI
+// TODO: 4/30/16 ToVerifiy
 
 public class PointOfInterestImpTest {
 
@@ -59,5 +60,18 @@ public class PointOfInterestImpTest {
 
     @Test
     public void testSetBelongingROIs() throws Exception {
+
+        int id = 46;
+        String uuid = "xyz";
+        int major = 29;
+        int minor = 10;
+
+        RegionOfInterest roi = new RegionOfInterestImp(id, uuid, major, minor);
+        Collection<RegionOfInterest> collection = new ArrayList<>();
+        collection.add(roi);
+
+        this.pointOfInterestImp.setBelongingROIs(collection);
+
+        Assert.assertEquals(collection, pointOfInterestImp.getAllBelongingROIs());
     }
 }
