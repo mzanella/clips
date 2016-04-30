@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -33,12 +34,16 @@ public class RemoteEdgeDaoTest {
         +"}";
     private JsonParser parser;
 
-    @Test
-    public void testFromJSONToTable() throws Exception {
+    @Before
+    public void init() {
         parser = new JsonParser();
         js = parser.parse(jsString).getAsJsonObject();
         remoteEdgeDao = new RemoteEdgeDao();
         edgeTable = remoteEdgeDao.fromJSONToTable(js);
+    }
+
+    @Test
+    public void testFromJSONToTable() throws Exception {
         Assert.assertEquals(1, edgeTable.getId());
         Assert.assertEquals(2, edgeTable.getStartROI());
         Assert.assertEquals(3, edgeTable.getEndROI());
