@@ -23,14 +23,12 @@ import static org.junit.Assert.*;
  * @since 0.00
  */
 
-// TODO: 4/30/16 ToVerify
-
 public class RegionOfInterestImpTest {
 
     int id = 46;
-    String uuid = "xyz";
-    int major = 299990;
-    int minor = 109120;
+    String uuid = "DF7E1C79-43E9-44FF-886F-1D1F7DA6997A".toLowerCase();
+    int major = 1;
+    int minor = 1;
 
     MyBeacon myBeaconContained;
     MyBeacon myBeaconNotContained;
@@ -43,13 +41,15 @@ public class RegionOfInterestImpTest {
         //Construct the Beacons for tests
         List<Long> data = new LinkedList<>();
         data.add((long) 88);
-        this.myBeaconContained = new MyBeaconImp(new AltBeacon.Builder().setId1("xyz").setId2("299990").setId3("109120").setRssi(-55).setTxPower(-55).setBluetoothAddress("prova").setDataFields(data).setBeaconTypeCode(1).build());
+        myBeaconContained= new MyBeaconImp(new AltBeacon.Builder().setId1(uuid)
+                .setId2(((Integer)major).toString()).setId3(((Integer)major).toString()).setRssi(-55).setTxPower(-55).setBluetoothAddress("prova").setDataFields(data).setBeaconTypeCode(1).build());
 
-        this.myBeaconContained = new MyBeaconImp(new AltBeacon.Builder().setId1("x").setId2("46").setId3("29").setRssi(-55).setTxPower(-55).setBluetoothAddress("prova").setDataFields(data).setBeaconTypeCode(1).build());
+        this.myBeaconNotContained = new MyBeaconImp(new AltBeacon.Builder().setId1("DF7F1C79-43E9-44FF-886F-1D1F7DA6997A")
+                .setId2("1").setId3("1").setRssi(-55).setTxPower(-55).setBluetoothAddress("prova").setDataFields(data).setBeaconTypeCode(1).build());;
 
 
 
-        this.regionOfInterestImp = new RegionOfInterestImp(id, uuid, major, minor);
+        this.regionOfInterestImp = new RegionOfInterestImp(this.id, this.uuid, this.major, this.minor);
     }
 
     @Test

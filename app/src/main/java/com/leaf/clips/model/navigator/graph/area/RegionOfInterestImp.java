@@ -11,6 +11,7 @@ package com.leaf.clips.model.navigator.graph.area;
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.navigator.graph.vertex.VertexImp;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -21,17 +22,17 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
     /**
      * Identificativo numerico di un oggetto RegionOfInterestImp
      */
-    private final int id = 0;
+    private final int id;
 
     /**
      * Identificativo Major del beacon associato alla ROI rappresentata dall'oggetto
      */
-    private final int major = 0;
+    private final int major;
 
     /**
      * Identificativo Minor del beacon associato alla ROI rappresentata dall'oggetto
      */
-    private final int minor = 0;
+    private final int minor;
 
     /**
      * Collezione degli oggetti PointOfInterest appartenenti all'oggetto
@@ -41,7 +42,7 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
     /**
      * Identificativo UUID del beacon associato alla ROI rappresentata dall'oggetto
      */
-    private final String uuid = null;
+    private final String uuid;
 
     /**
      * Costruttore della classe RegionOfInterestImp
@@ -51,7 +52,11 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
      * @param minor Identificativo Minor del beacon associato alla ROI rappresentata dall'oggetto
      */
     public RegionOfInterestImp(int id , String uuid, int major, int minor){
-        super(0);
+        super(id);
+        this.id = id;
+        this.uuid = uuid;
+        this.major = major;
+        this.minor = minor;
     }
 
     /**
@@ -61,7 +66,10 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
      */
     @Override
     public boolean contains(MyBeacon beacon){
-        return false;
+        if((beacon.getMajor() == this.major) && (beacon.getMinor() == this.minor) && (beacon.getUUID().equals(this.uuid)))
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -70,7 +78,7 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
      */
     @Override
     public Collection<PointOfInterest> getAllNearbyPOIs(){
-        return null;
+        return new ArrayList<>(this.pois);
     }
 
     /**
@@ -79,7 +87,7 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
      */
     @Override
     public int getFloor() {
-        return 0;
+        return this.minor / 1000;
     }
 
     /**
@@ -88,7 +96,7 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
      */
     @Override
     public int getMajor() {
-        return 0;
+        return this.major;
     }
 
     /**
@@ -97,7 +105,7 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
      */
     @Override
     public int getMinor() {
-        return 0;
+        return this.minor;
     }
 
     /**
@@ -106,7 +114,7 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
      */
     @Override
     public String getUUID() {
-        return null;
+        return this.uuid;
     }
 
     /**
@@ -115,7 +123,7 @@ public class RegionOfInterestImp extends VertexImp implements RegionOfInterest {
      */
     @Override
     public void setNearbyPOIs(Collection<PointOfInterest> pois) {
-
+        this.pois = new ArrayList<>(pois);
     }
 
 }
