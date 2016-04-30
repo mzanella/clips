@@ -5,6 +5,9 @@ package com.leaf.clips.model.usersetting;
  * @since 0.00
  */
 
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import junit.framework.Assert;
@@ -17,7 +20,7 @@ import org.junit.runners.JUnit4;
 /**
  * Unit Test 1
  */
-@RunWith(JUnit4.class)
+@RunWith(AndroidJUnit4.class)
 @SmallTest
 public class SettingImpTest1 {
 
@@ -25,7 +28,7 @@ public class SettingImpTest1 {
 
     @Before
     public void init(){
-        setting = new SettingImp();
+        setting = new SettingImp(InstrumentationRegistry.getTargetContext());
     }
 
     @Test

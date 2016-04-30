@@ -1,14 +1,14 @@
 package com.leaf.clips.model.usersetting;
 /**
 * @author Federico Tavella
-* @version 0.01
+* @version 0.02
 * @since 0.00
 * 
 * 
 */
 
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 
 /** 
  * Classe che implementa l'interfaccia Setting. Implementa tutti i metodi per la gestione delle impostazioni dell'utente
@@ -24,6 +24,30 @@ public class SettingImp implements Setting {
     * Preferenze di percorso dell'utente
     */
     private PathPreference pathPreference;
+
+    SharedPreferences sharedPreferences;
+
+    SharedPreferences.Editor preferencesEditor;
+
+    private static final String USER_PREFERENCES = "userKey"; // TODO: 01/05/2016
+
+    private static final String PATH_PREFERENCES = "pathKey"; // TODO: 01/05/2016
+
+    private static final String INSTRUCTION_PREFERENCES = "instructionKey"; // TODO: 01/05/2016
+
+    private static final String DEVELOPER_CODE = "developerKey"; // TODO: 01/05/2016
+
+    private DeveloperCodeManager developerCodeManager;
+
+    public SettingImp(Context context){
+        sharedPreferences = context.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
+        pathPreference = PathPreference.fromInt(sharedPreferences.getInt(PATH_PREFERENCES, 0));
+        instructionPreference = InstructionPreference.fromInt(sharedPreferences.getInt(INSTRUCTION_PREFERENCES, 0));
+
+        developerCodeManager = new DeveloperCodeManager(sharedPreferences);
+
+
+    }
 
     /**
     * Metodo che ritorna le preferenze riguardanti la modalità di fruizione delle informazioni
@@ -49,8 +73,8 @@ public class SettingImp implements Setting {
     */
     @Override
     public boolean isDeveloper(){
-        DeveloperCodeManager developerCodeManager = new DeveloperCodeManager();
-        return developerCodeManager.isValid(""); // TODO: 01/05/2016
+
+        return developerCodeManager.isValid(sharedPreferences.getString(DEVELOPER_CODE, "")); // TODO: 01/05/2016
     }
 
     /**
@@ -61,6 +85,9 @@ public class SettingImp implements Setting {
     @Override
     public void setInstructionPreference(InstructionPreference instructionPreference){
         this.instructionPreference = instructionPreference;
+        preferencesEditor = sharedPreferences.edit();
+        preferencesEditor.putInt(INSTRUCTION_PREFERENCES, InstructionPreference.toInt(instructionPreference));
+        preferencesEditor.apply();
     }
 
     /**
@@ -71,6 +98,9 @@ public class SettingImp implements Setting {
     @Override
     public void setPathPreference(PathPreference pathPreference){
         this.pathPreference = pathPreference;
+        preferencesEditor = sharedPreferences.edit();
+        preferencesEditor.putInt(PATH_PREFERENCES, PathPreference.toInt(pathPreference));
+        preferencesEditor.apply();
     }
 
     /**
@@ -80,7 +110,6 @@ public class SettingImp implements Setting {
     */
     @Override
     public boolean unlockDeveloper(String code){
-        DeveloperCodeManager developerCodeManager = new DeveloperCodeManager();
         return developerCodeManager.isValid(code);
     }
 

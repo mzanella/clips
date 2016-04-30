@@ -29,7 +29,7 @@ import java.util.concurrent.TimeoutException;
  */
 @RunWith(AndroidJUnit4.class)
 @SmallTest
-public class BeaconManagerAndroidTest extends InstrumentationTestCase{
+public class BeaconManagerAndroidTest{
 
     private BeaconRanger ranger;
 

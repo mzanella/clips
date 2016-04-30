@@ -7,19 +7,28 @@ package com.leaf.clips.model.usersetting;
 * 
 */
 
-/** 
+import android.content.SharedPreferences;
+
+/**
  * Classe che per la verifica dei codici sviluppatore
  */
-public class DeveloperCodeManager { 
+public class DeveloperCodeManager {
 
+    private static final String DEVELOPER_CODE = "developerKey"; // TODO: 01/05/2016
+
+    private SharedPreferences sharedPreferences;
+
+    public DeveloperCodeManager(SharedPreferences sharedPreferences){
+        this.sharedPreferences = sharedPreferences;
+    }
     /**
     * Questo metodo permette di verificare se il codice inserito è valido per attivare la modalità sviluppatore
     * @param code Questo parametro richiede il codice per attivare la modalità sviluppatore
     * @return  boolean
     */
     public boolean isValid(String code){
-        // TODO: 01/05/2016
-        return false;
+        //dumb implementation
+        return code == sharedPreferences.getString(DEVELOPER_CODE, "");// TODO: 01/05/2016  
     }
 
 }
