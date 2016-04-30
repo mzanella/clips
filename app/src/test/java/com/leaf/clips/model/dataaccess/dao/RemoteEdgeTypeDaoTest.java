@@ -9,10 +9,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
 /**
- * Created by zanna on 29/04/16.
+ * @author Marco Zanella
+ * @version 0.01
+ * @since 0.01
+ *
+ *
  */
+
 public class RemoteEdgeTypeDaoTest {
 
     private JsonObject js;

@@ -3,14 +3,15 @@ package com.leaf.clips.model.dataaccess.dao;
 import org.junit.Before;
 import org.junit.Test;
 import com.google.gson.*;
-
 import junit.framework.Assert;
-
-import static org.junit.Assert.*;
-
 /**
- * Created by zanna on 29/04/16.
+ * @author Marco Zanella
+ * @version 0.01
+ * @since 0.01
+ *
+ *
  */
+
 public class RemotePhotoDaoTest {
 
     private JsonObject js;
