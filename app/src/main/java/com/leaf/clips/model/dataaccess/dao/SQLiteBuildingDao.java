@@ -6,10 +6,13 @@ package com.leaf.clips.model.dataaccess.dao;
  * @since 0.01
  */
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  *Classe che rappresenta un DAO per la tabella "Building" del database locale
@@ -28,7 +31,6 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      * @param database Il database locale
      */
     public SQLiteBuildingDao(SQLiteDatabase database) {
-        // TODO: 30/04/16
         sqlDao = new SQLDao(database);
     }
 
@@ -39,8 +41,27 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      */
     @Override
     public BuildingTable cursorToType(Cursor cursor) {
-        // TODO: 30/04/16
-        return null;
+        int idIndex = cursor.getColumnIndex(BuildingContract.COLUMN_ID);
+        int nameIndex = cursor.getColumnIndex(BuildingContract.COLUMN_NAME);
+        int addressIndex = cursor.getColumnIndex(BuildingContract.COLUMN_ADDRESS);
+        int descriptionIndex = cursor.getColumnIndex(BuildingContract.COLUMN_DESCRIPTION);
+        int mapSizeIndex = cursor.getColumnIndex(BuildingContract.COLUMN_MAPSIZE);
+        int mapVersionIndex = cursor.getColumnIndex(BuildingContract.COLUMN_MAPVERSION);
+        int openingHoursIndex = cursor.getColumnIndex(BuildingContract.COLUMN_OPENINGHOURS);
+        int uuidIndex = cursor.getColumnIndex(BuildingContract.COLUMN_UUID);
+        int majorIndex = cursor.getColumnIndex(BuildingContract.COLUMN_MAJOR);
+        cursor.moveToNext();
+        return new BuildingTable(
+                cursor.getInt(idIndex),
+                cursor.getString(uuidIndex),
+                cursor.getInt(majorIndex),
+                cursor.getString(nameIndex),
+                cursor.getString(descriptionIndex),
+                cursor.getString(openingHoursIndex),
+                cursor.getString(addressIndex),
+                cursor.getInt(mapVersionIndex),
+                cursor.getString(mapSizeIndex)
+        );
     }
 
     /**
@@ -50,7 +71,10 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      */
     @Override
     public void deleteBuilding(int id) {
-        // TODO: 30/04/16
+        sqlDao.delete(
+                BuildingContract.TABLE_NAME,
+                BuildingContract.COLUMN_ID + "=" + id,
+                null);
     }
 
     /**
@@ -59,8 +83,35 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      */
     @Override
     public Collection<BuildingTable> findAllBuildings() {
-        // TODO: 30/04/16
-        return null;
+        String [] columns = new String[]{
+                BuildingContract.COLUMN_ADDRESS,
+                BuildingContract.COLUMN_DESCRIPTION,
+                BuildingContract.COLUMN_ID,
+                BuildingContract.COLUMN_MAPVERSION,
+                BuildingContract.COLUMN_NAME,
+                BuildingContract.COLUMN_OPENINGHOURS,
+                BuildingContract.COLUMN_MAPSIZE,
+                BuildingContract.COLUMN_MAJOR,
+                BuildingContract.COLUMN_UUID
+        };
+        Cursor cursor = sqlDao.query(true, BuildingContract.TABLE_NAME, columns,
+                "1", null, null, null, null, null);
+        int buildingNumber = cursor.getCount();
+        PriorityQueue<BuildingTable> buildingTables = new PriorityQueue<>(buildingNumber,
+                new Comparator<BuildingTable>() {
+            @Override
+            public int compare(BuildingTable lhs, BuildingTable rhs) {
+                if (lhs.getId() > rhs.getId())
+                    return 1;
+                else if (lhs.getId() == rhs.getId())
+                    return 0;
+                else
+                    return -1;
+            }
+        });
+        for (int i = 0; i < buildingNumber; i++)
+            buildingTables.add(cursorToType(cursor));
+        return buildingTables;
     }
 
     /**
@@ -70,8 +121,20 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      */
     @Override
     public BuildingTable findBuildingById(int id) {
-        // TODO: 30/04/16
-        return null;
+        String [] columns = new String[]{
+                BuildingContract.COLUMN_ADDRESS,
+                BuildingContract.COLUMN_DESCRIPTION,
+                BuildingContract.COLUMN_ID,
+                BuildingContract.COLUMN_MAPVERSION,
+                BuildingContract.COLUMN_NAME,
+                BuildingContract.COLUMN_OPENINGHOURS,
+                BuildingContract.COLUMN_MAPSIZE,
+                BuildingContract.COLUMN_MAJOR,
+                BuildingContract.COLUMN_UUID
+        };
+        Cursor cursor = sqlDao.query(true, BuildingContract.TABLE_NAME, columns,
+                BuildingContract.COLUMN_ID + "=" + id, null, null, null, null, null);
+        return cursorToType(cursor);
     }
 
     /**
@@ -81,8 +144,20 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      */
     @Override
     public BuildingTable findBuildingByMajor(int major) {
-        // TODO: 30/04/16
-        return null;
+        String [] columns = new String[]{
+                BuildingContract.COLUMN_ADDRESS,
+                BuildingContract.COLUMN_DESCRIPTION,
+                BuildingContract.COLUMN_ID,
+                BuildingContract.COLUMN_MAPVERSION,
+                BuildingContract.COLUMN_NAME,
+                BuildingContract.COLUMN_OPENINGHOURS,
+                BuildingContract.COLUMN_MAPSIZE,
+                BuildingContract.COLUMN_MAJOR,
+                BuildingContract.COLUMN_UUID
+        };
+        Cursor cursor = sqlDao.query(true, BuildingContract.TABLE_NAME, columns,
+                BuildingContract.COLUMN_MAJOR + "=" + major, null, null, null, null, null);
+        return cursorToType(cursor);
     }
 
     /**
@@ -92,8 +167,18 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      */
     @Override
     public int insertBuilding(BuildingTable toInsert) {
-        // TODO: 30/04/16
-        return 0;
+        ContentValues values = new ContentValues();
+        values.put(BuildingContract.COLUMN_ADDRESS, toInsert.getAddress());
+        values.put(BuildingContract.COLUMN_DESCRIPTION, toInsert.getDescription());
+        values.put(BuildingContract.COLUMN_ID, toInsert.getId());
+        values.put(BuildingContract.COLUMN_MAPVERSION, toInsert.getVersion());
+        values.put(BuildingContract.COLUMN_NAME, toInsert.getName());
+        values.put(BuildingContract.COLUMN_OPENINGHOURS, toInsert.getOpeningHours());
+        values.put(BuildingContract.COLUMN_UUID, toInsert.getUUID());
+        values.put(BuildingContract.COLUMN_MAPSIZE, toInsert.getSize());
+        values.put(BuildingContract.COLUMN_MAJOR, toInsert.getMajor());
+        sqlDao.insert(BuildingContract.TABLE_NAME, values);
+        return toInsert.getId();
     }
 
     /**
@@ -102,8 +187,20 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      * @return  boolean
      */
     public boolean isBuildingMapPresent(int major) {
-        // TODO: 30/04/16
-        return false;
+        String [] columns = new String[]{
+                BuildingContract.COLUMN_ADDRESS,
+                BuildingContract.COLUMN_DESCRIPTION,
+                BuildingContract.COLUMN_ID,
+                BuildingContract.COLUMN_MAPVERSION,
+                BuildingContract.COLUMN_NAME,
+                BuildingContract.COLUMN_OPENINGHOURS,
+                BuildingContract.COLUMN_MAPSIZE,
+                BuildingContract.COLUMN_MAJOR,
+                BuildingContract.COLUMN_UUID
+        };
+        Cursor cursor = sqlDao.query(true, BuildingContract.TABLE_NAME, columns,
+                BuildingContract.COLUMN_MAJOR + "=" + major, null, null, null, null, null);
+        return (cursor.getCount() > 0);
     }
 
     /**
@@ -114,8 +211,36 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
      */
     @Override
     public boolean updateBuilding(int id, BuildingTable toUpdate) {
-        // TODO: 30/04/16
-        return false;
+        String [] columns = new String[]{
+                BuildingContract.COLUMN_ADDRESS,
+                BuildingContract.COLUMN_DESCRIPTION,
+                BuildingContract.COLUMN_ID,
+                BuildingContract.COLUMN_MAPVERSION,
+                BuildingContract.COLUMN_NAME,
+                BuildingContract.COLUMN_OPENINGHOURS,
+                BuildingContract.COLUMN_MAPSIZE,
+                BuildingContract.COLUMN_MAJOR,
+                BuildingContract.COLUMN_UUID
+        };
+        Cursor cursor = sqlDao.query(true, BuildingContract.TABLE_NAME, columns,
+                BuildingContract.COLUMN_ID + "=" + id, null, null, null, null, null);
+        if (cursor.getCount() == 0)
+            return false;
+        else {
+            ContentValues values = new ContentValues();
+            values.put(BuildingContract.COLUMN_ADDRESS, toUpdate.getAddress());
+            values.put(BuildingContract.COLUMN_DESCRIPTION, toUpdate.getDescription());
+            values.put(BuildingContract.COLUMN_ID, toUpdate.getId());
+            values.put(BuildingContract.COLUMN_MAPVERSION, toUpdate.getVersion());
+            values.put(BuildingContract.COLUMN_NAME, toUpdate.getName());
+            values.put(BuildingContract.COLUMN_OPENINGHOURS, toUpdate.getOpeningHours());
+            values.put(BuildingContract.COLUMN_UUID, toUpdate.getUUID());
+            values.put(BuildingContract.COLUMN_MAPSIZE, toUpdate.getSize());
+            values.put(BuildingContract.COLUMN_MAJOR, toUpdate.getMajor());
+            sqlDao.update(BuildingContract.TABLE_NAME, values, BuildingContract.COLUMN_ID + "="
+                    + id, null);
+            return true;
+        }
     }
 
 }
