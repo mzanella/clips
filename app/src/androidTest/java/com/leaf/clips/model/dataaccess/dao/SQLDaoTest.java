@@ -1,14 +1,8 @@
 package com.leaf.clips.model.dataaccess.dao;
 
-import org.junit.Before;
-import org.junit.Rule;
+import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
-import static org.junit.Assert.*;
-
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,21 +10,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.rule.ServiceTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.AndroidTestCase;
 import android.test.InstrumentationTestCase;
-import android.test.ServiceTestCase;
-import android.test.mock.MockContext;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
-
-import junit.framework.Assert;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
 
 /**
  * @author Marco Zanella
