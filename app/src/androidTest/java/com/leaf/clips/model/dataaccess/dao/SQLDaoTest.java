@@ -129,8 +129,9 @@ public class SQLDaoTest extends InstrumentationTestCase {
             + "," + DatabaseTest.COLUMN_NAME_DESCRIPTION + ")" + " values (" + i + "," +
                     " \"description:" + i +"\")", null);
         }
-        Assert.assertTrue(5 <= sqlDao.query(true, DatabaseTest.TABLE_NAME, columns, "1", null, null,
-                null, null, null).getCount());
+        int numberOfEntry = sqlDao.query(true, DatabaseTest.TABLE_NAME, columns, "1", null, null,
+                null, null, null).getCount();
+        Assert.assertTrue("number:" + numberOfEntry, 5 <= numberOfEntry);
         Assert.assertFalse(sqlDao.query(true, DatabaseTest.TABLE_NAME, columns,
                 DatabaseTest.COLUMN_NAME_DESCRIPTION + "=\"description:3\"", null, null,
                 null, null, null).getCount() == 0);
