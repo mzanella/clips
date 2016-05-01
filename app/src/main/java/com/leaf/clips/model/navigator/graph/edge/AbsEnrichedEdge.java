@@ -90,7 +90,7 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
      */
     @Override
     public int getCoordinate(){
-        return 0;
+        return this.coordinate;
     }
 
     /**
@@ -106,7 +106,7 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
      */
     @Override
     public double getDistance(){
-        return 0;
+        return this.distance;
     }
 
     /**
@@ -115,7 +115,7 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
      */
     @Override
     public RegionOfInterest getEndPoint(){
-        return null;
+        return this.endROI;
     }
 
     /**
@@ -124,7 +124,7 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
      */
     @Override
     public int getId(){
-        return 0;
+        return this.id;
     }
 
     /**
@@ -132,7 +132,7 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
      * @return  NavigationInformation
      */
     protected NavigationInformation getNavigationInformation(){
-        return null;
+        return this.navInfo;
     }
 
     /**
@@ -141,7 +141,7 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
      */
     @Override
     public PhotoInformation getPhotoInformation(){
-        return null;
+        return this.navInfo.getPhotoInformation();
     }
 
     /**
@@ -150,7 +150,7 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
      */
     @Override
     public RegionOfInterest getStarterPoint(){
-        return null;
+        return this.startROI;
     }
 
     /**
