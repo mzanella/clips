@@ -1,6 +1,8 @@
 package com.leaf.clips.model.dataaccess.dao;
 
 import junit.framework.Assert;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import android.content.ContentValues;
@@ -67,6 +69,7 @@ public class SQLDaoTest extends InstrumentationTestCase {
     private SQLDao sqlDao;
     private Context context;
 
+    @Before
     public void setUp() throws Exception {
         super.setUp();
         context = InstrumentationRegistry.getTargetContext();
@@ -75,6 +78,8 @@ public class SQLDaoTest extends InstrumentationTestCase {
         Assert.assertNotNull(dbHelper);
         database = dbHelper.getWritableDatabase();
         Assert.assertNotNull(database);
+        database.execSQL(DatabaseTest.SQL_DELETE_ENTRIES);
+        database.execSQL(DatabaseTest.SQL_CREATE_ENTRIES);
         sqlDao = new SQLDao(database);
         Assert.assertNotNull(sqlDao);
     }
@@ -125,21 +130,23 @@ public class SQLDaoTest extends InstrumentationTestCase {
         String[] columns = {DatabaseTest.COLUMN_NAME_ID_TEST,
                 DatabaseTest.COLUMN_NAME_DESCRIPTION};
         for (int i = 0; i < 5; i++) {
-            database.rawQuery("insert into " + DatabaseTest.TABLE_NAME +"("+DatabaseTest.COLUMN_NAME_ID_TEST
-            + "," + DatabaseTest.COLUMN_NAME_DESCRIPTION + ")" + " values (" + i + "," +
-                    " \"description:" + i +"\")", null);
+            ContentValues values = new ContentValues();
+            values.put(DatabaseTest.COLUMN_NAME_ID_TEST, i);
+            values.put(DatabaseTest.COLUMN_NAME_DESCRIPTION, "description:" + i);
+            database.insert(DatabaseTest.TABLE_NAME, null, values);
         }
         int numberOfEntry = sqlDao.query(true, DatabaseTest.TABLE_NAME, columns, "1", null, null,
                 null, null, null).getCount();
         Assert.assertTrue("number:" + numberOfEntry, 5 <= numberOfEntry);
-        Assert.assertFalse(sqlDao.query(true, DatabaseTest.TABLE_NAME, columns,
+        numberOfEntry = sqlDao.query(true, DatabaseTest.TABLE_NAME, columns,
                 DatabaseTest.COLUMN_NAME_DESCRIPTION + "=\"description:3\"", null, null,
-                null, null, null).getCount() == 0);
+                null, null, null).getCount();
+        Assert.assertFalse("number:" + numberOfEntry, numberOfEntry == 0);
         database.delete(DatabaseTest.TABLE_NAME, "1", null);
         int numberOfRows = sqlDao.query(true, DatabaseTest.TABLE_NAME, columns,
                 DatabaseTest.COLUMN_NAME_DESCRIPTION + "=\"description:3\"", null, null,
                 null, null, null).getCount();
-        Assert.assertTrue("numbero of rows:" + numberOfRows, numberOfRows == 0);
+        Assert.assertTrue("number of rows:" + numberOfRows, numberOfRows == 0);
     }
 
     @Test
