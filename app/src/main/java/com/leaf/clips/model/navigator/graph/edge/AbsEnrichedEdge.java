@@ -161,6 +161,8 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
     @Override
     public abstract double getWeight();
 
+
+    // TODO: 5/1/16 Pullare le userSettings 
     /**
      * Metodo che permette di impostare le preferenze di un utente per il calcolo del peso dell'arco
      * @param setting Preferenze da impostare
