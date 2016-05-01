@@ -56,6 +56,11 @@ public class BuildingContract implements BaseColumns{
     public final static String COLUMN_MAPSIZE="size";
 
     /**
+     * Valore della colonna major. Valore di default "major"
+     */
+    public final static String COLUMN_MAJOR="major";
+
+    /**
      * Nome della tabella.Valore di default "Building"
      */
     public final static String TABLE_NAME="Building";
