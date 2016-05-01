@@ -34,8 +34,8 @@ public interface Edge {
 
     /**
      * Metodo che ritorna il peso dell'arco
-     * @return  int
+     * @return  double
      */
-    int getWeight();
+    double getWeight();
 
 }

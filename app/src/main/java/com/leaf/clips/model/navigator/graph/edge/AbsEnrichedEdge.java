@@ -155,15 +155,11 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
 
     /**
      * Metodo astratto che ritorna il peso dell'arco
-     * @return  int
+     * @return  double
      */
-    @Override
-    public abstract int getWeight();
 
     @Override
-    protected double getWeight(){
-        return 0;
-    }
+    public abstract double getWeight();
 
     /**
      * Metodo che permette di impostare le preferenze di un utente per il calcolo del peso dell'arco
