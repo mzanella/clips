@@ -51,6 +51,11 @@ public class BuildingContract implements BaseColumns{
     public final static String COLUMN_UUID="uuid";
 
     /**
+     * Valore della colonna mapSize. Valore di default "size"
+     */
+    public final static String COLUMN_MAPSIZE="size";
+
+    /**
      * Nome della tabella.Valore di default "Building"
      */
     public final static String TABLE_NAME="Building";
