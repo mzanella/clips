@@ -67,7 +67,6 @@ public class SQLiteBuildingDao implements BuildingDao, CursorConverter {
     /**
      * Metodo che permette la rimozione delle informazioni di un edificio dalla tabella "Building" del database locale
      * @param id Identificativo dell'edificio di cui rimuovere le informazioni dal database locale
-     * @return  void
      */
     @Override
     public void deleteBuilding(int id) {

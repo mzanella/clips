@@ -33,11 +33,6 @@ public class PointOfInterestContract {
     public final static String COLUMN_NAME = "name";
 
     /**
-     * Valore della colonna major. Valore di default "major"
-     */
-    public final static String COLUMN_MAJOR = "major";
-
-    /**
      * Nome della tabella.Valore di default "POI"
      */
     public final static String TABLE_NAME = "POI";
