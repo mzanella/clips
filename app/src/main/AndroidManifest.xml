@@ -19,8 +19,32 @@
         </activity>
         <activity
                 android:name=".presenter.HomeActivity"
-                android:label="@string/title_activity_home"
                 android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".presenter.MainDeveloperPresenter">
+        </activity>
+        <activity
+                android:name=".presenter.DeveloperUnlockerActivity"
+                android:label="@string/title_activity_developer_unlocker"
+                android:parentActivityName=".presenter.HomeActivity">
+        </activity>
+        <activity
+                android:name=".presenter.MainDeveloperActivity"
+                android:label="@string/title_activity_main_developer"
+                android:parentActivityName=".presenter.HomeActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.leaf.clips.presenter.HomeActivity"/>
+        </activity>
+        <activity
+                android:name=".presenter.LoggingActivity"
+                android:label="@string/title_activity_logging"
+                android:parentActivityName=".presenter.MainDeveloperActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.leaf.clips.presenter.MainDeveloperActivity"/>
         </activity>
     </application>
 

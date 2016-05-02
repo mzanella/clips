@@ -1,11 +1,11 @@
 package com.leaf.clips.view;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.leaf.clips.R;
 import com.leaf.clips.presenter.HomeActivity;
+import com.leaf.clips.presenter.MainDeveloperPresenter;
 
 public class HomeViewImp implements HomeView, NavigationView.OnNavigationItemSelectedListener {
     HomeActivity homeActivity;
@@ -31,57 +32,58 @@ public class HomeViewImp implements HomeView, NavigationView.OnNavigationItemSel
     ListView poiCategories;
     FloatingActionButton exploreButton;
 
-    public HomeViewImp(HomeActivity presenter) {
-        this.homeActivity = presenter;
-        presenter.setContentView(R.layout.activity_home);
+    public HomeViewImp(HomeActivity homeActivity) {
+        this.homeActivity = homeActivity;
+        homeActivity.setContentView(R.layout.activity_home);
 
-        toolbar = (Toolbar) presenter.findViewById(R.id.toolbar);
-        presenter.setSupportActionBar(toolbar);
+        toolbar = (Toolbar) homeActivity.findViewById(R.id.toolbar_home);
+        homeActivity.setSupportActionBar(toolbar);
 
-        exploreButton = (FloatingActionButton) presenter.findViewById(R.id.fab);
+        exploreButton = (FloatingActionButton) homeActivity.findViewById(R.id.fab_explore_button);
+        /**
+         * Listener del tap su exploreButton
+         */
         if(exploreButton != null){
             exploreButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //TODO: Aprire NearbyPoiActivity
                     Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
             });
         }
 
-        drawer = (DrawerLayout) presenter.findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                presenter, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        drawer = (DrawerLayout) homeActivity.findViewById(R.id.drawer_layout_home);
 
-        navigationView = (NavigationView) presenter.findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView = (NavigationView) homeActivity.findViewById(R.id.nav_view_home);
+        if(navigationView != null)
+            navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void setBuildingName(String name) {
-
+        //TODO
     }
 
     @Override
     public void setBuildingDescription(String description) {
-
+        //TODO
     }
 
     @Override
     public void setBuildingOpeningHours(String hours) {
-
+        //TODO
     }
 
     @Override
     public void setBuildingAddress(String address) {
-
+        //TODO
     }
 
     @Override
     public void setPoiCategoryListAdapter(ListAdapter adapter) {
-
+        //TODO
     }
 
     /**
@@ -96,7 +98,8 @@ public class HomeViewImp implements HomeView, NavigationView.OnNavigationItemSel
         int id = item.getItemId();
 
         if (id == R.id.nav_developer) {
-            // Handle the camera action
+            Intent intent = new Intent(homeActivity, MainDeveloperPresenter.class);
+            homeActivity.startActivity(intent);
         }
 
         drawer.closeDrawer(GravityCompat.START);
