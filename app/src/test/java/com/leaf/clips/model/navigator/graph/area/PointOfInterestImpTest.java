@@ -27,7 +27,9 @@ public class PointOfInterestImpTest {
         pointOfInterestInformation = new PointOfInterestInformation("name", "description", "category");
         this.pointOfInterestImp = new PointOfInterestImp(this.id, pointOfInterestInformation);
     }
-
+    /*
+     * TU25
+     */
     @Test
     public void testGetAllBelongingROIs() throws Exception {
         //Questo test potrebbe non essere efficace
@@ -42,26 +44,40 @@ public class PointOfInterestImpTest {
         }
     }
 
+    /*
+     * TU24
+     */
     @Test
     public void testGetCategory() throws Exception {
         Assert.assertEquals("category", pointOfInterestImp.getCategory());
     }
 
+    /*
+     * TU24
+     */
     @Test
     public void testGetDescription() throws Exception {
         Assert.assertEquals("description", pointOfInterestImp.getDescription());
     }
 
+    /*
+     * TU24
+     */
     @Test
     public void testGetId() throws Exception {
         Assert.assertEquals(this.id, pointOfInterestImp.getId());
     }
-
+    /*
+     * TU24
+     */
     @Test
     public void testGetName() throws Exception {
         Assert.assertEquals("name", pointOfInterestImp.getName());
     }
 
+    /*
+     * TU25
+     */
     @Test
     public void testSetBelongingROIs() throws Exception {
 

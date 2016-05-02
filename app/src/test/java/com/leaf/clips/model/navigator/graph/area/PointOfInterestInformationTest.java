@@ -20,16 +20,25 @@ public class PointOfInterestInformationTest {
         this.pointOfInterestInformation = new PointOfInterestInformation("name", "description", "category");
     }
 
+    /*
+     * TU23
+     */
     @Test
     public void testGetCategory() throws Exception {
         Assert.assertEquals("category", pointOfInterestInformation.getCategory());
     }
 
+    /*
+     * TU23
+     */
     @Test
     public void testGetDescription() throws Exception {
         Assert.assertEquals("description", pointOfInterestInformation.getDescription());
     }
 
+    /*
+     * TU23
+     */
     @Test
     public void testGetName() throws Exception {
         Assert.assertEquals("name", pointOfInterestInformation.getName());

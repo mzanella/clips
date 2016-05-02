@@ -32,8 +32,6 @@ import static org.junit.Assert.*;
  * @since 0.00
  */
 
-// TODO: 5/1/16 Codify
-
 public class DefaultEdgeTest {
 
     private DefaultEdge defaultEdge;
@@ -96,18 +94,27 @@ public class DefaultEdgeTest {
         defaultEdge = new DefaultEdge(startROI, endROI, distance, coordinate, edgeID, navInfo);
     }
 
+    /*
+     * TU17
+     */
     @Test
     public void testGetBasicInformation() throws Exception {
         Assert.assertEquals("Basic Instruction", defaultEdge.getBasicInformation());
     }
 
+    /*
+     * TU17
+     */
     @Test
     public void testGetDetailedInformation() throws Exception {
         Assert.assertEquals("Detailed Instruction", defaultEdge.getDetailedInformation());
     }
 
+    /*
+     * TU22
+     */
     @Test
     public void testGetWeight() throws Exception {
-
+       //TODO da implementare quando sarà deciso il peso
     }
 }

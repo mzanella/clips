@@ -37,6 +37,9 @@ public class PhotoInformationTest {
         this.photoInformation = new PhotoInformation(collection);
     }
 
+    /*
+     * TU12
+     */
     @Test
     public void testGetPhotoInformation() throws Exception {
         Collection<PhotoRef> photosCollection = this.photoInformation.getPhotoInformation();

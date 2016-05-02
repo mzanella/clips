@@ -28,6 +28,10 @@ public class PhotoRefTest {
         }
     }
 
+    /*
+     * TU11
+     */
+
     @Test
     public void testGetPhotoUri() throws Exception {
         Assert.assertEquals(new URI("www.google.com"), photoRef.getPhotoUri());

@@ -18,6 +18,9 @@ public class VertexImpTest {
         this.vertexImp = new VertexImp(15);
     }
 
+    /*
+     * TU8
+     */
     @Test
     public void testGetId() throws Exception {
         Assert.assertEquals(15, vertexImp.getId());

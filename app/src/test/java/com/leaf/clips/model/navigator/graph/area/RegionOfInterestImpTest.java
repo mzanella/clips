@@ -52,12 +52,18 @@ public class RegionOfInterestImpTest {
         this.regionOfInterestImp = new RegionOfInterestImp(this.id, this.uuid, this.major, this.minor);
     }
 
+    /*
+     * TU28
+     */
     @Test
     public void testContains() throws Exception {
         Assert.assertTrue(regionOfInterestImp.contains(myBeaconContained));
         Assert.assertFalse(regionOfInterestImp.contains(myBeaconNotContained));
     }
 
+    /*
+     * TU29
+     */
     @Test
     public void testGetAllNearbyPOIs() throws Exception {
         PointOfInterestInformation poiInfo = new PointOfInterestInformation("name", "description", "category");
@@ -70,27 +76,42 @@ public class RegionOfInterestImpTest {
         Assert.assertEquals(regionOfInterestImp.getAllNearbyPOIs().iterator().next(), poi);
     }
 
+    /*
+     * TU27
+     */
     @Test
     public void testGetFloor() throws Exception {
         int floor = this.minor / 1000;
         Assert.assertEquals(floor, regionOfInterestImp.getFloor());
     }
 
+    /*
+     * TU26
+     */
     @Test
     public void testGetMajor() throws Exception {
         Assert.assertEquals(this.major, regionOfInterestImp.getMajor());
     }
 
+    /*
+     * TU26
+     */
     @Test
     public void testGetMinor() throws Exception {
         Assert.assertEquals(this.minor, regionOfInterestImp.getMinor());
     }
 
+    /*
+     * TU26
+     */
     @Test
     public void testGetUUID() throws Exception {
         Assert.assertEquals(this.uuid, regionOfInterestImp.getUUID());
     }
 
+    /*
+     * TU29
+     */
     @Test
     public void testSetNearbyPOIs() throws Exception {
         PointOfInterestInformation poiInfo = new PointOfInterestInformation("name", "description", "category");
