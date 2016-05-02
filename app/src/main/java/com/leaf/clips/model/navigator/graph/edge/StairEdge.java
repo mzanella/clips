@@ -38,7 +38,7 @@ public class StairEdge extends AbsEnrichedEdge {
      */
     @Override
     public String getBasicInformation(){
-        return null;
+        return getNavigationInformation().getBasicInformation();
     }
 
     /**
@@ -47,7 +47,7 @@ public class StairEdge extends AbsEnrichedEdge {
      */
     @Override
     public String getDetailedInformation(){
-        return null;
+        return getNavigationInformation().getDetailedInformation();
     }
 
     /**
@@ -57,6 +57,7 @@ public class StairEdge extends AbsEnrichedEdge {
     @Override
     public double getWeight(){
         return 0;
+        //TODO Decidere il peso
     }
 
 }

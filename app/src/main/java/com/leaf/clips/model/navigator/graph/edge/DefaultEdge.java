@@ -9,8 +9,6 @@ package com.leaf.clips.model.navigator.graph.edge;
 import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 import com.leaf.clips.model.navigator.graph.navigationinformation.NavigationInformation;
 
-// TODO: 5/1/16 To codify
-
 /**
  *Classe che implementa AbsEnrichedEdge e rappresenta un arco del grafo senza caratteristiche particolari
  */
@@ -35,7 +33,7 @@ public class DefaultEdge extends AbsEnrichedEdge {
      */
     @Override
     public String getBasicInformation(){
-        return null;
+       return getNavigationInformation().getBasicInformation();
     }
 
     /**
@@ -44,7 +42,7 @@ public class DefaultEdge extends AbsEnrichedEdge {
      */
     @Override
     public String getDetailedInformation(){
-        return null;
+       return getNavigationInformation().getDetailedInformation();
     }
 
     /**
@@ -54,6 +52,7 @@ public class DefaultEdge extends AbsEnrichedEdge {
     @Override
     public double getWeight(){
         return 0;
+        //TODO Decidere il peso
     }
 
 }
