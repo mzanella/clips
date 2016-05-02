@@ -24,8 +24,8 @@ public class HomeActivityTest {
 
     @Test
     public void canIopenTheNavigationDrawer() throws Exception {
-        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
-        onView(withId(R.id.drawer_layout)).check(matches(isOpen()));
+        onView(withId(R.id.drawer_layout_home)).perform(DrawerActions.open());
+        onView(withId(R.id.drawer_layout_home)).check(matches(isOpen()));
     }
 
     @Test
