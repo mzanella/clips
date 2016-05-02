@@ -3,15 +3,17 @@ package com.leaf.clips.presenter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.leaf.clips.R;
+import com.leaf.clips.view.DeveloperUnlockerView;
+import com.leaf.clips.view.DeveloperUnlockerViewImp;
 
 public class DeveloperUnlockerActivity extends AppCompatActivity {
-    //TODO: creare la View e spostare relativa logica
+    DeveloperUnlockerView developerUnlockerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_developer_unlocker);
+
+        developerUnlockerView = new DeveloperUnlockerViewImp(this);
     }
 
     public boolean unlockDeveloper(String code){
