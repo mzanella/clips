@@ -45,7 +45,7 @@ public class SQLiteEdgeTypeDaoTest extends InstrumentationTestCase {
 
     public class MySQLiteHelper extends SQLiteOpenHelper {
 
-        private static final String DATABASE_NAME = "SQLitePhotoDaoTest.db";
+        private static final String DATABASE_NAME = "SQLiteEdgeTypeDaoTest.db";
         private static final int DATABASE_VERSION = 1;
 
         public MySQLiteHelper(Context context) {
