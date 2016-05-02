@@ -58,6 +58,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
         listeners = new LinkedList<>();
         lastBeaconsSeen = new PriorityQueue<>();
         // TODO: 02/05/2016
+        navigator = new NavigatorImp(compass);
         navigator.setGraph(graph);
     }
 

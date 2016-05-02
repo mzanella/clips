@@ -9,16 +9,13 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.leaf.clips.model.beacon.BeaconManagerAdapter;
 import com.leaf.clips.model.beacon.BeaconRanger;
-import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.beacon.PeriodType;
 
-import java.util.PriorityQueue;
 
 /** 
 *Classe base per la comunicazione con le classi che si occupano del rilevamento dei beacon
@@ -71,7 +68,6 @@ public abstract class AbsBeaconReceiverManager extends BroadcastReceiver {
      * @param p Periodo di scansione dei beacon da scansionare
      * @param type Parametro per decidere se cambiare il periodo di scansione in Foreground
      *             o in Background, di scansione o di non scansione
-     * @return  void
      */
     public void modifyScanningPeriod(long p, PeriodType type){
         beaconManagerAdapter.modifyScanPeriod(p, type);
@@ -91,7 +87,6 @@ public abstract class AbsBeaconReceiverManager extends BroadcastReceiver {
     /**
      * Metodo che permette di fermare il service che si occupa di fare le scansioni per trovare
      * i beacon
-     * @return  void
      */
     public void stopService(){
         context.unbindService(serviceConnection);
