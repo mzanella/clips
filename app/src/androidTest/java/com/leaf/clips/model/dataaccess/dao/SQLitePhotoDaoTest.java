@@ -99,11 +99,6 @@ public class SQLitePhotoDaoTest extends InstrumentationTestCase {
     private void databaseInsert(ContentValues values){
         database.insert(PhotoContract.TABLE_NAME, null, values);
     }
-    private void databaseInsert(ContentValues[] values){
-        /*database.insert(RoiPoiContract.TABLE_NAME, null, values[0]);
-        database.insert(RegionOfInterestContract.TABLE_NAME, null, values[1]);
-        database.insert(PointOfInterestContract.TABLE_NAME, null, values[2]);*/
-    }
 
     private ContentValues values(int id) {
         ContentValues values = new ContentValues();
