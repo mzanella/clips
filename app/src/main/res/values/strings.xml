@@ -14,4 +14,7 @@
     <string name="action_login">Login</string>
     <string name="title_activity_main_developer">Your logs</string>
     <string name="title_activity_logging">New log</string>
+    <string name="dialog_title_dev_code_error">Sorry!</string>
+    <string name="dialog_dev_code_error">Wrong code.</string>
+    <string name="ok" translatable="false">Ok</string>
 </resources>

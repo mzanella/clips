@@ -19,7 +19,7 @@ public class MainDeveloperPresenter extends AppCompatActivity {
 
     public boolean isDeveloper(){
         //TODO
-        return true;
+        return false;
     }
 
     public void startDeveloperUnlocker(){
