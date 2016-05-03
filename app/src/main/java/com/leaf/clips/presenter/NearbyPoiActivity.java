@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.leaf.clips.R;
 import com.leaf.clips.view.NearbyPoiView;
+import com.leaf.clips.view.NearbyPoiViewImp;
 
 public class NearbyPoiActivity extends AppCompatActivity {
 
@@ -22,6 +23,6 @@ public class NearbyPoiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nearby_poi);
+        view = new NearbyPoiViewImp(this);
     }
 }

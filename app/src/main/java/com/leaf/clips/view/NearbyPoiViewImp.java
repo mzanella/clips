@@ -29,7 +29,7 @@ public class NearbyPoiViewImp implements NearbyPoiView{
      * @param presenter Presenter della View che viene creata
      */
     public NearbyPoiViewImp(NearbyPoiActivity presenter){
-        //todo 
+        this.presenter = presenter;
     }
 
     /**
@@ -39,7 +39,7 @@ public class NearbyPoiViewImp implements NearbyPoiView{
      */
     @Override
     public void setAdapter(Adapter adp){
-        // TODO: 5/3/16  
+        // TODO: 5/3/16
     }
 
 }
