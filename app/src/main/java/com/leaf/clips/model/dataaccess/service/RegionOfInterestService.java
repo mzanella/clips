@@ -1,5 +1,13 @@
 package com.leaf.clips.model.dataaccess.service;
 
+import com.google.gson.JsonObject;
+
+import com.leaf.clips.model.dataaccess.dao.RegionOfInterestTable;
+import com.leaf.clips.model.dataaccess.dao.RemoteRegionOfInterestDao;
+import com.leaf.clips.model.dataaccess.dao.RemoteRoiPoiDao;
+import com.leaf.clips.model.dataaccess.dao.SQLiteRegionOfInterestDao;
+import com.leaf.clips.model.dataaccess.dao.SQLiteRoiPoiDao;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -54,7 +62,10 @@ public class RegionOfInterestService {
      * @param object Oggetto JsonObject che contiene le informazioni di una RegionOfInterest
      * @return  void
      */
-    public void convertAndInsert(JsonObject object) {}
+    public void convertAndInsert(JsonObject object) {
+        RegionOfInterestTable table = remoteRegionOfInterestDao.fromJSONToTable(object);
+        sqliteRegionOfInterestDao.insertRegionOfInterest(table);
+    }
 
     /**
      * Metodo per rimuovere una RegionOfInterest dal database locale
@@ -63,17 +74,20 @@ public class RegionOfInterestService {
      */
     public void deleteRegionOfInterest(int id) {
         sqliteRegionOfInterestDao.deleteRegionOfInterest(id);
+        sqliteRoiPoiDao.deleteRoiPoisWhereRoi(id);
     }
 
     /**
-     * Metodo per recuperare le informazioni di tutte le RegionOfInterest di un edificio, dato il major dell'edificio
+     * Metodo per recuperare le informazioni di tutte le RegionOfInterest di un edificio,
+     * dato il major dell'edificio
      * @param major Major dell'edificio
      * @return  Collection<RegionOfInterest>
      */
     public Collection<RegionOfInterest> findAllRegionsWithMajor(int major) {
-        Collection<RegionOfInterestTable> tables = sqliteRegionOfInterestDao.findAllRegionsWithMajor(major);
+        Collection<RegionOfInterestTable> tables =
+                sqliteRegionOfInterestDao.findAllRegionsWithMajor(major);
         Iterator<RegionOfInterestTable> iter = tables.iterator();
-        List<RegionOfInterest> rois = new LinkedList<>();
+        List<RegionOfInterest> rois = new LinkedList<RegionOfInterest>();
         while(iter.hasNext()) {
             RegionOfInterestTable table = iter.next();
             RegionOfInterest ref = fromTableToBo(table);
@@ -98,15 +112,22 @@ public class RegionOfInterestService {
      * @param regionOfInterestTable Oggetto contenente le informazioni della RegionOfInterest
      * @return  RegionOfInterest
      */
-    private RegionOfInterest fromTableToBo(RegionOfInterestTable regionOfInterestTable) {}
+    private RegionOfInterest fromTableToBo(RegionOfInterestTable regionOfInterestTable) {
+        // recupero tutte le informazioni dall'oggetto RegionOfInterestTable
+        int id = regionOfInterestTable.getId();
+        String uuid = regionOfInterestTable.getUUID();
+        int major = regionOfInterestTable.getMajor();
+        int minor = regionOfInterestTable.getMinor();
 
+        // recupero i PointOfInterest vicini alla RegionOfInterest
+        Collection<PointOfInterest> pois = sqliteRoiPoiDao.findAllPointsWithRoi(id);
 
+        // creo la RegionOfInterest e poi inserisco i POI vicini
+        RegionOfInterest roi = new RegionOfInterestImp(id, uuid, major, minor);
+        roi.setNearbyPOIs(pois);
+
+        // ritorno la RegionOfInterest costruita
+        return roi;
+    }
 }
 
-class RemoteRegionOfInterestDao {}
-class RemoteRoiPoiDao {}
-class RegionOfInterest {}
-class RegionOfInterestTable {}
-class JsonObject {}
-class SQLiteRegionOfInterestDao {}
-class SQLiteRoiPoiDao {}
