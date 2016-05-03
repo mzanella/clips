@@ -8,6 +8,11 @@ package com.leaf.clips.model.navigator;
  */
 
 import com.leaf.clips.model.beacon.MyBeacon;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
+
+import java.util.Collection;
 
 /**
  *Interfaccia che espone i metodi per l'accesso alle informazioni di un edificio

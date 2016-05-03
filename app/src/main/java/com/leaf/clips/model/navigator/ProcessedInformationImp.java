@@ -7,10 +7,8 @@ package com.leaf.clips.model.navigator;
  *
  */
 
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
 import com.leaf.clips.model.navigator.graph.navigationinformation.PhotoInformation;
-import com.leaf.clips.model.navigator.graph.navigationinformation.PhotoRef;
-
-import java.util.List;
 
 /**
  *Classe che rappresenta le informazioni di navigazione pronte per essere restituite ad un eventuale utilizzatore
@@ -39,7 +37,7 @@ public class ProcessedInformationImp implements ProcessedInformation {
     public ProcessedInformationImp(EnrichedEdge edge) {
         //TODO: fare get da edge VERIFICARE!
         this.basic = edge.getBasicInformation();
-        this.detailed = edge.getDetailInformation();
+        this.detailed = edge.getDetailedInformation();
         this.photos = edge.getPhotoInformation();
     }
 
@@ -52,7 +50,7 @@ public class ProcessedInformationImp implements ProcessedInformation {
     public ProcessedInformationImp(EnrichedEdge edge, String starterInformation) {
         //TODO: fare get da edge e includere le starterInformation VERIFICARE!
         this.basic = edge.getBasicInformation() + " " + starterInformation;
-        this.detailed = edge.getDetailInformation();
+        this.detailed = edge.getDetailedInformation();
         this.photos = edge.getPhotoInformation();
     }
 

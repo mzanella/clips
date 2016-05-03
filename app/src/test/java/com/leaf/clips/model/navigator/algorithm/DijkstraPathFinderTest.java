@@ -5,6 +5,10 @@ package com.leaf.clips.model.navigator.algorithm;
  * @since 0.00
  */
 
+import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
+
 import org.jgrapht.Graph;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.junit.Before;
@@ -19,7 +23,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 /**
- * TU32 TODO: test dipendente da JGraphT e quindi non mockabile
+ * TU32 TODO: test dipendente da un metodo statico di JGraphT, come fare il mock di tale metodo ???
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DijkstraPathFinderTest {
@@ -38,7 +42,7 @@ public class DijkstraPathFinderTest {
 
     @Before
     public void setUp() throws Exception {
-        when(DijkstraShortestPath.findPathBetween(graph, startROI, endROI)).thenReturn(mockPath);
+        when(DijkstraShortestPath.findPathBetween(graph.getGraph(), startROI, endROI)).thenReturn(mockPath);
     }
 
     @Test

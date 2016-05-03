@@ -10,6 +10,9 @@ package com.leaf.clips.model.navigator;
 import android.content.Intent;
 
 import com.leaf.clips.model.beacon.MyBeacon;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -135,7 +138,7 @@ public class BuildingMapImp implements BuildingMap {
      */
     @Override
     public Collection<String> getAllPOIsCategories() {
-        //TODO: Ritornare una collection di String dai POI VERIFICA!
+        //TODO: Ritornare una collection di String dai POI VERIFICARE!
         Collection<String> result = new ArrayList<String>();
         for (PointOfInterest poi : this.pois) {
             result.add(poi.getCategory());

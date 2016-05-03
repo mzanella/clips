@@ -7,6 +7,12 @@ package com.leaf.clips.model.navigator.algorithm;
  *
  */
 
+import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
+
+import java.util.List;
+
 /**
  *Interfaccia che espone i metodi per calcolare un percorso di navigazione
  */
