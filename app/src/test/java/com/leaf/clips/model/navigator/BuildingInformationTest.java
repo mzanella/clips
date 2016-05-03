@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Unit Test 4
+ * TU4
  */
 
 public class BuildingInformationTest {
