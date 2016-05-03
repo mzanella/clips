@@ -177,7 +177,7 @@ public class BeaconManagerAdapter extends Service implements BeaconRanger, Beaco
      */
     @Override
     public void didDetermineStateForRegion(int i, Region region) {
-        // TODO: 28/04/2016
+        // TODO: 28/04/2016 decidere cosa fare, anche lasciare vuoto
         if(i==0)
             System.out.println();
         else
@@ -196,7 +196,7 @@ public class BeaconManagerAdapter extends Service implements BeaconRanger, Beaco
                 p.add(new MyBeaconImp(oneBeacon));
             }
 
-            Intent msg = new Intent("beaconsDetected"); // TODO: 28/04/2016
+            Intent msg = new Intent("beaconsDetected"); // TODO: 28/04/2016 decidere le stringhe
             msg.putExtra("beacons", p);
 
             LocalBroadcastManager.getInstance(BeaconManagerAdapter.this).sendBroadcast(msg);

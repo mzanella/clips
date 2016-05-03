@@ -46,9 +46,12 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
     */
     private BuildingMap map;
 
+    boolean shouldLog = false;// TODO: 03/05/2016 aggiungere su tracy
+
     /**
     * Costruttore della classe InformationManagerImp
-    * @param dbService Oggetto per la gestione delle mappe nel database locale e per il recupero delle mappe nel database remoto
+    * @param dbService Oggetto per la gestione delle mappe nel database locale e per il recupero
+     *                 delle mappe nel database remoto
     * @param context Contesto dell'applicazione
     */
 
@@ -57,7 +60,7 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
         this.dbService = dbService;
         lastBeaconsSeen = new PriorityQueue<>();
         activeLog = new LoggerImp();
-        // TODO: 03/05/2016
+        // TODO: 03/05/2016 come si costruisce?
     }
 
     /**
@@ -82,11 +85,15 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
     }
 
     /**
-    * Metodo che ritorna la mappa dell'edificio se questa è già stata caricata dal database locale. Viene lanciata una eccezione di tipo NoBeaconSeenException nel caso in cui non sia stata caricata la mappa poiché non è stato ancora ricevuto alcun beacon
+    * Metodo che ritorna la mappa dell'edificio se questa è già stata caricata dal database locale.
+     * Viene lanciata una eccezione di tipo NoBeaconSeenException nel caso in cui non sia stata
+     * caricata la mappa poiché non è stato ancora ricevuto alcun beacon
     * @return  BuildingMap
     */
     @Override
-    public BuildingMap getBuildingMap(){
+    public BuildingMap getBuildingMap() throws NoBeaconSeenException {
+        if(map == null)
+            throw new NoBeaconSeenException("No beacons seen yet");
         return map;
     }
 
@@ -147,11 +154,24 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
 
     /**
      * Metodo che si occupa di settare il campo dati lastBeaconsSeen con la PriorityQueue<MyBeacon>
-     *     contenente gli ultimi beacon rilevati. Nel caso in cui non sia stata ancora caricata una mappa dal database locale si occupa di caricare la mappa dell'edificio che contiene I beacon rilevati
+     *     contenente gli ultimi beacon rilevati. Nel caso in cui non sia stata ancora caricata una
+     *     mappa dal database locale si occupa di caricare la mappa dell'edificio che contiene
+     *     i beacon rilevati
      */
     @Override
     public void onReceive(Context context, Intent intent){
+        PriorityQueue<MyBeacon> p;
+        p = ((PriorityQueue<MyBeacon>)intent.getSerializableExtra("beacons"));// TODO: 03/05/2016 decidere la stringa
 
+        for (MyBeacon oneBeacon : p)
+            lastBeaconsSeen.add(oneBeacon);
+
+        if(map == null)
+            loadMap();
+
+        if(shouldLog){
+            activeLog.add(lastBeaconsSeen);
+        }
     }
 
     /**
@@ -190,7 +210,7 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
      */
     @Override
     public void startRecordingBeacons(){
-        // TODO: 03/05/2016
+        shouldLog = true;
     }
 
 }

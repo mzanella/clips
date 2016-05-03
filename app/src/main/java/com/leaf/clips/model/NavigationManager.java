@@ -26,13 +26,18 @@ public interface NavigationManager {
     void addBeaconListener(NavigationListener listener);
 
     /**
-    * Metodo che permette di recuperare tutte le istruzioni di navigazione per un percorso calcolato. Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in cui venga richiamato questo metodo senza aver prima avviato la navigazione
+    * Metodo che permette di recuperare tutte le istruzioni di navigazione per un percorso
+     * calcolato. Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso
+     * in cui venga richiamato questo metodo senza aver prima avviato la navigazione
     * @return  List<ProcessedInformation>
     */
     List<ProcessedInformation> getAllNavigationInstruction();
 
     /**
-    * Metodo che permette di recuperare tutte le istruzioni di navigazione per un percorso calcolato in base al beacon più potente ricavato dalla PriorityQueue<MyBeacon> passata come argomento. Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in cui venga richiamato questo metodo senza aver prima avviato la navigazione.
+    * Metodo che permette di recuperare tutte le istruzioni di navigazione per un percorso calcolato
+     * in base al beacon più potente ricavato dalla PriorityQueue<MyBeacon> passata come argomento.
+     * Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in cui venga
+     * richiamato questo metodo senza aver prima avviato la navigazione.
     * @return  ProcessedInformation
     */
     ProcessedInformation getNextInstruction();

@@ -19,7 +19,7 @@ public enum MessageSendType {
                 return VISIBLE_BEACON;
             
         }
-        return VISIBLE_BEACON; // TODO: 02/05/2016
+        return VISIBLE_BEACON; // TODO: 02/05/2016 decidere cosa fare in caso di errore
     }
     
     public static int toInt(MessageSendType messageSendType){
@@ -27,7 +27,7 @@ public enum MessageSendType {
             case VISIBLE_BEACON:
                 return 0;
         }
-        return -1;// TODO: 02/05/2016  
+        return -1;// TODO: 02/05/2016  decidere cosa fare in caso di errore
     }
 }
 

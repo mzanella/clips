@@ -39,7 +39,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     /**
     * Grafo rappresentante la mappa dell'edificio
     */
-    private final MapGraph graph;// TODO: 02/05/2016
+    private final MapGraph graph;// TODO: 02/05/2016 perchè grafo e non BuildingMap?
 
     /**
     * PriorityQueue, eventualmente vuota, contenente gli ultimi beacon rilevati
@@ -66,7 +66,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
         this.graph = graph;
         listeners = new LinkedList<>();
         lastBeaconsSeen = new PriorityQueue<>();
-        // TODO: 02/05/2016
+        // TODO: 02/05/2016 Come si costruisce?
         navigator = new NavigatorImp(compass);
         navigator.setGraph(graph);
     }
@@ -146,7 +146,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
 
     @Override
     public ProcessedInformation startNavigation(PointOfInterest endPOI) {
-
+        // TODO: 03/05/2016 come far partire la navigazione? 
         return null;
     }
 
@@ -164,7 +164,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     */
     @Override
     public void stopNavigation(){
-        // TODO: 02/05/2016
+        // TODO: 02/05/2016 come fermare la navigazione?
     }
 
     /**

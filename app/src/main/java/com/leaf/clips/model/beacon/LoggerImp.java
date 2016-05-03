@@ -25,7 +25,7 @@ public class LoggerImp implements Logger {
     /**
      * Path della directory in cui vengono salvati i log
      */
-    final static String DIRECTORY = "C:\\Users\\Federico"; // TODO: 28/04/2016  
+    final static String DIRECTORY = "C:\\Users\\Federico"; // TODO: 28/04/2016  inserire il path in cui vengono salvati i log
 
     /**
      * Rappresenta il contenuto di un log
@@ -120,7 +120,7 @@ public class LoggerImp implements Logger {
         File fileToDelete = new File(DIRECTORY, name);
         boolean deleted = fileToDelete.delete();
         if(!deleted);
-        // TODO: 28/04/2016  
+        // TODO: 28/04/2016  lanciare eccezione? o modificare il tipo di ritorno?
 
 
     }

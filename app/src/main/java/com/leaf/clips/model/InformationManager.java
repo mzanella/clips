@@ -36,7 +36,7 @@ public interface InformationManager {
     * Metodo che ritorna la mappa dell'edificio se questa è già stata caricata dal database locale. Viene lanciata una eccezione di tipo NoBeaconSeenException nel caso in cui non sia stata caricata la mappa poiché non è stato ancora ricevuto alcun beacon
     * @return  BuildingMap
     */
-     BuildingMap getBuildingMap();
+     BuildingMap getBuildingMap() throws NoBeaconSeenException;
 
     /**
     * Metodo che ritorna un oggetto DatabaseService che permette di interrogare il database

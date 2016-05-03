@@ -93,7 +93,7 @@ public class MyBeaconImp extends Beacon implements MyBeacon, Comparable {
      */
     @Override
     public String toString(){
-        // TODO: 28/04/2016  
+        // TODO: 28/04/2016 decidere la stringa che rappresenta un beacon
         return super.toString();
     }
 
