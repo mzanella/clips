@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
      * @return  void
      */
     public void showHelp(){
-        // TODO: 5/3/16  
+        // TODO: 5/3/16  codify
     }
 
     /**
