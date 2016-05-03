@@ -80,8 +80,8 @@ public class DefaultEdgeTest {
         //Create a Collection of PhotoRef
         Collection<PhotoRef> photoRefs = new ArrayList<>();
         try {
-            photoRefs.add(new PhotoRef(new URI("www.google.com")));
-            photoRefs.add(new PhotoRef(new URI("www.apple.com")));
+            photoRefs.add(new PhotoRef(1,new URI("www.google.com")));
+            photoRefs.add(new PhotoRef(2,new URI("www.apple.com")));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
