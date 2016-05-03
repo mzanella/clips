@@ -1,5 +1,10 @@
 package com.leaf.clips.model.dataaccess.service;
 
+import com.google.gson.JsonObject;
+
+import com.leaf.clips.model.dataaccess.dao.PhotoTable;
+import com.leaf.clips.model.dataaccess.dao.RemotePhotoDao;
+import com.leaf.clips.model.dataaccess.dao.SQLitePhotoDao;
 import com.leaf.clips.model.navigator.graph.navigationinformation.PhotoRef;
 
 import java.net.URI;
@@ -44,7 +49,7 @@ public class PhotoService {
      */
     public void convertAndInsert(JsonObject object) {
         PhotoTable table = remotePhotoDao.fromJSONToTable(object);
-        sqlitePhotoDao.insertPhoto(table);
+        int i = sqlitePhotoDao.insertPhoto(table);
     }
 
     /**
@@ -62,9 +67,9 @@ public class PhotoService {
      * @return  Collection<PhotoRef>
      */
     public Collection<PhotoRef> findAllPhotosOfEdge(int id) {
-        Collection<PhotoTable> tables = sqlitePhotoDao.findAllPhotosOfEdge();
+        Collection<PhotoTable> tables = sqlitePhotoDao.findAllPhotosOfEdge(id);
         Iterator<PhotoTable> iter = tables.iterator();
-        List<PhotoRef> photoRefs = new LinkedList<>();
+        List<PhotoRef> photoRefs = new LinkedList<PhotoRef>();
         while(iter.hasNext()) {
             PhotoTable p = iter.next();
             PhotoRef ref = fromTableToBo(p);
@@ -90,8 +95,9 @@ public class PhotoService {
      * @return  PhotoRef
      */
     private PhotoRef fromTableToBo(PhotoTable photoTable) {
-        String uri = photoTable.getUrl();
-        return new PhotoRef(URI.create(uri));
+        String uri_s = photoTable.getUrl();
+        URI uri = URI.create(uri_s);
+        return new PhotoRef(uri);
     }
 
 }
