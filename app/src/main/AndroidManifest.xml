@@ -46,6 +46,8 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.leaf.clips.presenter.MainDeveloperActivity"/>
         </activity>
+        <activity android:name=".presenter.PoiCategoryActivity">
+        </activity>
     </application>
 
 </manifest>
