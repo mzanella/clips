@@ -22,13 +22,12 @@ import java.lang.reflect.Type;
  */
 public class RemoteRoiPoiDao {
 
-    // TODO: 29/04/16 chiedere modifica classe
-    private static final Gson gson = new Gson();
-
     /**
      * Costruttore di default per la classe RemoteRoiPoiDao
      */
     public RemoteRoiPoiDao() {}
+
+
 
     /**
      * Metodo utilizzato per la conversione di un oggetto JsonObject in un oggetto RoiPoiTable, che viene ritornato
@@ -37,6 +36,7 @@ public class RemoteRoiPoiDao {
      */
     public RoiPoiTable fromJSONToTable(JsonObject object) {
         // TODO: 30/04/16 chiedere perchè no nomi uguali
+        Gson gson = new Gson();
         GsonBuilder gsonBldr = new GsonBuilder();
         JsonDeserializer<RoiPoiTable> deserializer = new JsonDeserializer<RoiPoiTable>() {
             @Override

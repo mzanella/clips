@@ -15,8 +15,7 @@ import com.google.gson.JsonObject;
  */
 public class RemotePhotoDao {
 
-    // TODO: 29/04/16 chiedere modifica classe 
-    private static final Gson gson = new Gson();
+
     
     /**
      * Costruttore di default per la classe RemotePhotoDao
@@ -29,6 +28,7 @@ public class RemotePhotoDao {
      * @return  PhotoTable
      */
     public PhotoTable fromJSONToTable(JsonObject object) {
+        Gson gson = new Gson();
         PhotoTable photoTable;
         photoTable = gson.fromJson(object, PhotoTable.class);
         return photoTable;
