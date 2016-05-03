@@ -7,6 +7,12 @@ package com.leaf.clips.model.navigator;
  *
  */
 
+import com.leaf.clips.model.compass.Compass;
+import com.leaf.clips.model.navigator.algorithm.DijkstraPathFinder;
+import com.leaf.clips.model.navigator.algorithm.PathFinder;
+
+import java.util.List;
+
 /**
  *Classe che si occupa della navigazione
  */
@@ -43,6 +49,11 @@ public class NavigatorImp implements Navigator {
      */
     public NavigatorImp(Compass compass) {
         this.compass = compass;
+        this.path = new List<EnrichedEdge>(); // lista vuota
+        this.pathFinder = new DijkstraPathFinder();
+        //TODO: attributi inizializzati a null ???
+        this.buildingGraph = null;
+        this.progress = null;
 
     }
 
@@ -54,7 +65,7 @@ public class NavigatorImp implements Navigator {
      */
     @Override
     public void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi) {
-
+        this.path = pathFinder.calculatePath(buildingGraph, startRoi, endRoi);
     }
 
     /**
@@ -63,7 +74,7 @@ public class NavigatorImp implements Navigator {
      * @return  ProcessedInformation
      */
     private ProcessedInformation createInformation(EnrichedEdge edge) {
-
+        return new ProcessedInformationImp(edge);
     }
 
     /**
@@ -80,7 +91,7 @@ public class NavigatorImp implements Navigator {
      * @param beacons Queue dei beacon rilevati
      * @return  MyBeacon
      */
-    private MyBeacon getMostPowerfullBeacon(PriorityQueue<MyBeacon> beacons) {
+    private MyBeacon getMostPowerfulBeacon(PriorityQueue<MyBeacon> beacons) {
         return null;
     }
 
