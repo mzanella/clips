@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ public class HomeViewImp implements HomeView, NavigationView.OnNavigationItemSel
     TextView buildingOpeningHours;
     ListView poiCategories;
     FloatingActionButton exploreButton;
+    ActionBarDrawerToggle toggle;
 
     public HomeViewImp(HomeActivity homeActivity) {
         this.homeActivity = homeActivity;
@@ -55,6 +57,10 @@ public class HomeViewImp implements HomeView, NavigationView.OnNavigationItemSel
         }
 
         drawer = (DrawerLayout) homeActivity.findViewById(R.id.drawer_layout_home);
+
+        toggle = new ActionBarDrawerToggle(homeActivity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
         navigationView = (NavigationView) homeActivity.findViewById(R.id.nav_view_home);
         if(navigationView != null)
