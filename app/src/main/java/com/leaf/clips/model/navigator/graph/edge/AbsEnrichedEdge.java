@@ -9,6 +9,9 @@ package com.leaf.clips.model.navigator.graph.edge;
 import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 import com.leaf.clips.model.navigator.graph.navigationinformation.NavigationInformation;
 import com.leaf.clips.model.navigator.graph.navigationinformation.PhotoInformation;
+import com.leaf.clips.model.usersetting.InstructionPreference;
+import com.leaf.clips.model.usersetting.PathPreference;
+import com.leaf.clips.model.usersetting.Setting;
 
 import org.jgrapht.graph.DefaultWeightedEdge;
 
@@ -161,13 +164,25 @@ public abstract class AbsEnrichedEdge extends DefaultWeightedEdge implements Enr
     @Override
     public abstract double getWeight();
 
-
-    // TODO: 5/1/16 Pullare le userSettings 
     /**
      * Metodo che permette di impostare le preferenze di un utente per il calcolo del peso dell'arco
      * @param setting Preferenze da impostare
      * @return  void
      */
-    //public static void setUserPreference(Setting setting);
+    public void setUserPreference(Setting setting){
+       switch (setting.getPathPreference()){
+           case ELEVATOR_PREFERENCE:
+               userElevatorPreference=1;
+               userStairPreference=0;
+               break;
+           case STAIR_PREFERENCE:
+               userStairPreference=1;
+               userElevatorPreference=0;
+               break;
+           default:
+               userElevatorPreference=0;
+               userStairPreference=0;
+       }
+    }
 
 }
