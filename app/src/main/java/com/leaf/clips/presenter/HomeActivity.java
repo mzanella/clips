@@ -1,5 +1,6 @@
 package com.leaf.clips.presenter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -51,7 +52,9 @@ public class HomeActivity extends AppCompatActivity {
      * @return  void
      */
     public void showExplorer(){
-        // TODO: 5/3/16  
+        Intent intent = new Intent(this, NearbyPoiActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**
