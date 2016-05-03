@@ -1,7 +1,7 @@
 package com.leaf.clips.model.dataaccess.service;
 /**
- * @author
- * @version 0.00
+ * @author Davide Castello
+ * @version 0.01
  * @since 0.00
  *
  *
@@ -40,14 +40,14 @@ public interface DatabaseService {
      * @param major Identificativo major uguale per tutti i beacon presenti in uno stesso edificio
      * @return  BuildingMap
      */
-    //BuildingMap findBuildingByMajor(int major);
+    BuildingMap findBuildingByMajor(int major);
 
     /**
      * Metodo per effettuare il download di una mappa dal database remoto a partire dall'identificativo major uguale per tutti i beacon presenti in un certo edificio
      * @param major Identificativo major uguale per tutti i beacon presenti in uno stesso edificio
      * @return  BuildingMap
      */
-    //BuildingMap findRemoteBuildingByMajor(int major);
+    BuildingMap findRemoteBuildingByMajor(int major);
 
     /**
      * Metodo per verificare la presenza di una mappa di un edificio nel database locale
