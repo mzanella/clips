@@ -4,6 +4,7 @@ package com.leaf.clips.model.navigator;
  * @version 0.01
  * @since 0.00
  */
+
 import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
 import com.leaf.clips.model.navigator.graph.navigationinformation.PhotoInformation;
 
@@ -24,11 +25,13 @@ public class ProcessedInformationImpTest {
 
     private static final String FAKE_BASIC_INFORMATION = "FakeBasicInformation";
     private static final String FAKE_DETAIL_INFORMATION = "FakeDetailInformation";
+    private static final String FAKE_STARTER_INFORMATION = "FakeStartInformation";
     @Mock
     private PhotoInformation mockPhotoInformation;
 
 
-    private ProcessedInformationImp processedInformationImp;
+    private ProcessedInformationImp processedInformation;
+    private ProcessedInformationImp processedInformationWithStart;
 
     @Mock
     private EnrichedEdge mockEnrichedEdge;
@@ -40,7 +43,9 @@ public class ProcessedInformationImpTest {
         when(mockEnrichedEdge.getDetailedInformation()).thenReturn(FAKE_DETAIL_INFORMATION);
         when(mockEnrichedEdge.getPhotoInformation()).thenReturn(mockPhotoInformation);
 
-        processedInformationImp = new ProcessedInformationImp(mockEnrichedEdge);
+        processedInformation = new ProcessedInformationImp(mockEnrichedEdge);
+        processedInformationWithStart = new ProcessedInformationImp(mockEnrichedEdge,
+                FAKE_STARTER_INFORMATION);
     }
 
     /*@Test
@@ -53,9 +58,19 @@ public class ProcessedInformationImpTest {
     }*/
 
     @Test
-    public void testGettingAttribute() throws Exception {
-        assertEquals("Different basic info", processedInformationImp.getProcessedBasicInstruction(), FAKE_BASIC_INFORMATION);
-        assertEquals("Different detail info", processedInformationImp.getDetailedInstruction(), FAKE_DETAIL_INFORMATION);
-        assertEquals("Different PhotoInformation info", processedInformationImp.getPhotoInstruction(), mockPhotoInformation);
+    public void testShouldGettingAttribute() throws Exception {
+        assertEquals("Different basic info", processedInformation.getProcessedBasicInstruction(),
+                FAKE_BASIC_INFORMATION);
+        assertEquals("Different detail info", processedInformation.getDetailedInstruction(),
+                FAKE_DETAIL_INFORMATION);
+        assertEquals("Different PhotoInformation info", processedInformation.getPhotoInstruction(),
+                mockPhotoInformation);
+    }
+
+    @Test
+    public void testShouldGetBasicWithStartInfo() throws Exception {
+        assertEquals("Different start + basic info",
+                processedInformationWithStart.getProcessedBasicInstruction(),
+                FAKE_STARTER_INFORMATION + " " + FAKE_BASIC_INFORMATION);
     }
 }

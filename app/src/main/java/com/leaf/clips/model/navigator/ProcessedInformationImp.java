@@ -35,7 +35,6 @@ public class ProcessedInformationImp implements ProcessedInformation {
      * @param edge Edge da cui devono essere estratte le informazioni
      */
     public ProcessedInformationImp(EnrichedEdge edge) {
-        //TODO: fare get da edge VERIFICARE!
         this.basic = edge.getBasicInformation();
         this.detailed = edge.getDetailedInformation();
         this.photos = edge.getPhotoInformation();
@@ -48,8 +47,8 @@ public class ProcessedInformationImp implements ProcessedInformation {
      *                           un arco del percorso per superarlo
      */
     public ProcessedInformationImp(EnrichedEdge edge, String starterInformation) {
-        //TODO: fare get da edge e includere le starterInformation VERIFICARE!
-        this.basic = edge.getBasicInformation() + " " + starterInformation;
+        //TODO: fare get da edge e includere le starterInformation come ???
+        this.basic = starterInformation + " " + edge.getBasicInformation();
         this.detailed = edge.getDetailedInformation();
         this.photos = edge.getPhotoInformation();
     }

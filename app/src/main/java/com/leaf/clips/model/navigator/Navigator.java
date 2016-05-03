@@ -25,13 +25,13 @@ public interface Navigator {
      * @param endRoi Punto di arrivo del percorso.
      * @return  void
      */
-    void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi);
+    void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi) throws NavigationExceptions;
 
     /**
      * Metodo che ritorna la lista completa delle ProcessedInstruction da seguire per percorrere un percorso calcolato.
      * @return  List<ProcessedInformation>
      */
-    List<ProcessedInformation> getAllInstructions();
+    List<ProcessedInformation> getAllInstructions() throws NavigationExceptions;
 
     /**
      * Metodo per settare il grafo sul quale calcolare il percorso.
