@@ -6,9 +6,11 @@ package com.leaf.clips.model;
 *
 */
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.SensorManager;
+import android.os.Build;
 
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.compass.Compass;
@@ -26,12 +28,13 @@ import java.util.PriorityQueue;
 /**
  *Classe che si occupa della gestione della navigazione
  */
-public class NavigationManagerImp extends AbsBeaconReceiverManager implements NavigationManager { 
+
+public class NavigationManagerImp extends AbsBeaconReceiverManager implements NavigationManager {
 
     /**
     * Oggetto che permette di recuperare i dati della bussola
     */
-    private final Compass compass = new Compass(getContext().getSystemService(SensorManager.class));
+    private final Compass compass = new Compass((SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE));
 
     /**
     * Grafo rappresentante la mappa dell'edificio
@@ -79,7 +82,9 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     }
 
     /**
-    * Metodo che permette di recuperare tutte le istruzioni di navigazione per un percorso calcolato. Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in cui venga richiamato questo metodo senza aver prima avviato la navigazione
+    * Metodo che permette di recuperare tutte le istruzioni di navigazione per un percorso
+     * calcolato. Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in
+     * cui venga richiamato questo metodo senza aver prima avviato la navigazione
     * @return  List<ProcessedInformation>
     */
     @Override
@@ -91,9 +96,12 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     }
 
     /**
-    * Metodo che permette di recuperare tutte le istruzioni di navigazione per un percorso calcolato in base al beacon più potente ricavato dalla PriorityQueue<MyBeacon> passata come argomento. Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in cui venga richiamato questo metodo senza aver prima avviato la navigazione.
-    * @return  ProcessedInformation
-    */
+     * Metodo che permette di recuperare tutte le istruzioni di navigazione per un percorso calcolato
+     * in base al beacon più potente ricavato dalla PriorityQueue<MyBeacon> passata come argomento.
+     * Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in cui venga
+     * richiamato questo metodo senza aver prima avviato la navigazione.
+     * @return  ProcessedInformation
+     */
     @Override
     public ProcessedInformation getNextInstruction(){
         return navigator.toNextRegion(lastBeaconsSeen);
@@ -138,7 +146,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
 
     @Override
     public ProcessedInformation startNavigation(PointOfInterest endPOI) {
-        // TODO: 02/05/2016
+
         return null;
     }
 

@@ -108,5 +108,8 @@ public abstract class AbsBeaconReceiverManager extends BroadcastReceiver {
 
     }
 
+    @Override //Method of BroadcastReceiver
+    abstract public void onReceive(Context context, Intent intent);
+
 }
 
