@@ -7,7 +7,13 @@ package com.leaf.clips.model.navigator.algorithm;
  *
  */
 
+import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
+
 import org.jgrapht.alg.DijkstraShortestPath;
+
+import java.util.List;
 
 /**
  *Classe che rappresenta un algoritmo per il calcolo del percorso di navigazione
@@ -35,8 +41,7 @@ public class DijkstraPathFinder implements PathFinder {
     @Override
     public List<EnrichedEdge> calculatePath(MapGraph graph, RegionOfInterest startROI,
                                             RegionOfInterest endROI) {
-        //TODO: graph not accept ???
-        return DijkstraShortestPath.findPathBetween(graph, startROI, endROI);
+        return DijkstraShortestPath.findPathBetween(graph.getGraph(), startROI, endROI);
     }
 
 }

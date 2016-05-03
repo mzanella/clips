@@ -4,6 +4,7 @@ package com.leaf.clips.model.navigator;
  * @version 0.01
  * @since 0.00
  */
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
 import com.leaf.clips.model.navigator.graph.navigationinformation.PhotoInformation;
 
 import org.junit.Before;
@@ -36,7 +37,7 @@ public class ProcessedInformationImpTest {
     @Before
     public void setUp() throws Exception {
         when(mockEnrichedEdge.getBasicInformation()).thenReturn(FAKE_BASIC_INFORMATION);
-        when(mockEnrichedEdge.getDetailInformation()).thenReturn(FAKE_DETAIL_INFORMATION);
+        when(mockEnrichedEdge.getDetailedInformation()).thenReturn(FAKE_DETAIL_INFORMATION);
         when(mockEnrichedEdge.getPhotoInformation()).thenReturn(mockPhotoInformation);
 
         processedInformationImp = new ProcessedInformationImp(mockEnrichedEdge);
@@ -55,6 +56,6 @@ public class ProcessedInformationImpTest {
     public void testGettingAttribute() throws Exception {
         assertEquals("Different basic info", processedInformationImp.getProcessedBasicInstruction(), FAKE_BASIC_INFORMATION);
         assertEquals("Different detail info", processedInformationImp.getDetailedInstruction(), FAKE_DETAIL_INFORMATION);
-        assertEquals("Different PhotoInformation info", processedInformationImp.getPhotoInstruction(), processedInformationImp);
+        assertEquals("Different PhotoInformation info", processedInformationImp.getPhotoInstruction(), mockPhotoInformation);
     }
 }

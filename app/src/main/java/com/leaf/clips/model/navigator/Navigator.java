@@ -7,6 +7,13 @@ package com.leaf.clips.model.navigator;
  *
  */
 
+import com.leaf.clips.model.beacon.MyBeacon;
+import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+
+import java.util.List;
+import java.util.PriorityQueue;
+
 /**
  *Interfaccia che espone i metodi per accedere alle funzionalità di navigazione
  */

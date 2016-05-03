@@ -7,11 +7,18 @@ package com.leaf.clips.model.navigator;
  *
  */
 
+import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.compass.Compass;
 import com.leaf.clips.model.navigator.algorithm.DijkstraPathFinder;
 import com.leaf.clips.model.navigator.algorithm.PathFinder;
+import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  *Classe che si occupa della navigazione
@@ -49,7 +56,7 @@ public class NavigatorImp implements Navigator {
      */
     public NavigatorImp(Compass compass) {
         this.compass = compass;
-        this.path = new List<EnrichedEdge>(); // lista vuota
+        this.path = new ArrayList<EnrichedEdge>(); // lista vuota
         this.pathFinder = new DijkstraPathFinder();
         //TODO: attributi inizializzati a null ???
         this.buildingGraph = null;
@@ -65,7 +72,7 @@ public class NavigatorImp implements Navigator {
      */
     @Override
     public void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi) {
-        this.path = pathFinder.calculatePath(buildingGraph, startRoi, endRoi);
+        this.path = pathFinder.calculatePath(this.buildingGraph, startRoi, endRoi);
     }
 
     /**
@@ -118,7 +125,7 @@ public class NavigatorImp implements Navigator {
      * @return  boolean
      */
     private boolean isShorter(List<EnrichedEdge> firstPath, List<EnrichedEdge> secondPath) {
-        return null;
+        return false;
     }
 
     /**

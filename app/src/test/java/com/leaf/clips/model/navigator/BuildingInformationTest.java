@@ -44,7 +44,7 @@ public class BuildingInformationTest {
     @Test
     public void testToString() throws Exception {
         String testString = buildingInformation.toString();
-        assertEquals("Stringa non stampata correttamente", "\"Nome: FakeName\nIndirizzo: " +
+        assertEquals("Stringa non stampata correttamente", "Nome: FakeName\nIndirizzo: " +
                         "FakeAddress\nDescrizione: FakeDescription\nOrario apertura: " +
                     "FakeOpeningHours", testString);
     }
