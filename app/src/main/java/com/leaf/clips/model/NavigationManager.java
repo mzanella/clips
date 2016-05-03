@@ -7,7 +7,12 @@ package com.leaf.clips.model;
  *
  */
 
-/** 
+import com.leaf.clips.model.navigator.ProcessedInformation;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
+
+import java.util.List;
+
+/**
  *Interfaccia che si occupa di esporre tutti i metodi utili alla navigazione
  */
 

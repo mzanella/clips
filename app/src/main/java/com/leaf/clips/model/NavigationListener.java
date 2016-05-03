@@ -5,6 +5,8 @@ package com.leaf.clips.model;
  * @since 0.00
  */
 
+import com.leaf.clips.model.navigator.ProcessedInformation;
+
 /**
  * Class Description
  */

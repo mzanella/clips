@@ -8,6 +8,9 @@ package com.leaf.clips.model;
 */
 
 import com.leaf.clips.model.beacon.MyBeacon;
+import com.leaf.clips.model.dataaccess.service.DatabaseService;
+import com.leaf.clips.model.navigator.BuildingMap;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
 
 import java.util.Collection;
 import java.util.PriorityQueue;

@@ -12,6 +12,11 @@ import android.hardware.SensorManager;
 
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.compass.Compass;
+import com.leaf.clips.model.navigator.Navigator;
+import com.leaf.clips.model.navigator.NavigatorImp;
+import com.leaf.clips.model.navigator.ProcessedInformation;
+import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -55,6 +60,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     */
     public NavigationManagerImp(MapGraph graph, Context context){
         super(context);
+        this.graph = graph;
         listeners = new LinkedList<>();
         lastBeaconsSeen = new PriorityQueue<>();
         // TODO: 02/05/2016
@@ -79,7 +85,9 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     @Override
     public List<ProcessedInformation> getAllNavigationInstruction(){
 
-        return navigator.getAllInstruction();
+        LinkedList<ProcessedInformation> list = new LinkedList<ProcessedInformation>();
+        list.addAll(navigator.getAllInstructions());
+        return list;
     }
 
     /**
@@ -119,7 +127,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
      */
     @Override
     public void startCompass(){
-        // TODO: 02/05/2016
+        compass.registerListener();
     }
 
     /**
@@ -140,7 +148,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
      */
     @Override
     public void stopCompass(){
-        // TODO: 02/05/2016
+        compass.unregisterListener();
     }
 
     /**

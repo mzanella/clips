@@ -11,7 +11,11 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.leaf.clips.model.beacon.Logger;
+import com.leaf.clips.model.beacon.LoggerImp;
 import com.leaf.clips.model.beacon.MyBeacon;
+import com.leaf.clips.model.dataaccess.service.DatabaseService;
+import com.leaf.clips.model.navigator.BuildingMap;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -47,8 +51,14 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
     * @param dbService Oggetto per la gestione delle mappe nel database locale e per il recupero delle mappe nel database remoto
     * @param context Contesto dell'applicazione
     */
-    @Override
-    public InformationManagerImp(DatabaseService dbService, Context context);
+
+    public InformationManagerImp(DatabaseService dbService, Context context){
+        super(context);
+        this.dbService = dbService;
+        lastBeaconsSeen = new PriorityQueue<>();
+        activeLog = new LoggerImp();
+        // TODO: 03/05/2016
+    }
 
     /**
     * Metodo che ritorna tutte le categorie di POI presenti all'interno dell'edificio
@@ -56,7 +66,10 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
     */
     @Override
     public Collection<String> getAllCategories(){
-        return new LinkedList<>(map.getAllPOIsCategories());
+
+        LinkedList<String> list = new LinkedList<String>();
+        list.addAll(map.getAllPOIsCategories());
+        return list;
     }
 
     /**
@@ -107,7 +120,9 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
         if(lastBeaconsSeen.isEmpty())
             throw new NoBeaconSeenException();
 
-        map.getNearbyPOIs(lastBeaconsSeen.peek());
+        LinkedList<PointOfInterest> list = new LinkedList<PointOfInterest>();
+        list.addAll(map.getNearbyPOIs(lastBeaconsSeen.peek()));
+        return list;
 
     }
 
@@ -172,11 +187,10 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
 
     /**
      * Metodo che permette di avviare il log delle informazioni dei beacon visibili
-     * @return  void
      */
     @Override
     public void startRecordingBeacons(){
-
+        // TODO: 03/05/2016
     }
 
 }
