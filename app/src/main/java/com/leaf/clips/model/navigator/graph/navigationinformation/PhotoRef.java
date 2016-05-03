@@ -16,16 +16,15 @@ public class PhotoRef {
      * URL di una fotografia
      */
     private final URI photoUrl;
-
-
+    
     /**
      * Costruttore della classe PhotoRef
-     * @param id
-     * @param photoSource
+     * @param id Identificativo della fotografia
+     * @param source URL di una fotografia
      */
-    public PhotoRef(int id, URI photoSource) {
+    public PhotoRef(int id, URI source) {
         this.id=id;
-        this.photoUrl = photoSource;
+        this.photoUrl = source;
     }
 
     /**
