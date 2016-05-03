@@ -1,7 +1,7 @@
 package com.leaf.clips.model;
 /**
-* @author
-* @version 0.00 
+* @author Federico Tavella
+* @version 0.03
 * @since 0.00
 * 
 * 

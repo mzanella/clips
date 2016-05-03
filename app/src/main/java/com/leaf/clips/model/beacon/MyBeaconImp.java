@@ -25,13 +25,15 @@ public class MyBeaconImp extends Beacon implements MyBeacon, Comparable {
         }
 
         public MyBeacon[] newArray(int size) {
-            return new MyBeacon[size];
+            return new MyBeaconImp[size];
         }
     };
 
     private MyBeaconImp(Parcel in) {
         super(in);
-    }{
+    }
+
+    {
         Beacon.setDistanceCalculator(new MyDistanceCalculator());
     }
 

@@ -1,9 +1,9 @@
 package com.leaf.clips.model.dataaccess.dao;
 
 /**
- * @author
- * @version 0.00
- * @since 0.00
+ * @author Marco Zanella
+ * @version 0.01
+ * @since 0.01
  *
  *
  */
@@ -49,6 +49,16 @@ public class BuildingContract implements BaseColumns{
      * Valore della colonna uuid. Valore di default "uuid"
      */
     public final static String COLUMN_UUID="uuid";
+
+    /**
+     * Valore della colonna mapSize. Valore di default "size"
+     */
+    public final static String COLUMN_MAPSIZE="size";
+
+    /**
+     * Valore della colonna major. Valore di default "major"
+     */
+    public final static String COLUMN_MAJOR="major";
 
     /**
      * Nome della tabella.Valore di default "Building"

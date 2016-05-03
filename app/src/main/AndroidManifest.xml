@@ -10,8 +10,7 @@
             android:theme="@style/AppTheme">
         <service android:name=".model.beacon.BeaconManagerAdapter"/>
 
-
-
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
