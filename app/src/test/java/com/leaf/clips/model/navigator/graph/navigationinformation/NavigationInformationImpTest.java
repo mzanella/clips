@@ -43,17 +43,23 @@ public class NavigationInformationImpTest {
 
         this.navigationInformationImp = new NavigationInformationImp(basicInformation, detailedInformation, photoInformation);
     }
-
+    /*
+     * TU13
+     */
     @Test
     public void testGetBasicInformation() throws Exception {
         Assert.assertEquals("Basic Instruction", navigationInformationImp.getBasicInformation());
     }
-
+    /*
+     * TU13
+     */
     @Test
     public void testGetDetailedInformation() throws Exception {
         Assert.assertEquals("Detailed Instruction", navigationInformationImp.getDetailedInformation());
     }
-
+    /*
+     * TU13
+     */
     @Test
     public void testGetPhotoInformation() throws Exception {
         Assert.assertNotNull(navigationInformationImp.getPhotoInformation());
