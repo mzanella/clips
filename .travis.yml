@@ -42,6 +42,11 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
+before_install:
+  - sudo apt-add-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+  - sudo apt-get update
+  - sudo apt-get install libsdl1.2debian:i386
+
 before_script:
   # unit testing
   - ./gradlew test
