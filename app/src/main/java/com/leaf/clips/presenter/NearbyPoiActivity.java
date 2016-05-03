@@ -3,6 +3,8 @@ package com.leaf.clips.presenter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.leaf.clips.R;
+
 public class NearbyPoiActivity extends AppCompatActivity {
 
     @Override
