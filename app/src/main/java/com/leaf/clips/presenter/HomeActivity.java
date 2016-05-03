@@ -54,7 +54,6 @@ public class HomeActivity extends AppCompatActivity {
     public void showExplorer(){
         Intent intent = new Intent(this, NearbyPoiActivity.class);
         startActivity(intent);
-        finish();
     }
 
     /**

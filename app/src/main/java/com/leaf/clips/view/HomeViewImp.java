@@ -34,7 +34,7 @@ public class HomeViewImp implements HomeView, NavigationView.OnNavigationItemSel
     FloatingActionButton exploreButton;
     ActionBarDrawerToggle toggle;
 
-    public HomeViewImp(HomeActivity homeActivity) {
+    public HomeViewImp(final HomeActivity homeActivity) {
         this.homeActivity = homeActivity;
         homeActivity.setContentView(R.layout.activity_home);
 
@@ -49,9 +49,7 @@ public class HomeViewImp implements HomeView, NavigationView.OnNavigationItemSel
             exploreButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO: Aprire NearbyPoiActivity
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    homeActivity.showExplorer();
                 }
             });
         }
