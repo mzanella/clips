@@ -53,16 +53,11 @@ public class NavigatorImp implements Navigator {
     private Iterator<EnrichedEdge> progress;
 
     /**
-     * TODO:
-     */
-    private Setting setting;
-
-    /**
      * Costruttore della classe NavigatorImp
      * @param compass Sensore di tipo Compass utilizzato durante la navigazione
-     * @param setting TODO
+     * @param setting Impostazioni dell'applicazione
      */
-    public NavigatorImp(Compass compass, Setting setting) {
+    public NavigatorImp(Compass compass) {
         this.compass = compass;
         this.pathFinder = new DijkstraPathFinder();
         this.path = null;
@@ -190,7 +185,7 @@ public class NavigatorImp implements Navigator {
         String startInformation = "";
         if (progress == null) { // È all'inizio della navigazione
             progress = path.iterator(); //TODO: gestire iteratore ???
-            startInformation = getStarterInformation();
+            startInformation = this.getStarterInformation();
         }
         // Prelevo il beacon più potente per capire se l'utente è nel percorso previsto
         MyBeacon nearBeacon = this.getMostPowerfulBeacon(visibleBeacons);
