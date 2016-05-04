@@ -5,6 +5,9 @@ package com.leaf.clips.model.navigator;
  * @since 0.00
  */
 
+import android.nfc.Tag;
+import android.util.Log;
+
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.compass.Compass;
 import com.leaf.clips.model.navigator.algorithm.DijkstraPathFinder;
@@ -12,6 +15,7 @@ import com.leaf.clips.model.navigator.algorithm.PathFinder;
 import com.leaf.clips.model.navigator.graph.MapGraph;
 import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
+import com.leaf.clips.model.usersetting.Setting;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,10 +53,16 @@ public class NavigatorImp implements Navigator {
     private Iterator<EnrichedEdge> progress;
 
     /**
+     * TODO:
+     */
+    private Setting setting;
+
+    /**
      * Costruttore della classe NavigatorImp
      * @param compass Sensore di tipo Compass utilizzato durante la navigazione
+     * @param setting TODO
      */
-    public NavigatorImp(Compass compass) {
+    public NavigatorImp(Compass compass, Setting setting) {
         this.compass = compass;
         this.pathFinder = new DijkstraPathFinder();
         this.path = null;
@@ -155,6 +165,7 @@ public class NavigatorImp implements Navigator {
      * @return boolean
      */
     private boolean isShorter(List<EnrichedEdge> firstPath, List<EnrichedEdge> secondPath) {
+        // TODO: metodo non implementato
         return false;
     }
 
@@ -174,19 +185,41 @@ public class NavigatorImp implements Navigator {
      * @return ProcessedInformation
      */
     @Override
-    public ProcessedInformation toNextRegion(PriorityQueue<MyBeacon> visibleBeacons) {
-        //TODO: gestire iteratore ???
-        progress = path.iterator();
-
-        String startInformation = getStarterInformation();
-        //MyBeacon nearBeacon = getMostPowerfulBeacon(visibleBeacons);
-        ProcessedInformation nextInformation = new ProcessedInformationImp(null);
-        if (progress.hasNext()) {
-            nextInformation = createInformation(progress.next()); // é le start Information?
+    public ProcessedInformation toNextRegion(PriorityQueue<MyBeacon> visibleBeacons) throws PathException {
+        // Capisco se è la prima richiesta di informazioni
+        String startInformation = "";
+        if (progress == null) { // È all'inizio della navigazione
+            progress = path.iterator(); //TODO: gestire iteratore ???
+            startInformation = getStarterInformation();
         }
-
-        return nextInformation;
+        // Prelevo il beacon più potente per capire se l'utente è nel percorso previsto
+        MyBeacon nearBeacon = this.getMostPowerfulBeacon(visibleBeacons);
+        if (progress.hasNext()) {
+            EnrichedEdge nextEdge = progress.next();
+            RegionOfInterest endROI = nextEdge.getEndPoint();
+            if (endROI.contains(nearBeacon)) { // OK: percorso corretto
+                //TODO: non si utilizza il metodo this.createInformation(edge);
+                return new ProcessedInformationImp(nextEdge, startInformation);
+            }
+            else { // ERROR: errore percorso seguito errato
+                throw new PathException();
+            }
+        }
+        else {
+            //TODO: prevedere il comportamento se iterator è alla fine
+            Log.d("NAVIGATOR", "toNextRegion: Progress iterator at end");
+            throw new PathException("Navigation finish, progress iterator at end");
+        }
     }
 
+
+    /**
+     * Metodo che ritorna un booleano false se il percorso è concluso
+     * @return boolean
+     */
+    @Override
+    public boolean hasFinishedPath() {
+        return progress.hasNext();
+    }
 }
 

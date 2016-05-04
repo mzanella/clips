@@ -47,7 +47,13 @@ public interface Navigator {
      * @param visibleBeacons Insieme di beacon visibili al momento della chiamata al metodo.
      * @return  ProcessedInformation
      */
-    ProcessedInformation toNextRegion(PriorityQueue<MyBeacon> visibleBeacons);
+    ProcessedInformation toNextRegion(PriorityQueue<MyBeacon> visibleBeacons) throws PathException;
+
+    /**
+     * Metodo che ritorna un booleano false se il percorso è concluso
+     * @return boolean
+     */
+    public boolean hasFinishedPath();
 
 }
 
