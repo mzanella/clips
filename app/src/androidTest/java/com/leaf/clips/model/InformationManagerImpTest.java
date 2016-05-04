@@ -29,7 +29,7 @@ public class InformationManagerImpTest {
 
     @Test(expected = NoBeaconSeenException.class)
     void shouldNotReturnMap() throws NoBeaconSeenException {
-        informationManager.getBuildingMap()
+        informationManager.getBuildingMap();
     }
 
     @Test(expected = NoBeaconSeenException.class)
