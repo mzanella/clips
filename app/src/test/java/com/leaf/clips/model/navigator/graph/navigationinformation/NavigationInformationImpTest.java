@@ -32,8 +32,8 @@ public class NavigationInformationImpTest {
         //Create a Collection of PhotoRef
         Collection<PhotoRef> photoRefs = new ArrayList<>();
         try {
-            photoRefs.add(new PhotoRef(new URI("www.google.com")));
-            photoRefs.add(new PhotoRef(new URI("www.apple.com")));
+            photoRefs.add(new PhotoRef(1,new URI("www.google.com")));
+            photoRefs.add(new PhotoRef(2,new URI("www.apple.com")));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -43,17 +43,23 @@ public class NavigationInformationImpTest {
 
         this.navigationInformationImp = new NavigationInformationImp(basicInformation, detailedInformation, photoInformation);
     }
-
+    /*
+     * TU13
+     */
     @Test
     public void testGetBasicInformation() throws Exception {
         Assert.assertEquals("Basic Instruction", navigationInformationImp.getBasicInformation());
     }
-
+    /*
+     * TU13
+     */
     @Test
     public void testGetDetailedInformation() throws Exception {
         Assert.assertEquals("Detailed Instruction", navigationInformationImp.getDetailedInformation());
     }
-
+    /*
+     * TU13
+     */
     @Test
     public void testGetPhotoInformation() throws Exception {
         Assert.assertNotNull(navigationInformationImp.getPhotoInformation());
