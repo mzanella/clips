@@ -1,7 +1,7 @@
 package com.leaf.clips.model.dataaccess.service;
 /**
- * @author
- * @version 0.00
+ * @author Davide Castello
+ * @version 0.01
  * @since 0.00
  *
  *
