@@ -15,9 +15,6 @@ import com.google.gson.JsonObject;
  */
 public class RemoteCategoryDao {
 
-    // TODO: 29/04/16 chiedere modifica alla classe
-    private static final Gson gson = new Gson();
-
     /**
      * Costruttore di default per la classe RemoteCategoryDao
      */
@@ -29,6 +26,7 @@ public class RemoteCategoryDao {
      * @return  CategoryTable
      */
     public CategoryTable fromJSONToTable(JsonObject object){
+        Gson gson = new Gson();
         CategoryTable categoryTable;
         categoryTable = gson.fromJson(object, CategoryTable.class);
         return categoryTable;

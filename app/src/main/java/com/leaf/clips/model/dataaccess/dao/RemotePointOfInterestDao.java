@@ -14,8 +14,6 @@ import com.google.gson.JsonObject;
  */
 public class RemotePointOfInterestDao {
 
-    // TODO: 30/04/16 chiedere modifica alla classe
-    private static final Gson gson = new Gson();
     /**
      * Costruttore di default per la classe RemotePointOfInterestDao
      */
@@ -27,7 +25,7 @@ public class RemotePointOfInterestDao {
      * @return  PointOfInterestTable
      */
     public PointOfInterestTable fromJSONToTable(JsonObject object) {
-
+        Gson gson = new Gson();
         PointOfInterestTable pointOfInterestTable;
         pointOfInterestTable = gson.fromJson(object, PointOfInterestTable.class);
         return pointOfInterestTable;

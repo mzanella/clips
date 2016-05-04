@@ -13,8 +13,7 @@ import com.google.gson.JsonObject;
  */
 public class RemoteRegionOfInterestDao {
 
-    // TODO: 30/04/16 chiedere modifica classe
-    private static final Gson gson = new Gson();
+
 
     /**
      * Costruttore di default per la classe RemoteRegionOfInterestDao
@@ -29,6 +28,7 @@ public class RemoteRegionOfInterestDao {
      * @return RegionOfInterestTable
      */
     public RegionOfInterestTable fromJSONToTable(JsonObject object) {
+        Gson gson = new Gson();
         RegionOfInterestTable regionOfInterestTable;
         regionOfInterestTable = gson.fromJson(object, RegionOfInterestTable.class);
         return regionOfInterestTable;

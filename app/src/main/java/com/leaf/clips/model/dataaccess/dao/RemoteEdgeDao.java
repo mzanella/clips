@@ -15,9 +15,6 @@ import com.google.gson.JsonObject;
  */
 public class RemoteEdgeDao {
 
-    // TODO: 29/04/16 chiedere modifica alla classe
-    private static final Gson gson = new Gson();
-
     /**
      * Costruttore di default per la classe RemoteEdgeDao
      */
@@ -29,6 +26,7 @@ public class RemoteEdgeDao {
      * @return  EdgeTable
      */
     public EdgeTable fromJSONToTable(JsonObject object) {
+        Gson gson = new Gson();
         EdgeTable edgeTable;
         edgeTable = gson.fromJson(object, EdgeTable.class);
         return edgeTable;
