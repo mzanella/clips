@@ -18,7 +18,8 @@ import java.util.List;
  * @version 0.01
  * @since 0.00
  *
- * Classe che rappresenta il layer Service tra gli oggetti RegionOfInterest e gli oggetti DAO corrispettivi
+ * Classe che rappresenta il layer Service tra gli oggetti RegionOfInterest e
+ * gli oggetti DAO corrispettivi
  */
 
 public class RegionOfInterestService {
@@ -47,10 +48,12 @@ public class RegionOfInterestService {
      * Costruttore della classe RegionOfInterestService
      * @param sqliteROI Oggetto che rappresenta un DAO per la tabella "ROI" del database locale
      * @param remoteROI Oggetto di utility per la conversione da JSON a RegionOfInterestTable
-     * @param sqliteRoiPoi Oggetto che rappresenta un DAO per la tabella "ROIPOI" del database locale
+     * @param sqliteRoiPoi Oggetto che rappresenta un DAO per la tabella "ROIPOI" del database
+     *                     locale
      * @param remoteRoiPoi Oggetto di utility per la conversione da JSON a RoiPoiTable
      */
-    public RegionOfInterestService(SQLiteRegionOfInterestDao sqliteROI, RemoteRegionOfInterestDao remoteROI, SQLiteRoiPoiDao sqliteRoiPoi, RemoteRoiPoiDao remoteRoiPoi) {
+    public RegionOfInterestService(SQLiteRegionOfInterestDao sqliteROI, RemoteRegionOfInterestDao
+            remoteROI, SQLiteRoiPoiDao sqliteRoiPoi, RemoteRoiPoiDao remoteRoiPoi) {
         sqliteRegionOfInterestDao = sqliteROI;
         sqliteRoiPoiDao = sqliteRoiPoi;
         remoteRegionOfInterestDao = remoteROI;
@@ -58,9 +61,9 @@ public class RegionOfInterestService {
     }
 
     /**
-     * Metodo per la conversione di un JsonObject in un oggetto RegionOfInterestTable, che verrà inserito nel database locale
+     * Metodo per la conversione di un JsonObject in un oggetto RegionOfInterestTable,
+     * che verrà inserito nel database locale
      * @param object Oggetto JsonObject che contiene le informazioni di una RegionOfInterest
-     * @return  void
      */
     public void convertAndInsert(JsonObject object) {
         RegionOfInterestTable table = remoteRegionOfInterestDao.fromJSONToTable(object);
@@ -70,11 +73,13 @@ public class RegionOfInterestService {
     /**
      * Metodo per rimuovere una RegionOfInterest dal database locale
      * @param id Identificativo numerico della RegionOfInterest da rimuovere
-     * @return  void
      */
     public void deleteRegionOfInterest(int id) {
-        sqliteRegionOfInterestDao.deleteRegionOfInterest(id);
+        // cancello tutte le istanze di ROIPOI nel database dove compare quella ROI
         sqliteRoiPoiDao.deleteRoiPoisWhereRoi(id);
+
+        // elimino la RegionOfInterest dal database
+        sqliteRegionOfInterestDao.deleteRegionOfInterest(id);
     }
 
     /**
@@ -90,8 +95,8 @@ public class RegionOfInterestService {
         List<RegionOfInterest> rois = new LinkedList<RegionOfInterest>();
         while(iter.hasNext()) {
             RegionOfInterestTable table = iter.next();
-            RegionOfInterest ref = fromTableToBo(table);
-            rois.add(ref);
+            RegionOfInterest roi = fromTableToBo(table);
+            rois.add(roi);
         }
         return rois;
     }
