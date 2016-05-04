@@ -9,6 +9,7 @@ package com.leaf.clips.model.navigator;
 
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
 import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 
 import java.util.List;
@@ -22,10 +23,10 @@ public interface Navigator {
     /**
      * Metodo che calcola un percorso tra due RegionOfInterest viste come vertici di un grafo MapGraph utilizzando un oggetto PathFinder. Il punto di partenza e il punto di arrivo sono i parametri richiesti in input dal metodo mentre il grafo è un campo dati. Viene lanciata un eccezione di tipo NoGraphSetException nel caso in cui non sia settato alcun grafo.
      * @param startRoi Punto di partenza del percorso.
-     * @param endRoi Punto di arrivo del percorso.
+     * @param endPoi Punto di arrivo del percorso.
      * @return  void
      */
-    void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi) throws NavigationExceptions;
+    void calculatePath(RegionOfInterest startRoi, PointOfInterest endPoi) throws NavigationExceptions;
 
     /**
      * Metodo che ritorna la lista completa delle ProcessedInstruction da seguire per percorrere un percorso calcolato.
@@ -53,7 +54,7 @@ public interface Navigator {
      * Metodo che ritorna un booleano false se il percorso è concluso
      * @return boolean
      */
-    public boolean hasFinishedPath();
+    boolean hasFinishedPath();
 
 }
 

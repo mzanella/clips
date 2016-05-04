@@ -13,17 +13,19 @@ import com.leaf.clips.model.compass.Compass;
 import com.leaf.clips.model.navigator.algorithm.DijkstraPathFinder;
 import com.leaf.clips.model.navigator.algorithm.PathFinder;
 import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
 import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
 import com.leaf.clips.model.usersetting.Setting;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- *Classe che si occupa della navigazione
+ * Classe che si occupa della navigazione
  */
 public class NavigatorImp implements Navigator {
 
@@ -54,6 +56,7 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Costruttore della classe NavigatorImp
+     *
      * @param compass Sensore di tipo Compass utilizzato durante la navigazione
      */
     public NavigatorImp(Compass compass) {
@@ -69,21 +72,40 @@ public class NavigatorImp implements Navigator {
      * MapGraph utilizzando un oggetto PathFinder. Il punto di partenza e il punto di arrivo sono i
      * parametri richiesti in input dal metodo mentre il grafo è un campo dati. Viene lanciata un
      * eccezione di tipo NoGraphSetException nel caso in cui non sia settato alcun grafo
+     *
      * @param startRoi Punto di partenza del percorso
-     * @param endRoi Punto di arrivo del percorso
+     * @param endPoi   Punto di arrivo del percorso
      * @return void
      */
     @Override
-    public void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi) throws NavigationExceptions {
-        if (buildingGraph != null)
-            this.path = pathFinder.calculatePath(this.buildingGraph, startRoi, endRoi);
-        else {
+    public void calculatePath(RegionOfInterest startRoi, PointOfInterest endPoi) throws NavigationExceptions {
+        if (buildingGraph != null) {
+            Collection<RegionOfInterest> endRois = endPoi.getAllBelongingROIs();
+            Iterator<RegionOfInterest> endRoisIterator = endRois.iterator();
+            // prelevo il primo path considerandolo il migliore
+            if (endRoisIterator.hasNext()) {
+                RegionOfInterest endRoi = endRoisIterator.next();
+                List<EnrichedEdge> shortestPath = pathFinder.calculatePath(this.buildingGraph, startRoi, endRoi);
+
+                // prelevo gli altri path e li confronto con il migliore attuale
+                while (endRoisIterator.hasNext()) {
+                    RegionOfInterest nextEndRoi = endRoisIterator.next();
+                    List<EnrichedEdge> newPath = pathFinder.calculatePath(this.buildingGraph, startRoi, endRoi);
+                    if (isShorter(newPath, shortestPath)) {
+                        shortestPath = newPath;
+                    }
+                }
+            } else {
+                //TODO: ERROR endPoi non ha nessun ROI in esso
+            }
+        } else {
             throw new NoGraphSetException();
         }
     }
 
     /**
      * Metodo che crea le ProcessedInformation in base al tipo di arco e in base alle informazioni provenienti dal beacon e da eventuali sensori utilizzati
+     *
      * @param edge Edge di cui devono essere recuperate le informazioni
      * @return ProcessedInformation
      */
@@ -93,6 +115,7 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Metodo che ritorna la lista completa delle ProcessedInstruction da seguire per percorrere un percorso calcolato
+     *
      * @return List<ProcessedInformation>
      */
     @Override
@@ -111,6 +134,7 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Metodo che ritorna il beacon con potenza maggiore tra quelli rilevati
+     *
      * @param beacons Queue dei beacon rilevati
      * @return MyBeacon
      */
@@ -120,6 +144,7 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Metodo per ottenere la lista di EnrichedEdge rappresentanti un percorso
+     *
      * @return List<EnrichedEdge>
      */
     public List<EnrichedEdge> getPath() {
@@ -128,6 +153,7 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Metodo che ritorna le prime informazioni utili alla navigazione
+     *
      * @return String
      */
     private String getStarterInformation() {
@@ -142,30 +168,37 @@ public class NavigatorImp implements Navigator {
                 correctGrade > Math.abs(deviceGrade + 90) % 360) {// delta di 180
             // siamo all'interno dell'intervallo accettato
             return "Direzione sbagliata, voltati"; // TODO: usare una Android Resource
-        }
-        else {
+        } else {
             return "Direzione corretta";
         }
     }
 
     /**
      * Metodo per determinare se un percorso è più lungo o più breve di un altro percorso
-     * @param firstPath Lista di EnrichedEdge rappresentante un percorso
+     *
+     * @param firstPath  Lista di EnrichedEdge rappresentante un percorso
      * @param secondPath Lista di EnrichedEdge rappresentante un percorso
      * @return boolean
      */
     private boolean isShorter(List<EnrichedEdge> firstPath, List<EnrichedEdge> secondPath) {
-        // TODO: metodo non implementato usando i pesi di ogni edge ???
-        if ( firstPath.size() < secondPath.size() ) {
-            return true;
+        double weightFirstPath = 0;
+        double weightSecondPath = 0;
+        for (EnrichedEdge firstPathEdge : firstPath) {
+            weightFirstPath += firstPathEdge.getWeight();
         }
-        else {
+        for (EnrichedEdge secondPathEdge : secondPath) {
+            weightSecondPath += secondPathEdge.getWeight();
+        }
+        if (weightFirstPath < weightSecondPath) {
+            return true;
+        } else {
             return false;
         }
     }
 
     /**
      * Metodo per settare il grafo sul quale calcolare il percorso
+     *
      * @param graph Grafo sul quale si vogliono calcolare dei percorsi
      * @return void
      */
@@ -176,6 +209,7 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Metodo che ritorna le informazioni da seguire per raggiungere la prossima RegionOfInterest. Le informazioni fornite dipendono dalla lista di beacon passata come parametro in ingrasso e dal beacon più potente tra quelli in essa contenuti. Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in cui si cerchi di accedere a tale metodo senza prima aver calcolato un percorso di navigazione. Viene lanciata una eccezione di tipo PathException nel caso in cui il beacon più potente nella lista di beacon in ingrasso sia associato ad una RegionOfInterest non appartenente ad una di quelle presenti nel percorso calcolato
+     *
      * @param visibleBeacons Insieme di beacon visibili al momento della chiamata al metodo
      * @return ProcessedInformation
      */
@@ -197,12 +231,10 @@ public class NavigatorImp implements Navigator {
             if (endEdgeROI.contains(nearBeacon)) { // OK: percorso corretto
                 //TODO: non si utilizza il metodo this.createInformation(edge)
                 return new ProcessedInformationImp(nextEdge, startInformation);
-            }
-            else { // ERROR: errore percorso seguito errato
+            } else { // ERROR: errore percorso seguito errato
                 throw new PathException();
             }
-        }
-        else {
+        } else {
             Log.d("NAVIGATOR", "toNextRegion: Progress iterator at end");
             throw new PathException("Navigation finish, progress iterator at end");
         }
@@ -210,6 +242,7 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Metodo che ritorna un booleano false se il percorso è concluso
+     *
      * @return boolean
      */
     @Override
@@ -223,8 +256,7 @@ public class NavigatorImp implements Navigator {
     private void initIterator() throws NavigationExceptions {
         if (path != null) {
             progress = path.iterator();
-        }
-        else {
+        } else {
             throw new NoNavigationInformationException();
         }
     }
