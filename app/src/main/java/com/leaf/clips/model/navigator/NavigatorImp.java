@@ -55,7 +55,6 @@ public class NavigatorImp implements Navigator {
     /**
      * Costruttore della classe NavigatorImp
      * @param compass Sensore di tipo Compass utilizzato durante la navigazione
-     * @param setting Impostazioni dell'applicazione
      */
     public NavigatorImp(Compass compass) {
         this.compass = compass;
@@ -76,8 +75,7 @@ public class NavigatorImp implements Navigator {
      */
     @Override
     public void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi) throws NavigationExceptions {
-        //TODO: VERIFICARE!
-        if (buildingGraph == null)
+        if (buildingGraph != null)
             this.path = pathFinder.calculatePath(this.buildingGraph, startRoi, endRoi);
         else {
             throw new NoGraphSetException();
@@ -99,7 +97,6 @@ public class NavigatorImp implements Navigator {
      */
     @Override
     public List<ProcessedInformation> getAllInstructions() throws NavigationExceptions {
-        //TODO: VERIFICARE!
         if (path != null) {
             ArrayList<ProcessedInformation> result = new ArrayList<>();
             for (EnrichedEdge edge : path) {
@@ -118,7 +115,6 @@ public class NavigatorImp implements Navigator {
      * @return MyBeacon
      */
     private MyBeacon getMostPowerfulBeacon(PriorityQueue<MyBeacon> beacons) {
-        //TODO: VERIFICARE!
         return beacons.peek();
     }
 
@@ -135,7 +131,6 @@ public class NavigatorImp implements Navigator {
      * @return String
      */
     private String getStarterInformation() {
-        //TODO: VERIFICARE!
         Float deviceGrade = compass.getLastCoordinate();
         int correctGrade = 0;
         if (progress.hasNext()) {
@@ -160,8 +155,13 @@ public class NavigatorImp implements Navigator {
      * @return boolean
      */
     private boolean isShorter(List<EnrichedEdge> firstPath, List<EnrichedEdge> secondPath) {
-        // TODO: metodo non implementato
-        return false;
+        // TODO: metodo non implementato usando i pesi di ogni edge ???
+        if ( firstPath.size() < secondPath.size() ) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -180,20 +180,22 @@ public class NavigatorImp implements Navigator {
      * @return ProcessedInformation
      */
     @Override
-    public ProcessedInformation toNextRegion(PriorityQueue<MyBeacon> visibleBeacons) throws PathException {
-        // Capisco se è la prima richiesta di informazioni
+    public ProcessedInformation toNextRegion(PriorityQueue<MyBeacon> visibleBeacons) throws NavigationExceptions {
+        EnrichedEdge nextEdge;
+        RegionOfInterest endEdgeROI;
         String startInformation = "";
+        // Capisco se è la prima richiesta di informazioni
         if (progress == null) { // È all'inizio della navigazione
-            progress = path.iterator(); //TODO: gestire iteratore ???
+            this.initIterator();
             startInformation = this.getStarterInformation();
         }
         // Prelevo il beacon più potente per capire se l'utente è nel percorso previsto
         MyBeacon nearBeacon = this.getMostPowerfulBeacon(visibleBeacons);
         if (progress.hasNext()) {
-            EnrichedEdge nextEdge = progress.next();
-            RegionOfInterest endROI = nextEdge.getEndPoint();
-            if (endROI.contains(nearBeacon)) { // OK: percorso corretto
-                //TODO: non si utilizza il metodo this.createInformation(edge);
+            nextEdge = progress.next();
+            endEdgeROI = nextEdge.getEndPoint();
+            if (endEdgeROI.contains(nearBeacon)) { // OK: percorso corretto
+                //TODO: non si utilizza il metodo this.createInformation(edge)
                 return new ProcessedInformationImp(nextEdge, startInformation);
             }
             else { // ERROR: errore percorso seguito errato
@@ -201,12 +203,10 @@ public class NavigatorImp implements Navigator {
             }
         }
         else {
-            //TODO: prevedere il comportamento se iterator è alla fine
             Log.d("NAVIGATOR", "toNextRegion: Progress iterator at end");
             throw new PathException("Navigation finish, progress iterator at end");
         }
     }
-
 
     /**
      * Metodo che ritorna un booleano false se il percorso è concluso
@@ -216,5 +216,18 @@ public class NavigatorImp implements Navigator {
     public boolean hasFinishedPath() {
         return progress.hasNext();
     }
+
+    /**
+     * Metodo che inizializza l'iteratore del percorso calcolato
+     */
+    private void initIterator() throws NavigationExceptions {
+        if (path != null) {
+            progress = path.iterator();
+        }
+        else {
+            throw new NoNavigationInformationException();
+        }
+    }
+
 }
 
