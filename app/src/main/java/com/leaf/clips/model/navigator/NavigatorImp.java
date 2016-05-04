@@ -3,9 +3,10 @@ package com.leaf.clips.model.navigator;
  * @author Eduard Bicego
  * @version 0.01
  * @since 0.00
- *
- *
  */
+
+import android.nfc.Tag;
+import android.util.Log;
 
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.compass.Compass;
@@ -14,6 +15,7 @@ import com.leaf.clips.model.navigator.algorithm.PathFinder;
 import com.leaf.clips.model.navigator.graph.MapGraph;
 import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
+import com.leaf.clips.model.usersetting.Setting;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,37 +50,49 @@ public class NavigatorImp implements Navigator {
     /**
      * Iteratore rappresentante il punto che è stato raggiunto durante la navigazione
      */
-    private Iterator progress;
+    private Iterator<EnrichedEdge> progress;
+
+    /**
+     * TODO:
+     */
+    private Setting setting;
 
     /**
      * Costruttore della classe NavigatorImp
      * @param compass Sensore di tipo Compass utilizzato durante la navigazione
+     * @param setting TODO
      */
-    public NavigatorImp(Compass compass) {
+    public NavigatorImp(Compass compass, Setting setting) {
         this.compass = compass;
-        this.path = new ArrayList<EnrichedEdge>(); // lista vuota
         this.pathFinder = new DijkstraPathFinder();
-        //TODO: attributi inizializzati a null ???
+        this.path = null;
         this.buildingGraph = null;
-        this.progress = null;
-
+        this.progress = null; // TODO: attributo inizializzato a null ???
     }
 
     /**
-     * Metodo che calcola un percorso tra due RegionOfInterest viste come vertici di un grafo MapGraph utilizzando un oggetto PathFinder. Il punto di partenza e il punto di arrivo sono i parametri richiesti in input dal metodo mentre il grafo è un campo dati. Viene lanciata un eccezione di tipo NoGraphSetException nel caso in cui non sia settato alcun grafo
+     * Metodo che calcola un percorso tra due RegionOfInterest viste come vertici di un grafo
+     * MapGraph utilizzando un oggetto PathFinder. Il punto di partenza e il punto di arrivo sono i
+     * parametri richiesti in input dal metodo mentre il grafo è un campo dati. Viene lanciata un
+     * eccezione di tipo NoGraphSetException nel caso in cui non sia settato alcun grafo
      * @param startRoi Punto di partenza del percorso
      * @param endRoi Punto di arrivo del percorso
-     * @return  void
+     * @return void
      */
     @Override
-    public void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi) {
-        this.path = pathFinder.calculatePath(this.buildingGraph, startRoi, endRoi);
+    public void calculatePath(RegionOfInterest startRoi, RegionOfInterest endRoi) throws NavigationExceptions {
+        //TODO: VERIFICARE!
+        if (buildingGraph == null)
+            this.path = pathFinder.calculatePath(this.buildingGraph, startRoi, endRoi);
+        else {
+            throw new NoGraphSetException();
+        }
     }
 
     /**
      * Metodo che crea le ProcessedInformation in base al tipo di arco e in base alle informazioni provenienti dal beacon e da eventuali sensori utilizzati
      * @param edge Edge di cui devono essere recuperate le informazioni
-     * @return  ProcessedInformation
+     * @return ProcessedInformation
      */
     private ProcessedInformation createInformation(EnrichedEdge edge) {
         return new ProcessedInformationImp(edge);
@@ -86,25 +100,36 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Metodo che ritorna la lista completa delle ProcessedInstruction da seguire per percorrere un percorso calcolato
-     * @return  List<ProcessedInformation>
+     * @return List<ProcessedInformation>
      */
     @Override
-    public List<ProcessedInformation> getAllInstructions() {
-        return null;
+    public List<ProcessedInformation> getAllInstructions() throws NavigationExceptions {
+        //TODO: VERIFICARE!
+        if (path != null) {
+            ArrayList<ProcessedInformation> result = new ArrayList<>();
+            for (EnrichedEdge edge : path) {
+                ProcessedInformation edgeProcessedInformation = new ProcessedInformationImp(edge);
+                result.add(edgeProcessedInformation);
+            }
+            return result;
+        } else {
+            throw new NoNavigationInformationException();
+        }
     }
 
     /**
      * Metodo che ritorna il beacon con potenza maggiore tra quelli rilevati
      * @param beacons Queue dei beacon rilevati
-     * @return  MyBeacon
+     * @return MyBeacon
      */
     private MyBeacon getMostPowerfulBeacon(PriorityQueue<MyBeacon> beacons) {
-        return null;
+        //TODO: VERIFICARE!
+        return beacons.peek();
     }
 
     /**
      * Metodo per ottenere la lista di EnrichedEdge rappresentanti un percorso
-     * @return  List<EnrichedEdge>
+     * @return List<EnrichedEdge>
      */
     public List<EnrichedEdge> getPath() {
         return this.path;
@@ -112,26 +137,42 @@ public class NavigatorImp implements Navigator {
 
     /**
      * Metodo che ritorna le prime informazioni utili alla navigazione
-     * @return  String
+     * @return String
      */
     private String getStarterInformation() {
-        return null;
+        //TODO: VERIFICARE!
+        Float deviceGrade = compass.getLastCoordinate();
+        int correctGrade = 0;
+        if (progress.hasNext()) {
+            correctGrade = progress.next().getCoordinate();
+        } else {
+            //TODO: Attenzione cosa fare nel caso iterator sia alla fine o sia inizializzato???
+        }
+        if (Math.abs(deviceGrade - 90) % 360 > correctGrade &&
+                correctGrade > Math.abs(deviceGrade + 90) % 360) {// delta di 180
+            // siamo all'interno dell'intervallo accettato
+            return "Direzione sbagliata, voltati"; // TODO: usare una Android Resource
+        }
+        else {
+            return "Direzione corretta";
+        }
     }
 
     /**
      * Metodo per determinare se un percorso è più lungo o più breve di un altro percorso
      * @param firstPath Lista di EnrichedEdge rappresentante un percorso
      * @param secondPath Lista di EnrichedEdge rappresentante un percorso
-     * @return  boolean
+     * @return boolean
      */
     private boolean isShorter(List<EnrichedEdge> firstPath, List<EnrichedEdge> secondPath) {
+        // TODO: metodo non implementato
         return false;
     }
 
     /**
      * Metodo per settare il grafo sul quale calcolare il percorso
      * @param graph Grafo sul quale si vogliono calcolare dei percorsi
-     * @return  void
+     * @return void
      */
     @Override
     public void setGraph(MapGraph graph) {
@@ -141,12 +182,44 @@ public class NavigatorImp implements Navigator {
     /**
      * Metodo che ritorna le informazioni da seguire per raggiungere la prossima RegionOfInterest. Le informazioni fornite dipendono dalla lista di beacon passata come parametro in ingrasso e dal beacon più potente tra quelli in essa contenuti. Viene lanciata una eccezione di tipo NoNavigationInformationException nel caso in cui si cerchi di accedere a tale metodo senza prima aver calcolato un percorso di navigazione. Viene lanciata una eccezione di tipo PathException nel caso in cui il beacon più potente nella lista di beacon in ingrasso sia associato ad una RegionOfInterest non appartenente ad una di quelle presenti nel percorso calcolato
      * @param visibleBeacons Insieme di beacon visibili al momento della chiamata al metodo
-     * @return  ProcessedInformation
+     * @return ProcessedInformation
      */
     @Override
-    public ProcessedInformation toNextRegion(PriorityQueue<MyBeacon> visibleBeacons) {
-        return null;
+    public ProcessedInformation toNextRegion(PriorityQueue<MyBeacon> visibleBeacons) throws PathException {
+        // Capisco se è la prima richiesta di informazioni
+        String startInformation = "";
+        if (progress == null) { // È all'inizio della navigazione
+            progress = path.iterator(); //TODO: gestire iteratore ???
+            startInformation = getStarterInformation();
+        }
+        // Prelevo il beacon più potente per capire se l'utente è nel percorso previsto
+        MyBeacon nearBeacon = this.getMostPowerfulBeacon(visibleBeacons);
+        if (progress.hasNext()) {
+            EnrichedEdge nextEdge = progress.next();
+            RegionOfInterest endROI = nextEdge.getEndPoint();
+            if (endROI.contains(nearBeacon)) { // OK: percorso corretto
+                //TODO: non si utilizza il metodo this.createInformation(edge);
+                return new ProcessedInformationImp(nextEdge, startInformation);
+            }
+            else { // ERROR: errore percorso seguito errato
+                throw new PathException();
+            }
+        }
+        else {
+            //TODO: prevedere il comportamento se iterator è alla fine
+            Log.d("NAVIGATOR", "toNextRegion: Progress iterator at end");
+            throw new PathException("Navigation finish, progress iterator at end");
+        }
     }
 
+
+    /**
+     * Metodo che ritorna un booleano false se il percorso è concluso
+     * @return boolean
+     */
+    @Override
+    public boolean hasFinishedPath() {
+        return progress.hasNext();
+    }
 }
 

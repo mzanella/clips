@@ -3,8 +3,6 @@ package com.leaf.clips.model.navigator;
  * @author Eduard Bicego
  * @version 0.01
  * @since 0.00
- *
- *
  */
 
 import android.content.Intent;
@@ -18,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- *Classe che rappresenta la mappa di un edificio con tutte le informazioni ad esso associate
+ * Classe che rappresenta la mappa di un edificio con tutte le informazioni ad esso associate
  */
 public class BuildingMapImp implements BuildingMap {
 
@@ -59,16 +57,17 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Costruttore della classe BuildingMapImp
-     * @param id Identificativo dell'edificio
-     * @param version Versione della mappa
-     * @param pois Tutti i POI appartenenti all'edificio
-     * @param rois Tutte le ROI appartenente all'edificio
+     *
+     * @param id           Identificativo dell'edificio
+     * @param version      Versione della mappa
+     * @param pois         Tutti i POI appartenenti all'edificio
+     * @param rois         Tutte le ROI appartenente all'edificio
      * @param buildingInfo Informazioni dell'edificio
-     * @param size Dimensione della mappa dell'edificio (espressa in MB)
+     * @param size         Dimensione della mappa dell'edificio (espressa in MB)
      */
-    public BuildingMapImp(Collection<EnrichedEdge> edges, int id, int version, Collection<PointOfInterest> pois,
-                          Collection<RegionOfInterest> rois, BuildingInformation buildingInfo,
-                          String size) {
+    public BuildingMapImp(Collection<EnrichedEdge> edges, int id, int version,
+                          Collection<PointOfInterest> pois, Collection<RegionOfInterest> rois,
+                          BuildingInformation buildingInfo, String size) {
         this.edges = edges;
         this.id = id;
         this.version = version;
@@ -80,16 +79,18 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna l'indirizzo dell'edificio a cui l'oggetto è associato
-     * @return  String
+     *
+     * @return String
      */
     @Override
-    public String getAddress(){
+    public String getAddress() {
         return this.buildingInformation.getAddress();
     }
 
     /**
      * Metodo che ritorna un oggetto BuildingInformation contenente tutte le informazioni dell'edificio a cui è associato.
-     * @return  BuildingInformation
+     *
+     * @return BuildingInformation
      */
     @Override
     public BuildingInformation getAllBuildingInformation() {
@@ -98,7 +99,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna la collezione di tutti gli archi previsti nella rappresentazione a grafo di un edificio
-     * @return  Collection<EnrichedEdge>
+     *
+     * @return Collection<EnrichedEdge>
      */
     @Override
     public Collection<EnrichedEdge> getAllEdges() {
@@ -107,15 +109,14 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna la collezione di POI associati alla ROI che contiene il beacon passato come argomento
+     *
      * @param beacon Beacon associato alla RegionOfInterest di cui si vogliono conoscere l'insieme di POI che contiene
-     * @return  Collection<PointOfInterest>
+     * @return Collection<PointOfInterest>
      */
     @Override
     public Collection<PointOfInterest> getNearbyPOIs(MyBeacon beacon) {
-        //TODO: reperire i POI attraverso il parametro beacon VERIFICARE!
         for (RegionOfInterest roi : this.rois) {
-            if (roi.contains(beacon)) {
-                // è il ROI in cui sono
+            if (roi.contains(beacon)) { // è il ROI in cui sono
                 return roi.getAllNearbyPOIs();
             }
         }
@@ -125,7 +126,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna la collezione di tutti i POI presenti in un edificio
-     * @return  Collection<PointOfInterest>
+     *
+     * @return Collection<PointOfInterest>
      */
     @Override
     public Collection<PointOfInterest> getAllPOIs() {
@@ -134,11 +136,11 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna una collezione di stringhe, eventualmente vuota, che rappresentano le categorie di appartenenza dei POI
-     * @return  Collection<String>
+     *
+     * @return Collection<String>
      */
     @Override
     public Collection<String> getAllPOIsCategories() {
-        //TODO: Ritornare una collection di String dai POI VERIFICARE!
         Collection<String> result = new ArrayList<String>();
         for (PointOfInterest poi : this.pois) {
             result.add(poi.getCategory());
@@ -148,7 +150,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna la collezione di tutti i ROI presenti in un edificio
-     * @return  Collection<RegionOfInterest>
+     *
+     * @return Collection<RegionOfInterest>
      */
     @Override
     public Collection<RegionOfInterest> getAllROIs() {
@@ -157,7 +160,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna una descrizione dell'edificio a cui l'oggetto è associato
-     * @return  String
+     *
+     * @return String
      */
     @Override
     public String getDescription() {
@@ -166,7 +170,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che l'identificativo numerico della mappa all'interno di un database
-     * @return  int
+     *
+     * @return int
      */
     @Override
     public int getId() {
@@ -175,7 +180,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che restituisce il nome dell'edificio a cui è associato tale oggetto
-     * @return  String
+     *
+     * @return String
      */
     @Override
     public String getName() {
@@ -184,7 +190,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritornagli orari di apertura dell'edificio a cui l'oggetto è associato
-     * @return  String
+     *
+     * @return String
      */
     @Override
     public String getOpeningHours() {
@@ -193,7 +200,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna la dimensione della mappa dell'edificio (espressa in MB)
-     * @return  String
+     *
+     * @return String
      */
     @Override
     public String getSize() {
@@ -202,7 +210,8 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che ritorna l'identificativo numerico della mappa
-     * @return  int
+     *
+     * @return int
      */
     @Override
     public int getVersion() {
@@ -211,13 +220,13 @@ public class BuildingMapImp implements BuildingMap {
 
     /**
      * Metodo che permette di cercare i POI di un edificio il cui nome contiene la stringa passata come parametro. Ritorna una collezione, eventualmente vuota,  di oggetti PointOfInterest nel cui nome contengono la stringa passata come parametro
+     *
      * @param name Stringa da cercare nei POI dell'edificio
-     * @return  Collection<PointOfInterest>
+     * @return Collection<PointOfInterest>
      */
     @Override
     public Collection<PointOfInterest> searchPOIByName(String name) {
-        //TODO: cercare POI con il parametro name VERIFICARE!
-        Collection<PointOfInterest> result = new ArrayList<>();
+        Collection<PointOfInterest> result = new ArrayList<PointOfInterest>();
         for (PointOfInterest poi : this.pois) {
             if (poi.getName().contains(name)) {
                 result.add(poi);
