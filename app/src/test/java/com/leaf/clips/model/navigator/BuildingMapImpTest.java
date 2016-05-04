@@ -23,7 +23,7 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 /**
- * TODO: trovare test unità relativi
+ * TU5 TU6
  */
 @RunWith(MockitoJUnitRunner.class)
 public class BuildingMapImpTest {
