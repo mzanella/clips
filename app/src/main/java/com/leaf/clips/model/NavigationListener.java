@@ -8,10 +8,9 @@ package com.leaf.clips.model;
 import com.leaf.clips.model.navigator.ProcessedInformation;
 
 /**
- * Class Description
+ * Interfaccia che deve essere implementata da chi vuole usufruire della navigazione
  */
 public interface NavigationListener {
-    // TODO: 02/05/2016 da aggiungere su Tracy
 
     void informationUpdate(ProcessedInformation info);
 

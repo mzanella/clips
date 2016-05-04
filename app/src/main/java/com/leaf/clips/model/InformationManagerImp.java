@@ -48,7 +48,10 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
     */
     private BuildingMap map;
 
-    boolean shouldLog = false;// TODO: 03/05/2016 aggiungere su tracy
+    /**
+     * Variabile booleana che indica se debba essere effettuato o meno il log dei beacon rilevati
+     */
+    boolean shouldLog = false;
 
     /**
     * Costruttore della classe InformationManagerImp
@@ -163,7 +166,7 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
     @Override
     public void onReceive(Context context, Intent intent){
         PriorityQueue<MyBeacon> p;
-        p = ((PriorityQueue<MyBeacon>)intent.getSerializableExtra("beacons"));// TODO: 03/05/2016 decidere la stringa
+        p = ((PriorityQueue<MyBeacon>)intent.getSerializableExtra("queueOfBeacons"));
 
         for (MyBeacon oneBeacon : p)
             lastBeaconsSeen.add(oneBeacon);
@@ -212,10 +215,12 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
      */
     @Override
     public void startRecordingBeacons(){
-        // TODO: 04/05/2016
-        if(new SettingImp(getContext()).isDeveloper())
+        if(isDeveloper())
             shouldLog = true;
     }
 
+    private boolean isDeveloper(){
+        return new SettingImp(getContext()).isDeveloper();
+    }
 }
 

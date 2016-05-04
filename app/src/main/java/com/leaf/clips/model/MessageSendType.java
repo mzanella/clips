@@ -1,17 +1,18 @@
 package com.leaf.clips.model;
 /**
-* @author
-* @version 0.00 
+* @author Federico Tavella
+* @version 0.01
 * @since 0.00
 * 
 * 
 */
 
 /** 
-*Classe che rappresenta l'etichetta di un messaggio scambiato all'interno dell'applicazione contenente una lista di beacon
+*Classe che rappresenta l'etichetta di un messaggio scambiato all'interno dell'applicazione
+ * contenente una lista di beacon
 */ 
 public enum MessageSendType {
-    VISIBLE_BEACON;
+    VISIBLE_BEACON, ERROR;
     
     public static MessageSendType fromInt(int i){
         switch(i){
@@ -19,7 +20,7 @@ public enum MessageSendType {
                 return VISIBLE_BEACON;
             
         }
-        return VISIBLE_BEACON; // TODO: 02/05/2016 decidere cosa fare in caso di errore
+        return ERROR;
     }
     
     public static int toInt(MessageSendType messageSendType){
@@ -27,7 +28,7 @@ public enum MessageSendType {
             case VISIBLE_BEACON:
                 return 0;
         }
-        return -1;// TODO: 02/05/2016  decidere cosa fare in caso di errore
+        return -1;
     }
 }
 

@@ -15,7 +15,7 @@ public class NoBeaconSeenException extends Exception{
     /**
     * Rappresenta il messaggio di default che viene mostrato quando non viene rilevato nessun beacon
     */
-    private final static String DEFAULT_MESSAGE = ""; // TODO: 02/05/2016 decidere la stringa
+    private final static String DEFAULT_MESSAGE = "No visible beacons";
 
     /**
     * Rappresenta un messaggio qualsiasi quando non viene rilevato nessun beacon
@@ -26,7 +26,7 @@ public class NoBeaconSeenException extends Exception{
     * Costruttore della classe di default
     */
     public NoBeaconSeenException(){
-        message = "";
+        message = DEFAULT_MESSAGE;
     }
 
     /**
