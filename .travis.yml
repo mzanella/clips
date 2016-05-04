@@ -33,7 +33,7 @@ android:
 # to give execute permission
 before_script:
   - chmod 777 gradlew
-  - rm -f $HOME/app/src/androidTest/java/com/leaf/clips
+  - rm -f -f $HOME/app/src/androidTest/java/com/leaf/clips
 
 # for caching
 before_cache:
