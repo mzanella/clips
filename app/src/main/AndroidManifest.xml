@@ -51,7 +51,7 @@
         </activity>
         <activity
                 android:name=".presenter.NearbyPoiActivity"
-                android:label="Nearby Pois"
+                android:label="@string/title_activity_nearby_poi"
                 android:parentActivityName=".presenter.HomeActivity">
         </activity>
     </application>
