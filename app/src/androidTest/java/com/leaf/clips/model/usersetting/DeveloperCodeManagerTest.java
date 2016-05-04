@@ -34,13 +34,16 @@ public class DeveloperCodeManagerTest {
 
     @Test
     public void shouldAcceptDeveloperCode(){
+
         Assert.assertTrue(dev.isValid(""));// TODO: 01/05/2016 decidere la stringa
+
 
     }
 
 
     @Test
     public void shouldRejectDeveloperCode(){
+
         Assert.assertFalse(dev.isValid(""));// TODO: 01/05/2016 decidere la stringa
 
     }

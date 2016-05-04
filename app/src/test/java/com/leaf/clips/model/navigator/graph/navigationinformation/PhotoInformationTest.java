@@ -25,11 +25,11 @@ public class PhotoInformationTest {
     public void init() {
         Collection<PhotoRef> collection = new ArrayList<>(5);
         try {
-            collection.add(new PhotoRef(new URI("www.google.com")));
-            collection.add(new PhotoRef(new URI("www.ciao.com")));
-            collection.add(new PhotoRef(new URI("www.roma.com")));
-            collection.add(new PhotoRef(new URI("www.lazio.com")));
-            collection.add(new PhotoRef(new URI("www.vr46.com")));
+            collection.add(new PhotoRef(1,new URI("www.google.com")));
+            collection.add(new PhotoRef(2,new URI("www.ciao.com")));
+            collection.add(new PhotoRef(3,new URI("www.roma.com")));
+            collection.add(new PhotoRef(4,new URI("www.lazio.com")));
+            collection.add(new PhotoRef(5,new URI("www.vr46.com")));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
