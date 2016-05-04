@@ -12,4 +12,5 @@
     <string name="dialog_dev_code_error">Codice errato.</string>
     <string name="dialog_title_dev_code_error">Ops!</string>
     <string name="title_activity_nearby_poi">Nelle vicinanze</string>
+    <string name="title_activity_log_information">Dettaglio log</string>
 </resources>
