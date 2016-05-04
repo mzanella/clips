@@ -139,7 +139,7 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
     * Metodo che permette di recuperare una mappa dal database in base al major dei beacon rilevati
     * @return  BuildingMap Mappa dell'edificio
     */
-    @Override
+
     private BuildingMap loadMap(){
         int major = lastBeaconsSeen.peek().getMajor();
 
@@ -212,7 +212,7 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
      */
     @Override
     public void startRecordingBeacons(){
-        // TODO: 04/05/2016  
+        // TODO: 04/05/2016
         if(new SettingImp(getContext()).isDeveloper())
             shouldLog = true;
     }

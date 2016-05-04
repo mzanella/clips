@@ -74,5 +74,6 @@ public interface InformationManager {
     */
     void startRecordingBeacons();
 
+
 }
 

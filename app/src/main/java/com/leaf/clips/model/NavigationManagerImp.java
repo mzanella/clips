@@ -6,11 +6,9 @@ package com.leaf.clips.model;
 *
 */
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.SensorManager;
-import android.os.Build;
 
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.compass.Compass;
@@ -21,8 +19,6 @@ import com.leaf.clips.model.navigator.PathException;
 import com.leaf.clips.model.navigator.ProcessedInformation;
 import com.leaf.clips.model.navigator.graph.MapGraph;
 import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
-import com.leaf.clips.model.usersetting.Setting;
-import com.leaf.clips.model.usersetting.SettingImp;
 
 import java.util.Collection;
 import java.util.LinkedList;
