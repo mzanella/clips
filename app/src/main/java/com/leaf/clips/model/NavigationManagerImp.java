@@ -1,7 +1,7 @@
 package com.leaf.clips.model;
 /**
 * @author Federico Tavella
-* @version 0.01
+* @version 0.08
 * @since 0.00
 *
 */
@@ -16,12 +16,15 @@ import com.leaf.clips.model.navigator.NavigationExceptions;
 import com.leaf.clips.model.navigator.Navigator;
 import com.leaf.clips.model.navigator.NavigatorImp;
 import com.leaf.clips.model.navigator.NoNavigationInformationException;
+import com.leaf.clips.model.navigator.PathException;
 import com.leaf.clips.model.navigator.ProcessedInformation;
 import com.leaf.clips.model.navigator.graph.MapGraph;
 import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 import com.leaf.clips.model.usersetting.SettingImp;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -40,7 +43,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     /**
     * Grafo rappresentante la mappa dell'edificio
     */
-    private final MapGraph graph;// TODO: 02/05/2016 perchè grafo e non BuildingMap?
+    private final MapGraph graph;
 
     /**
     * PriorityQueue, eventualmente vuota, contenente gli ultimi beacon rilevati
@@ -67,10 +70,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
         this.graph = graph;
         listeners = new LinkedList<>();
         lastBeaconsSeen = new PriorityQueue<>();
-        // TODO: 02/05/2016 Come si costruisce? Sicuramente bisogna impostare tutti i pesi degli Edge
-        navigator = new NavigatorImp(compass);
-        graph.setSettingAllEdge(new SettingImp(context));
-        navigator.setGraph(graph);
+
     }
 
     /**
@@ -151,9 +151,38 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
      */
 
     @Override
-    public ProcessedInformation startNavigation(PointOfInterest endPOI) {
-        // TODO: 03/05/2016 come far partire la navigazione?
-        return null;
+    public ProcessedInformation startNavigation(PointOfInterest endPOI)
+            throws NoNavigationInformationException {
+        graph.setSettingAllEdge(new SettingImp(getContext()));
+        navigator = new NavigatorImp(compass);
+        navigator.setGraph(graph);
+        MyBeacon beacon = lastBeaconsSeen.peek();
+        Iterator<RegionOfInterest> iterator = graph.getGraph().vertexSet().iterator();
+        boolean found = false;
+        RegionOfInterest startROI = null;
+
+        while(!found && iterator.hasNext()){
+            startROI = iterator.next();
+            found = startROI.contains(beacon);
+        }
+
+        navigator.calculatePath(startROI, endPOI);
+
+        ProcessedInformation processedInfo = null;
+
+        try {
+            processedInfo = navigator.toNextRegion(lastBeaconsSeen);
+        } catch (NoNavigationInformationException noNavInfoExc) {
+            noNavInfoExc.printStackTrace();
+            navigator.calculatePath(startROI, endPOI);
+            throw new NoNavigationInformationException("Impossibile risolvere il problema");
+        } catch (PathException pathException){
+            pathException.printStackTrace();
+        } catch (NavigationExceptions navigationExceptions) {
+            navigationExceptions.printStackTrace();
+        }
+
+        return processedInfo;
     }
 
     /**
@@ -169,7 +198,8 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     */
     @Override
     public void stopNavigation(){
-        // TODO: 02/05/2016 come fermare la navigazione?
+        listeners.clear();
+        navigator = null;
     }
 
     /**
@@ -187,7 +217,22 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
 
         p = ((PriorityQueue<MyBeacon>)intent.getSerializableExtra("queueOfBeacons"));
 
-        setVisibleBeacon(p);
+        if(!lastBeaconsSeen.containsAll(p) || !p.containsAll(lastBeaconsSeen)){
+
+            setVisibleBeacon(p);
+            for(NavigationListener nv : listeners){
+                try {
+                    nv.informationUpdate(navigator.toNextRegion(lastBeaconsSeen));
+                } catch (NoNavigationInformationException navigationExceptions) {
+                    navigationExceptions.printStackTrace();
+                    nv.pathError();
+                } catch (NavigationExceptions navigationExceptions){
+                    navigationExceptions.printStackTrace();
+                }
+            }
+        }
+
+
     }
 }
 

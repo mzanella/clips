@@ -65,7 +65,6 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
         this.dbService = dbService;
         lastBeaconsSeen = new PriorityQueue<>();
         activeLog = new LoggerImp();
-        // TODO: 03/05/2016 come si costruisce?
     }
 
     /**
