@@ -16,7 +16,6 @@ import com.leaf.clips.model.navigator.NavigationExceptions;
 import com.leaf.clips.model.navigator.Navigator;
 import com.leaf.clips.model.navigator.NavigatorImp;
 import com.leaf.clips.model.navigator.NoNavigationInformationException;
-import com.leaf.clips.model.navigator.PathException;
 import com.leaf.clips.model.navigator.ProcessedInformation;
 import com.leaf.clips.model.navigator.graph.MapGraph;
 import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
@@ -76,7 +75,6 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     /**
     * Metodo che permette di registrare un listener
     * @param listener Listener che deve essere aggiunto alla lista di NavigationListener
-    * @return  void
     */
     @Override
     public void addBeaconListener(NavigationListener listener){
@@ -166,7 +164,11 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
             found = startROI.contains(beacon);
         }
 
-        navigator.calculatePath(startROI, endPOI);
+        try {
+            navigator.calculatePath(startROI, endPOI);
+        } catch (NavigationExceptions navigationExceptions) {
+            navigationExceptions.printStackTrace();
+        }
 
         ProcessedInformation processedInfo = null;
 
@@ -174,12 +176,14 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
             processedInfo = navigator.toNextRegion(lastBeaconsSeen);
         } catch (NoNavigationInformationException noNavInfoExc) {
             noNavInfoExc.printStackTrace();
-            navigator.calculatePath(startROI, endPOI);
+            try {
+                navigator.calculatePath(startROI, endPOI);
+            } catch (NavigationExceptions navigationExceptions) {
+                navigationExceptions.printStackTrace();
+            }
             throw new NoNavigationInformationException("Impossibile risolvere il problema");
-        } catch (PathException pathException){
-            pathException.printStackTrace();
-        } catch (NavigationExceptions navigationExceptions) {
-            navigationExceptions.printStackTrace();
+        } catch (NavigationExceptions e){
+            e.printStackTrace();
         }
 
         return processedInfo;
@@ -215,7 +219,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
         lastBeaconsSeen.clear();
         PriorityQueue<MyBeacon> p;
 
-        p = ((PriorityQueue<MyBeacon>)intent.getSerializableExtra("queueOfBeacons"));
+        p = (PriorityQueue<MyBeacon>)intent.getSerializableExtra("queueOfBeacons");
 
         if(!lastBeaconsSeen.containsAll(p) || !p.containsAll(lastBeaconsSeen)){
 
