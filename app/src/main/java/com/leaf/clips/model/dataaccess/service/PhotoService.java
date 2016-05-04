@@ -43,9 +43,9 @@ public class PhotoService {
     }
 
     /**
-     * Metodo per la conversione di un JsonObject in un oggetto PhotoTable, che verrà inserito nel database locale
+     * Metodo per la conversione di un JsonObject in un oggetto PhotoTable, che verrà inserito
+     * nel database locale
      * @param object Oggetto JsonObject che contiene le informazioni di una foto
-     * @return  void
      */
     public void convertAndInsert(JsonObject object) {
         PhotoTable table = remotePhotoDao.fromJSONToTable(object);
@@ -55,7 +55,6 @@ public class PhotoService {
     /**
      * Metodo per rimuovere una foto di un Edge dal database locale
      * @param id Identificativo numerico della foto da rimuovere
-     * @return  void
      */
     public void deletePhoto(int id) {
         sqlitePhotoDao.deletePhoto(id);
