@@ -3,6 +3,7 @@ package com.leaf.clips.view;
 import android.widget.Adapter;
 import android.widget.ListView;
 
+import com.leaf.clips.R;
 import com.leaf.clips.presenter.NearbyPoiActivity;
 
 /**
@@ -29,6 +30,7 @@ public class NearbyPoiViewImp implements NearbyPoiView{
      * @param presenter Presenter della View che viene creata
      */
     public NearbyPoiViewImp(NearbyPoiActivity presenter){
+        presenter.setContentView(R.layout.activity_nearby_poi);
         this.presenter = presenter;
     }
 
