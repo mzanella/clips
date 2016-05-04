@@ -19,6 +19,8 @@ import com.leaf.clips.model.navigator.NavigatorImp;
 import com.leaf.clips.model.navigator.ProcessedInformation;
 import com.leaf.clips.model.navigator.graph.MapGraph;
 import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
+import com.leaf.clips.model.usersetting.Setting;
+import com.leaf.clips.model.usersetting.SettingImp;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -56,6 +58,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     */
     private Navigator navigator;
 
+    private final Setting setting;
     /**
     * Costruttore della classe NavigationManagerImp
     * @param graph Grafo dell'edificio in cui si desidera navigare
@@ -63,11 +66,12 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     */
     public NavigationManagerImp(MapGraph graph, Context context){
         super(context);
+        setting = new SettingImp(context);
         this.graph = graph;
         listeners = new LinkedList<>();
         lastBeaconsSeen = new PriorityQueue<>();
         // TODO: 02/05/2016 Come si costruisce?
-        navigator = new NavigatorImp(compass);
+        navigator = new NavigatorImp(compass, setting);
         navigator.setGraph(graph);
     }
 

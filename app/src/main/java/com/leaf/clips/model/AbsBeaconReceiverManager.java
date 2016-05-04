@@ -42,7 +42,11 @@ public abstract class AbsBeaconReceiverManager extends BroadcastReceiver {
      */
     private final Intent serviceStart;
 
-    private boolean isBound;
+    /**
+     * Variabile booleana che indica l'avvenuta connesione tra il Service e la ServiceConnection
+     */
+
+    volatile private boolean isBound; // TODO: 04/05/2016 va bene volatile? o meglio synchronized?
 
     /**
      * Costruttore della classe AbsBeaconReceiverManager

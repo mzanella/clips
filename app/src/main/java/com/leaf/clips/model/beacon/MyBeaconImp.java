@@ -108,8 +108,7 @@ public class MyBeaconImp extends Beacon implements MyBeacon, Comparable {
 
     /**
      * Metodo che ritorna la distanza del beacon dal dispositivo che lo ha rilevato
-     * @return double distanza del beacon dal dispositivo che lo ha rilevato
-     */
+     * @return double distanza del beacon dal dispositivo che lo ha rilevato     */
     @Override
     public double getDistance() {
         return super.getDistance();

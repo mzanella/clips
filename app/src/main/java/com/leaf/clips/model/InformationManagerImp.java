@@ -210,7 +210,8 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
      */
     @Override
     public void startRecordingBeacons(){
-        shouldLog = true;
+        // TODO: 04/05/2016 if(isDeveloper()) 
+            shouldLog = true;
     }
 
 }
