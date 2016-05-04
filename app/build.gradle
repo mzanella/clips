@@ -43,6 +43,19 @@ android {
         timeOutInMs 10 * 60 * 1000  // 10 minutes
         installOptions "-d","-t"
     }
+
+    sourceSets {
+        main {
+            java {
+
+            }
+        }
+        androidTest {
+            java {
+                exclude '**/presenter/**'
+            }
+        }
+    }
 }
 
 dependencies {

@@ -33,8 +33,6 @@ android:
 # to give execute permission
 before_script:
   - chmod 777 gradlew
-  - "export DISPLAY=:99.0"
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -nolisten $NOLISTEN"
 
 # for caching
 before_cache:
@@ -49,7 +47,7 @@ before_script:
   - ./gradlew test
   # starting the emulator
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio &
+  - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
 
