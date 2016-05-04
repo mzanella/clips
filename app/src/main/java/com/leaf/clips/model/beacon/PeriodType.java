@@ -9,7 +9,7 @@ package com.leaf.clips.model.beacon;
  * Class Description
  */
 public enum PeriodType{
-    BACKGROUND, FOREGROUND, BACKGROUND_BETWEEN, FOREGROUND_BETWEEN;
+    BACKGROUND, FOREGROUND, BACKGROUND_BETWEEN, FOREGROUND_BETWEEN, ERROR;
     
     static public int toInt(PeriodType periodType){
         switch (periodType){
@@ -38,6 +38,6 @@ public enum PeriodType{
                 return FOREGROUND_BETWEEN;
             
         }
-        return FOREGROUND; // TODO: 04/05/2016 cosa fare in caso di errore? 
+        return ERROR;
     }
 }

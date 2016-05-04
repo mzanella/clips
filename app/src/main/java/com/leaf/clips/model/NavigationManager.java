@@ -8,6 +8,7 @@ package com.leaf.clips.model;
  */
 
 import com.leaf.clips.model.navigator.NavigationExceptions;
+import com.leaf.clips.model.navigator.NoNavigationInformationException;
 import com.leaf.clips.model.navigator.PathException;
 import com.leaf.clips.model.navigator.ProcessedInformation;
 import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
@@ -42,7 +43,7 @@ public interface NavigationManager {
      * richiamato questo metodo senza aver prima avviato la navigazione.
     * @return  ProcessedInformation
     */
-    ProcessedInformation getNextInstruction() throws PathException;
+    ProcessedInformation getNextInstruction() throws NoNavigationInformationException;
 
     /**
     * Metodo che permette di rimuovere un listener

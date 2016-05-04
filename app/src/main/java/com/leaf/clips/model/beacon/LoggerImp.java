@@ -116,10 +116,7 @@ public class LoggerImp implements Logger {
     @Override
     public boolean remove(String name){
         File fileToDelete = new File(DIRECTORY, name);
-        boolean deleted = fileToDelete.delete();
-        if(!deleted);
-        // TODO: 28/04/2016  lanciare eccezione? o modificare il tipo di ritorno?
-
+        return fileToDelete.delete();
 
     }
 
