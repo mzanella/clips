@@ -92,7 +92,6 @@ public class EdgeService {
      * Metodo per la conversione di un JsonObject in un oggetto EdgeTable, che verrà inserito nel
      * database locale
      * @param object Oggetto JsonObject che contiene le informazioni di un Edge
-     * @return  void
      */
     public void convertAndInsert(JsonObject object) {
         EdgeTable table = remoteEdgeDao.fromJSONToTable(object);
@@ -103,7 +102,6 @@ public class EdgeService {
      * Metodo per la conversione di un JsonObject in un oggetto EdgeTypeTable, che verrà inserito
      * nel database locale
      * @param object Oggetto JsonObject che contiene le informazioni di un tipo di Edge
-     * @return  void
      */
     public void convertAndInsertEdgeType(JsonObject object) {
         EdgeTypeTable table = remoteEdgeTypeDao.fromJSONToTable(object);
@@ -111,9 +109,17 @@ public class EdgeService {
     }
 
     /**
+     * Metodo per la conversione di un JsonObject in un oggetto PhotoTable, che verrà inserito
+     * nel database locale
+     * @param object Oggetto JsonObject che contiene le informazioni di una foto
+     */
+    public void convertAndInsertPhoto(JsonObject object) {
+        photoService.convertAndInsert(object);
+    }
+
+    /**
      * Metodo per rimuovere un Edge dal database locale
      * @param edge L'Edge da rimuovere
-     * @return  void
      */
     public void deleteEdge(EnrichedEdge edge) {
         // recupero dall'Edge tutte le sue fotografie
@@ -193,11 +199,11 @@ public class EdgeService {
                 photoInfo);
 
         // costruisco e ritorno l'edge del tipo specificato
-        if (typeName == "default")
+        if (typeName.equals("default"))
             return new DefaultEdge(startROI, endROI, distance, coordinate, id, navInfo);
-        else if (typeName == "stairs")
+        else if (typeName.equals("stairs"))
             return new StairEdge(startROI, endROI, distance, coordinate, id, navInfo);
-        else if (typeName == "elevator")
+        else //if (typeName.equals("elevator"))
             return new ElevatorEdge(startROI, endROI, distance, coordinate, id, navInfo);
     }
 
