@@ -166,7 +166,11 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
             found = startROI.contains(beacon);
         }
 
-        navigator.calculatePath(startROI, endPOI);
+        try {
+            navigator.calculatePath(startROI, endPOI);
+        } catch (NavigationExceptions navigationExceptions) {
+            navigationExceptions.printStackTrace();
+        }
 
         ProcessedInformation processedInfo = null;
 
@@ -174,7 +178,11 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
             processedInfo = navigator.toNextRegion(lastBeaconsSeen);
         } catch (NoNavigationInformationException noNavInfoExc) {
             noNavInfoExc.printStackTrace();
-            navigator.calculatePath(startROI, endPOI);
+            try {
+                navigator.calculatePath(startROI, endPOI);
+            } catch (NavigationExceptions navigationExceptions) {
+                navigationExceptions.printStackTrace();
+            }
             throw new NoNavigationInformationException("Impossibile risolvere il problema");
         } catch (PathException pathException){
             pathException.printStackTrace();
