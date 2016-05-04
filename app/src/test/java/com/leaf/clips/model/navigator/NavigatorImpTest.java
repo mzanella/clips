@@ -8,6 +8,7 @@ package com.leaf.clips.model.navigator;
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.compass.Compass;
 import com.leaf.clips.model.navigator.graph.MapGraph;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
 import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
 
 import org.junit.Before;
@@ -38,7 +39,7 @@ public class NavigatorImpTest {
     private RegionOfInterest mockStartRoi;
 
     @Mock
-    private RegionOfInterest mockEndRoi;
+    private PointOfInterest mockEndPoi;
 
     @Mock
     private PriorityQueue<MyBeacon> mockVisibleBeacons;
@@ -55,14 +56,14 @@ public class NavigatorImpTest {
 
     @Test(expected = NoGraphSetException.class)
     public void testCalculatePathException() throws Exception {
-        navigatorImp.calculatePath(mockStartRoi, mockEndRoi);
+        navigatorImp.calculatePath(mockStartRoi, mockEndPoi);
         fail("Should throw NoGraphException");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = PathException.class)
     public void testSetGraph() throws Exception {
         navigatorImp.setGraph(mockMapGraph);
-        navigatorImp.calculatePath(mockStartRoi, mockEndRoi);
+        navigatorImp.calculatePath(mockStartRoi, mockEndPoi);
     }
 
     @Test(expected = NoNavigationInformationException.class)
