@@ -14,8 +14,10 @@ import android.os.Build;
 
 import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.compass.Compass;
+import com.leaf.clips.model.navigator.NavigationExceptions;
 import com.leaf.clips.model.navigator.Navigator;
 import com.leaf.clips.model.navigator.NavigatorImp;
+import com.leaf.clips.model.navigator.PathException;
 import com.leaf.clips.model.navigator.ProcessedInformation;
 import com.leaf.clips.model.navigator.graph.MapGraph;
 import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
@@ -58,7 +60,6 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     */
     private Navigator navigator;
 
-    private final Setting setting;
     /**
     * Costruttore della classe NavigationManagerImp
     * @param graph Grafo dell'edificio in cui si desidera navigare
@@ -66,12 +67,11 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     */
     public NavigationManagerImp(MapGraph graph, Context context){
         super(context);
-        setting = new SettingImp(context);
         this.graph = graph;
         listeners = new LinkedList<>();
         lastBeaconsSeen = new PriorityQueue<>();
-        // TODO: 02/05/2016 Come si costruisce?
-        navigator = new NavigatorImp(compass, setting);
+        // TODO: 02/05/2016 Come si costruisce? Sicuramente bisogna impostare tutti i pesi degli Edge
+        navigator = new NavigatorImp(compass);
         navigator.setGraph(graph);
     }
 
@@ -92,7 +92,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
     * @return  List<ProcessedInformation>
     */
     @Override
-    public List<ProcessedInformation> getAllNavigationInstruction(){
+    public List<ProcessedInformation> getAllNavigationInstruction() throws NavigationExceptions {
 
         LinkedList<ProcessedInformation> list = new LinkedList<ProcessedInformation>();
         list.addAll(navigator.getAllInstructions());
@@ -107,7 +107,7 @@ public class NavigationManagerImp extends AbsBeaconReceiverManager implements Na
      * @return  ProcessedInformation
      */
     @Override
-    public ProcessedInformation getNextInstruction(){
+    public ProcessedInformation getNextInstruction() throws PathException {
         return navigator.toNextRegion(lastBeaconsSeen);
     }
 

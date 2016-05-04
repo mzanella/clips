@@ -16,6 +16,8 @@ import com.leaf.clips.model.beacon.MyBeacon;
 import com.leaf.clips.model.dataaccess.service.DatabaseService;
 import com.leaf.clips.model.navigator.BuildingMap;
 import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
+import com.leaf.clips.model.usersetting.Setting;
+import com.leaf.clips.model.usersetting.SettingImp;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -210,7 +212,8 @@ public class InformationManagerImp extends AbsBeaconReceiverManager implements I
      */
     @Override
     public void startRecordingBeacons(){
-        // TODO: 04/05/2016 if(isDeveloper()) 
+        // TODO: 04/05/2016  
+        if(new SettingImp(getContext()).isDeveloper())
             shouldLog = true;
     }
 
