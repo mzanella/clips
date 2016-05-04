@@ -64,7 +64,7 @@ public class NavigatorImp implements Navigator {
         this.pathFinder = new DijkstraPathFinder();
         this.path = null;
         this.buildingGraph = null;
-        this.progress = null; // TODO: attributo inizializzato a null ???
+        this.progress = null;
     }
 
     /**
@@ -95,8 +95,9 @@ public class NavigatorImp implements Navigator {
                         shortestPath = newPath;
                     }
                 }
+                path = shortestPath;
             } else {
-                //TODO: ERROR endPoi non ha nessun ROI in esso
+                throw new PathException("endPoi without ROI");
             }
         } else {
             throw new NoGraphSetException();
