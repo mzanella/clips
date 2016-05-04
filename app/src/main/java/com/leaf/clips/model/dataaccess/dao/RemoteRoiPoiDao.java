@@ -35,7 +35,6 @@ public class RemoteRoiPoiDao {
      * @return  RoiPoiTable
      */
     public RoiPoiTable fromJSONToTable(JsonObject object) {
-        // TODO: 30/04/16 chiedere perchè no nomi uguali
         Gson gson = new Gson();
         GsonBuilder gsonBldr = new GsonBuilder();
         JsonDeserializer<RoiPoiTable> deserializer = new JsonDeserializer<RoiPoiTable>() {
