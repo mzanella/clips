@@ -7,10 +7,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import com.leaf.clips.R;
+import com.leaf.clips.model.InformationManager;
 import com.leaf.clips.view.HomeView;
 import com.leaf.clips.view.HomeViewImp;
 
+import javax.inject.Inject;
+
 public class HomeActivity extends AppCompatActivity {
+    @Inject
+    InformationManager informationManager;
     /**
      *  TODO
         Enable Suggestion
@@ -30,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         view = new HomeViewImp(this);
+        ((MyApplication)getApplication()).getInfoComponent().inject(this);
     }
 
     /**

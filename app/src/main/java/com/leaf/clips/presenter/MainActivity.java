@@ -1,10 +1,8 @@
 package com.leaf.clips.presenter;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.leaf.clips.R;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  *  MainActivity ha l'unico compito di reindirizzare l'utente verso HomeActivity e fornire una
@@ -12,9 +10,12 @@ import com.leaf.clips.R;
  */
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
