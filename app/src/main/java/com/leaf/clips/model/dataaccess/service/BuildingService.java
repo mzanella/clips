@@ -1,15 +1,18 @@
 package com.leaf.clips.model.dataaccess.service;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import com.leaf.clips.model.dataaccess.dao.BuildingTable;
 import com.leaf.clips.model.dataaccess.dao.RemoteBuildingDao;
 import com.leaf.clips.model.dataaccess.dao.SQLiteBuildingDao;
+import com.leaf.clips.model.navigator.BuildingInformation;
+import com.leaf.clips.model.navigator.BuildingMap;
+import com.leaf.clips.model.navigator.BuildingMapImp;
+import com.leaf.clips.model.navigator.graph.area.PointOfInterest;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

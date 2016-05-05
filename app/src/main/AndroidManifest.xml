@@ -9,6 +9,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <service android:name=".model.beacon.BeaconManagerAdapter"/>
+        <activity
                 android:name=".presenter.MainActivity"
                 android:theme="@style/SplashTheme">
             <intent-filter>

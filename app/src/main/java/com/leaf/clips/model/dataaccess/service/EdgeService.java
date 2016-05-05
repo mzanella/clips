@@ -1,13 +1,17 @@
 package com.leaf.clips.model.dataaccess.service;
 
 import com.google.gson.JsonObject;
-
 import com.leaf.clips.model.dataaccess.dao.EdgeTable;
 import com.leaf.clips.model.dataaccess.dao.EdgeTypeTable;
 import com.leaf.clips.model.dataaccess.dao.RemoteEdgeDao;
 import com.leaf.clips.model.dataaccess.dao.RemoteEdgeTypeDao;
 import com.leaf.clips.model.dataaccess.dao.SQLiteEdgeDao;
 import com.leaf.clips.model.dataaccess.dao.SQLiteEdgeTypeDao;
+import com.leaf.clips.model.navigator.graph.area.RegionOfInterest;
+import com.leaf.clips.model.navigator.graph.edge.DefaultEdge;
+import com.leaf.clips.model.navigator.graph.edge.ElevatorEdge;
+import com.leaf.clips.model.navigator.graph.edge.EnrichedEdge;
+import com.leaf.clips.model.navigator.graph.edge.StairEdge;
 import com.leaf.clips.model.navigator.graph.navigationinformation.BasicInformation;
 import com.leaf.clips.model.navigator.graph.navigationinformation.DetailedInformation;
 import com.leaf.clips.model.navigator.graph.navigationinformation.NavigationInformation;
@@ -200,11 +204,11 @@ public class EdgeService {
 
         // costruisco e ritorno l'edge del tipo specificato
         if (typeName.equals("default"))
-            return new DefaultEdge(startROI, endROI, distance, coordinate, id, navInfo);
+            return new DefaultEdge(startROI, endROI, distance, 1, id, navInfo);
         else if (typeName.equals("stairs"))
-            return new StairEdge(startROI, endROI, distance, coordinate, id, navInfo);
+            return new StairEdge(startROI, endROI, distance, 1, id, navInfo);
         else //if (typeName.equals("elevator"))
-            return new ElevatorEdge(startROI, endROI, distance, coordinate, id, navInfo);
+            return new ElevatorEdge(startROI, endROI, distance, 1, id, navInfo);
     }
 
 }
