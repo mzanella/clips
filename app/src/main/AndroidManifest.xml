@@ -13,6 +13,7 @@
                 android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -49,8 +50,17 @@
         </activity>
         <activity
                 android:name=".presenter.NearbyPoiActivity"
-                android:label="Nearby Pois"
+                android:label="@string/title_activity_nearby_poi"
                 android:parentActivityName=".presenter.HomeActivity">
+        </activity>
+        <activity
+                android:name=".presenter.LogInformationActivity"
+                android:label="@string/title_activity_log_information"
+                android:parentActivityName=".presenter.LoggingActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.leaf.clips.presenter.LoggingActivity"/>
         </activity>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
