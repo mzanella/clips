@@ -24,9 +24,6 @@ import java.lang.reflect.Type;
  */
 public class RemoteEdgeTypeDao {
 
-    // TODO: 29/04/16 chiedere modifica classe
-    private static final Gson gson = new Gson();
-
     /**
      * Costruttore di default per la classe RemoteEdgeTypeDao
      */
@@ -38,6 +35,7 @@ public class RemoteEdgeTypeDao {
      * @return  EdgeTypeTable
      */
     public EdgeTypeTable fromJSONToTable(JsonObject object) {
+        Gson gson = new Gson();
         // TODO: 29/04/16 chiedere perchè no nomi uguali
         GsonBuilder gsonBldr = new GsonBuilder();
         JsonDeserializer<EdgeTypeTable> deserializer = new JsonDeserializer<EdgeTypeTable>() {

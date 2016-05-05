@@ -8,6 +8,7 @@ package com.leaf.clips.model.dataaccess.service;
  */
 
 import com.leaf.clips.model.dataaccess.dao.BuildingTable;
+import com.leaf.clips.model.navigator.BuildingMap;
 
 import java.util.Collection;
 

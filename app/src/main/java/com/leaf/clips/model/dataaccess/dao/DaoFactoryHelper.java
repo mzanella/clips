@@ -2,9 +2,6 @@ package com.leaf.clips.model.dataaccess.dao;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-
 /**
  * @author Marco Zanella
  * @version 0.01
@@ -14,7 +11,6 @@ import com.google.inject.Singleton;
 /**
  *Classe che rappresenta un aiutante per ottenere un'istanza di una delle due Factory di DAO (locali o remoti)
  */
-@Singleton
 public class DaoFactoryHelper {
 
     /**

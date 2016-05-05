@@ -20,9 +20,6 @@ import java.lang.reflect.Type;
  */
 public class RemoteBuildingDao {
 
-    // TODO: 29/04/16 chiedere modifica alla classe
-    private static final Gson gson = new Gson();
-
     /**
      * Costruttore di default per la classe RemoteBuildingDao
      */
@@ -34,6 +31,7 @@ public class RemoteBuildingDao {
      * @return  BuildingTable
      */
     public BuildingTable fromJSONToTable(JsonObject object){
+        Gson gson = new Gson();
         // TODO: 30/04/16 chiedere perchè no nomi uguali
         GsonBuilder gsonBldr = new GsonBuilder();
         JsonDeserializer<BuildingTable> deserializer = new JsonDeserializer<BuildingTable>() {

@@ -5,20 +5,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.content.ContextCompat;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
-
-import com.google.inject.Inject;
 
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Marco Zanella
