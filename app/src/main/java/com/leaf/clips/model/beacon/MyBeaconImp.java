@@ -25,13 +25,15 @@ public class MyBeaconImp extends Beacon implements MyBeacon, Comparable {
         }
 
         public MyBeacon[] newArray(int size) {
-            return new MyBeacon[size];
+            return new MyBeaconImp[size];
         }
     };
 
     private MyBeaconImp(Parcel in) {
         super(in);
-    }{
+    }
+
+    {
         Beacon.setDistanceCalculator(new MyDistanceCalculator());
     }
 
@@ -91,7 +93,7 @@ public class MyBeaconImp extends Beacon implements MyBeacon, Comparable {
      */
     @Override
     public String toString(){
-        // TODO: 28/04/2016  
+        // TODO: 28/04/2016 decidere la stringa che rappresenta un beacon
         return super.toString();
     }
 
@@ -106,8 +108,7 @@ public class MyBeaconImp extends Beacon implements MyBeacon, Comparable {
 
     /**
      * Metodo che ritorna la distanza del beacon dal dispositivo che lo ha rilevato
-     * @return double distanza del beacon dal dispositivo che lo ha rilevato
-     */
+     * @return double distanza del beacon dal dispositivo che lo ha rilevato     */
     @Override
     public double getDistance() {
         return super.getDistance();
